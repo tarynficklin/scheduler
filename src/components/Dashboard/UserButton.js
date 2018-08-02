@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateUserData} from '../../ducks/auth0';
+import {updateUserData, deleteUser} from '../../ducks/auth0';
 import {withRouter} from 'react-router-dom';
 
 class UserButton extends Component {
 	componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
-	logout() {axios.get('/api/logout').then(res => {this.props.history.push('/')})}
+	logout() {axios.get('/api/logout').then(res => {
+		const {deleteUser} = this.props;
+		this.props.history.push('/');
+		deleteUser();
+	})}
 
 	render () {
 		let {user} = this.props;
@@ -24,4 +28,4 @@ class UserButton extends Component {
 }
 
 function mapStateToProps (state) {return {user: state.auth0.user}}
-export default withRouter(connect(mapStateToProps, {updateUserData})(UserButton));
+export default withRouter(connect(mapStateToProps, {updateUserData, deleteUser})(UserButton));

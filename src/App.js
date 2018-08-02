@@ -10,11 +10,6 @@ import {connect} from 'react-redux';
 
 class App extends Component {
   componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
-  login () {
-    const {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
-    const url = `${window.location.origin}/auth/callback`;
-    window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
-  }
   render() {
     let {user} = this.props;
     return (
@@ -27,7 +22,7 @@ class App extends Component {
               <Route path="/dashboard" component={Dashboard}/>
             </Switch>
           </HashRouter>
-					) : <div><button onClick={() => this.login()}>Login</button><p>Please Log in.</p></div>
+					) : <Login />
 				}
       </div>
     );

@@ -11,6 +11,7 @@ export default class Login extends Component {
   render(){
     return(
       <div>
+        <p>Please Log in.</p>
         <button onClick={() => this.login()}>Login</button>
       </div>
     )
