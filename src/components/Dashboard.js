@@ -9,10 +9,22 @@ class Dashboard extends Component {
 
 	render () {
 		console.log(this.props.user)
+		let {user} = this.props;
 		return (
 			<div>
 				Dashboard
 				<button onClick={() => this.logout()}>Logout</button>
+				{
+					user.user_name ? (
+						<div>
+							<p>Account ID: {user.user_id}</p>
+							<p>Account Holder: {user.user_name}</p>
+							<p>Account Email: {user.user_email}</p>
+							<p>Account Number: {user.auth_id}</p>
+							<img src={user.auth_profile} alt="" />
+						</div>
+					) : <p>Please Log in.</p>
+				}
 			</div>
 		)
 	}
