@@ -38,11 +38,11 @@ app.get('/auth/callback', async (req, res) => {
 	
 	if (foundUser[0]) {
 		req.session.user = foundUser[0];
-		res.redirect('/#/dashboard')
+		res.redirect('/#/')
 	}	else {
 		let createdUser = await db.user_create([name, email, sub, picture]);
 		req.session.user = createdUser[0];
-		res.redirect('/#/dashboard');
+		res.redirect('/#/');
 	}
 });
 

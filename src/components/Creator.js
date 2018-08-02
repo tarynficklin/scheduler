@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
-class Scheduler extends Component {
+class Creator extends Component {
 	constructor () {
 		super();
 		this.state = {
@@ -13,9 +14,10 @@ class Scheduler extends Component {
 	render () {
 		return (
 			<div>
+				<Link to="/"><button>X</button></Link>
 			</div>
 		)
 	}
 }
 
-export default Scheduler;
+export default Creator;

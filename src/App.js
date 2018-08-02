@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {HashRouter, Switch, Route} from 'react-router-dom';
+import axios from 'axios';
+
+import {connect} from 'react-redux';
+import {updateUserData} from './ducks/auth0';
+
 import Landing from './components/Landing';
 import Dashboard from './components/Dashboard';
-import './App.css';
-
-import {updateUserData} from './ducks/auth0';
-import axios from 'axios';
-import {connect} from 'react-redux';
+import Creator from './components/Creator';
 
 class App extends Component {
   componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
@@ -18,8 +19,8 @@ class App extends Component {
 					user.user_name ? (
           <HashRouter>
             <Switch>
-              <Route exact path='/' component={Landing}/>
-              <Route path="/dashboard" component={Dashboard}/>
+              <Route exact path="/" component={Dashboard}/>
+              <Route path="/new" component={Creator} />
             </Switch>
           </HashRouter>
 					) : <Landing />
