@@ -34,17 +34,32 @@ app.get('/auth/callback', async (req, res) => {
 	const db = req.app.get('db');
 
 	let {name, email, sub, picture} = resWithUserData.data;
-	let foundUser = await db.find_user([sub]);
+	let foundUser = await db.user_find([sub]);
 	
 	if (foundUser[0]) {
 		req.session.user = foundUser[0];
-		res.redirect('/#/private')
+		res.redirect('/#/dashboard')
 	}	else {
-		let createdUser = await db.create_user([name, email, sub, picture]);
+		let createdUser = await db.user_create([name, email, sub, picture]);
 		req.session.user = createdUser[0];
-		res.redirect('/#/private');
+		res.redirect('/#/dashboard');
 	}
 });
+
+//AUTH0 ENDPOINTS
+app.get('/api/user-data', (req, res) => {
+	if (req.session.user) {
+		res.status(200).send(req.session.user);
+	}
+	else {
+		res.status(401).send('Lul, ya a strangah');
+	}
+});
+
+app.get('/api/logout', (req, res) => {
+	req.session.destroy();
+	res.status(200).send('Logged out');
+})
 
 //USER ENDPOINTS
 const userOrigin = '/api/users';

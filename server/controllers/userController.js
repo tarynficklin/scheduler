@@ -19,18 +19,18 @@ module.exports = {
 	update: (req, res) => {
 		const db = req.app.get('db');
 		const {user_name, user_email} = req.body;
-		const {params} = req;
+		const {id} = req.params;
 
-		db.user_update([user_name, user_email, params.id])
+		db.user_update([user_name, user_email, id])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
 	delete: (req, res) => {
 		const db = req.app.get('db');
-		const {params} = req;
+		const {id} = req.params;
 
-		db.user_delete([params.id])
+		db.user_delete([id])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	}
