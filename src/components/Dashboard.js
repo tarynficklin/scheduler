@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {updateUserData} from '../ducks/auth0';
 
 class Dashboard extends Component {
-	logout() {
-		axios.get('/api/logout').then(res => {
-			this.props.history.push('/')
-		})
-	}
+	componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
+	logout() {axios.get('/api/logout').then(res => {this.props.history.push('/')})}
 
 	render () {
+		console.log(this.props.user)
 		return (
 			<div>
 				Dashboard
@@ -18,4 +18,5 @@ class Dashboard extends Component {
 	}
 }
 
-export default Dashboard;
+function mapStateToProps (state) {return {user: state.auth0.user}}
+export default connect(mapStateToProps, {updateUserData})(Dashboard);

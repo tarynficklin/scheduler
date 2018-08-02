@@ -1,6 +1,6 @@
 //INITIAL STATE
 const initialState = {
-	
+	test: 'gigert'
 };
 
 //CONSTANTS
@@ -14,6 +14,7 @@ export default function reducer( state = initialState, action ) {
 	// 	default:
 	// 		return state;
 	// 	}
+	return state;
 }
 
 //ACTION CREATORS

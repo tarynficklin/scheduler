@@ -52,7 +52,7 @@ app.get('/api/user-data', (req, res) => {
 		res.status(200).send(req.session.user);
 	}
 	else {
-		res.status(401).send('Lul, ya a strangah');
+		res.status(401).send('Access Denied');
 	}
 });
 
