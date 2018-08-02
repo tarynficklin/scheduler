@@ -8,8 +8,3 @@ VALUES ( $1, $2, null, null );
 -- 	"auth_id": 'auth0 id',
 -- 	"auth_profile": 'auth 0 profile picture'
 -- }
-
--- {
--- 	"user_name":"grubsy2",
--- 	"user_email":"grubsy2@gmail.com"
--- }
