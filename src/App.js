@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {HashRouter, Switch, Route} from 'react-router-dom';
-import Login from './components/Login';
+import Landing from './components/Landing';
 import Dashboard from './components/Dashboard';
 import './App.css';
 
@@ -18,11 +18,11 @@ class App extends Component {
 					user.user_name ? (
           <HashRouter>
             <Switch>
-              <Route exact path='/' component={Login}/>
+              <Route exact path='/' component={Landing}/>
               <Route path="/dashboard" component={Dashboard}/>
             </Switch>
           </HashRouter>
-					) : <Login />
+					) : <Landing />
 				}
       </div>
     );

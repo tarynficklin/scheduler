@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateUserData, deleteUser} from '../../ducks/auth0';
 import {withRouter} from 'react-router-dom';
+import './UserButton.css';
 
 class UserButton extends Component {
 	componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
@@ -15,13 +16,10 @@ class UserButton extends Component {
 	render () {
 		let {user} = this.props;
 		return (
-			<div>
-				UserButton
+			<div className="user-button">
+				<img src={user.auth_profile} alt="" className="profile-pic"/><br />
 				<button onClick={() => this.logout()}>Logout</button>
-				<div>
-					<p>Account Holder: {user.user_name}</p>
-					<img src={user.auth_profile} alt="" />
-				</div>
+				<button>New Trip +</button>
 			</div>
 		)
 	}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default class Login extends Component {
+export default class Landing extends Component {
 
   login () {
     const {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
