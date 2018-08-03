@@ -7,6 +7,15 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	find: (req, res) => {
+		const db = req.app.get('db');
+		const {id} = req.params;
+
+		db.trip_find([id])
+			.then(user => res.status(200).send(user))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	create: (req, res) => {
 		const db = req.app.get('db');
 		const {trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
@@ -19,18 +28,18 @@ module.exports = {
 	update: (req, res) => {
 		const db = req.app.get('db');
 		const {trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
-		const {params} = req;
+		const {id} = req.params;
 
-		db.trip_update([trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule, params.id])
+		db.trip_update([trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule, id])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
 	delete: (req, res) => {
 		const db = req.app.get('db');
-		const {params} = req;
+		const {id} = req.params;
 
-		db.trip_delete([params.id])
+		db.trip_delete([id])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	}
