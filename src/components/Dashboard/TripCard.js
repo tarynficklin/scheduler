@@ -8,7 +8,7 @@ export default function TripCard(props) {
 			<button onClick={() => deleteTrip(id)}>X</button>
 			<p>id: {id}</p>
 			<p>location: {location}</p>
-			<p>date: {startDate}-{endDate}</p>
+			<p>date: {startDate} - {endDate}</p>
 			<p>budget: {budget}</p>
 			<p>packingList: {JSON.stringify(packingList)}</p>
 			<p>schedule: {JSON.stringify(schedule)}</p>

@@ -8,6 +8,7 @@ import {updateUserData} from './ducks/auth0';
 import Landing from './components/Landing';
 import Dashboard from './components/Dashboard';
 import Creator from './components/Creator';
+import Scheduler from './components/Scheduler'
 
 class App extends Component {
   componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
@@ -21,6 +22,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Dashboard}/>
               <Route path="/new" component={Creator} />
+              <Route path="/trip/:id" component={Scheduler} />
             </Switch>
           </HashRouter>
 					) : <Landing />
