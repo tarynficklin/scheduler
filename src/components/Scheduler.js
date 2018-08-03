@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
+import './Scheduler.css';
+
+import Header from './Scheduler/Header';
+import WeekSelector from './Scheduler/WeekSelector';
+import WeekTimeline from './Scheduler/WeekTimeline';
+import Schedule from './Scheduler/Schedule';
+import BudgetWidget from './Scheduler/BudgetWidget';
+import PackingWidget from './Scheduler/PackingWidget';
+import SettingsWidget from './Scheduler/SettingsWidget';
 
 class Scheduler extends Component {
 	constructor () {
@@ -25,6 +33,7 @@ class Scheduler extends Component {
 	}
 
 	render () {
+
 		const {
 			trip_id,
 			trip_location,
@@ -34,15 +43,16 @@ class Scheduler extends Component {
 			trip_packing_list,
 			trip_schedule
 		} = this.state.trip;
+
 		return (
-			<div>
-				<Link to="/"><button>X</button></Link>
-				<p>id: {trip_id}</p>
-				<p>location: {trip_location}</p>
-				<p>date: {trip_start_date} - {trip_end_date}</p>
-				<p>budget: {trip_budget}</p>
-				<p>packingList: {JSON.stringify(trip_packing_list)}</p>
-				<p>schedule: {JSON.stringify(trip_schedule)}</p>
+			<div className="scheduler">
+				<Header id={trip_id} location={trip_location} />
+				<WeekSelector />
+				<WeekTimeline />
+				<Schedule schedule={trip_schedule} />
+				<BudgetWidget budget={trip_budget}/>
+				<PackingWidget packingList={trip_packing_list} />
+				<SettingsWidget location={trip_location} startDate={trip_start_date} endDate={trip_end_date}/>
 			</div>
 		)
 	}

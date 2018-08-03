@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
 import axios from 'axios';
+import './Dashboard.css'
 
 class Dashboard extends Component {
 	constructor () {
@@ -19,7 +20,7 @@ class Dashboard extends Component {
 	render () {
 		const {tripCards} = this.state;
 		return (
-			<div>
+			<div className="dashboard">
 				<UserButton />
 				{tripCards.map((e, i) => {
 					return (
