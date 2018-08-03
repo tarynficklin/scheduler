@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import './Creator.css'
 
 import Calendar from './Creator/Calendar';
 import Location from './Creator/Location';
@@ -11,7 +12,7 @@ class Creator extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className="creator">
 				<Link to="/"><button>X</button></Link>
 				<p>New Vacation</p>
 				<Location />

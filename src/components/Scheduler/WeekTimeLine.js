@@ -1,8 +1,9 @@
 import React from 'react';
+import './WeekTimeline.css'
 
 export default function WeekTimeline(props) {
 	return (
-		<form action="">
+		<form action="" className="week-timeline">
 			<a>mon</a>
 			<input type="radio" name="weekday" val="mon"/>
 			<a>tue</a>

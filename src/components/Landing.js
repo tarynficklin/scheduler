@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './Landing.css'
 
 export default class Landing extends Component {
 
@@ -10,7 +11,7 @@ export default class Landing extends Component {
 
   render(){
     return(
-      <div>
+      <div className="landing">
         <p>Please Log in.</p>
         <button onClick={() => this.login()}>Login</button>
       </div>

@@ -1,8 +1,9 @@
 import React from 'react'
+import './Budget.css'
 
 export default function Budget(props) {
 	return (
-		<div>
+		<div className="budget">
 			<input placeholder="budget" />
 		</div>
 	)

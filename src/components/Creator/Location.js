@@ -1,8 +1,9 @@
 import React from 'react'
+import './Location.css'
 
 export default function Location(props) {
 	return (
-		<div>
+		<div className="location">
 			<input placeholder="location"/>
 		</div>
 	)
