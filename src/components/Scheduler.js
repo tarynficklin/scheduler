@@ -29,7 +29,9 @@ class Scheduler extends Component {
 	componentDidMount() {
 		const {id} = this.props.match.params;
 		axios.get(`/api/trips/${id}`)
-		.then(results => {results.data[0] ? this.setState({trip: results.data[0]}) : null})}
+		.then(results => results.data[0] ? this.setState({trip: results.data[0]}) : this.props.history.push('/404'))}
+
+	deleteTrip(id) {axios.delete(`api/trips/${id}`)}
 
 	render () {
 
@@ -51,7 +53,12 @@ class Scheduler extends Component {
 				<Schedule schedule={trip_schedule} />
 				<BudgetWidget budget={trip_budget}/>
 				<PackingWidget packingList={trip_packing_list} />
-				<SettingsWidget location={trip_location} startDate={trip_start_date} endDate={trip_end_date} />
+				<SettingsWidget
+					location={trip_location}
+					startDate={trip_start_date}
+					endDate={trip_end_date}
+					id={trip_id}
+					deleteTrip={this.deleteTrip} />
 			</div>
 		)
 	}

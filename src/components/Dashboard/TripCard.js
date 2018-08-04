@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom'
 import './TripCard.css';
 
 export default function TripCard(props) {
-	const {id, location, startDate, endDate, deleteTrip} = props;
+	const {id, location, startDate, endDate} = props;
 	return (
 		
-			<div className="trip-card">
-				<button onClick={() => deleteTrip(id)}>X</button>
-				<p>location: {location}</p>
-				<p>date: {startDate} - {endDate}</p>
-				<Link to={`/trip/${id}`}><button>Edit</button></Link>
+		<div className="trip-card">
+			<Link to={`/trip/${id}`}>
+				<h3>{location}</h3>
+				<p>{startDate} - {endDate}</p>
+			</Link>
 			</div>
 	)
 }

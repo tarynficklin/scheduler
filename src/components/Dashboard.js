@@ -15,8 +15,6 @@ class Dashboard extends Component {
 	componentDidMount() {axios.get('/api/trips').then(results => this.setState({tripCards: results.data}))}
 	componentDidUpdate() {axios.get('/api/trips').then(results => this.setState({tripCards: results.data}))}
 
-	deleteTrip(id) {axios.delete(`api/trips/${id}`)}
-
 	render () {
 		const {tripCards} = this.state;
 		return (
