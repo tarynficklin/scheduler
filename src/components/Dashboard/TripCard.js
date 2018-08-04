@@ -6,11 +6,9 @@ export default function TripCard(props) {
 	const {id, location, startDate, endDate} = props;
 	return (
 		
-		<div className="trip-card">
-			<Link to={`/trip/${id}`}>
+			<Link to={`/trip/${id}`} className="trip-card">
 				<h3>{location}</h3>
 				<p>{startDate} - {endDate}</p>
 			</Link>
-			</div>
 	)
 }
