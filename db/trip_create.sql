@@ -26,3 +26,143 @@ VALUES ( $1, $2, $3, $4, $5, $6 );
 -- 			]}
 -- 		]}
 -- }
+
+
+-- {"tripSchedule":
+-- 	[
+-- 		{"week1":
+-- 			[
+-- 				{"mon": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"tue": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"wed": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"thurs": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"fri": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"sat": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"sun": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 			]
+-- 		},
+		
+-- 		{"week2":
+-- 			[
+-- 				{"mon": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"tue": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"wed": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"thurs": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"fri": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"sat": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				},
+-- 				{"sun": 
+-- 					[
+-- 						{"title": "Drive to New York", "price":2.59, "isChecked":true},
+-- 						{"title":"Breakfast", "price":3.99, "isChecked":false},
+-- 						{"title":"Statue", "price":null, "isChecked":true}
+-- 					]
+-- 				}
+-- 			]
+-- 		}
+-- 	]
+-- }
+
+-- {"tripSchedule":
+-- 	[
+-- 		{"week1":
+-- 			[
+-- 				{"mon":[]},
+-- 				{"tue":[]},
+-- 				{"wed":[]},
+-- 				{"thur":[]},
+-- 				{"fri":[]},
+-- 				{"sat":[]},
+-- 				{"sun":[]}
+-- 			]
+-- 		},
+-- 		{"week2":
+-- 			[
+-- 				{"mon":[]},
+-- 				{"tue":[]},
+-- 				{"wed":[]},
+-- 				{"thur":[]},
+-- 				{"fri":[]},
+-- 				{"sat":[]},
+-- 				{"sun":[]}
+-- 			]
+-- 		}
+-- 	]
+-- }

@@ -8,4 +8,10 @@
 	display: block;
 	color: white;
 	text-decoration: none;
+	cursor: default;
+	transition: 0.5s;
+}
+
+.trip-card:hover {
+	background: rgba(0, 0, 0, 0.75);
 }
