@@ -263,21 +263,16 @@ SELECT * FROM schedule_items;
 
 
 
-
-
-
-
-
 --clear the tabels
-DELETE FROM schedule_items;
-DELETE FROM schedules;
-DELETE FROM packing_lists;
-DELETE FROM trips;
-DELETE FROM users;
+	-- DELETE FROM schedule_items;
+	-- DELETE FROM schedules;
+	-- DELETE FROM packing_lists;
+	-- DELETE FROM trips;
+	-- DELETE FROM users;
 
 --see all tabels
-SELECT * FROM users;
-SELECT * FROM trips;
-SELECT * FROM packing_lists;
-SELECT * FROM schedules;
-SELECT * FROM schedule_items;
+	-- SELECT * FROM users;
+	-- SELECT * FROM trips;
+	-- SELECT * FROM packing_lists;
+	-- SELECT * FROM schedules;
+	-- SELECT * FROM schedule_items;
