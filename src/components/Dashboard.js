@@ -16,11 +16,11 @@ class Dashboard extends Component {
 
 	componentDidMount() {
 		const {user_id} = this.props.user
-		axios.get(`/api/trips/trips/${user_id}`).then(results => this.setState({tripCards: results.data}))
+		axios.get(`/api/trips/${user_id}`).then(results => this.setState({tripCards: results.data}))
 	}
 	componentDidUpdate() {
 		const {user_id} = this.props.user
-		axios.get(`/api/trips/trips/${user_id}`).then(results => this.setState({tripCards: results.data}))
+		axios.get(`/api/trips/${user_id}`).then(results => this.setState({tripCards: results.data}))
 }
 
 	render () {
