@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
+
 import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
-import axios from 'axios';
 import './Dashboard.css'
 
 class Dashboard extends Component {
@@ -12,8 +14,14 @@ class Dashboard extends Component {
 		}
 	}
 
-	componentDidMount() {axios.get('/api/trips').then(results => this.setState({tripCards: results.data}))}
-	componentDidUpdate() {axios.get('/api/trips').then(results => this.setState({tripCards: results.data}))}
+	componentDidMount() {
+		const {user_id} = this.props.user
+		axios.get(`/api/trips/trips/${user_id}`).then(results => this.setState({tripCards: results.data}))
+	}
+	componentDidUpdate() {
+		const {user_id} = this.props.user
+		axios.get(`/api/trips/trips/${user_id}`).then(results => this.setState({tripCards: results.data}))
+}
 
 	render () {
 		const {tripCards} = this.state;
@@ -41,4 +49,5 @@ class Dashboard extends Component {
 	}
 }
 
-export default Dashboard;
+function mapStateToProps (state) {return {user: state.auth0.user}}
+export default connect(mapStateToProps)(Dashboard);

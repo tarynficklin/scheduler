@@ -1,8 +1,10 @@
 module.exports = {
 	read: (req, res) => {
 		const db = req.app.get('db');
+		const {user} = req.params;
 
-		db.trip_read()
+		// console.log(user)
+		db.trip_read([user])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
