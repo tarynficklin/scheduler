@@ -28,7 +28,7 @@ class Scheduler extends Component {
 
 	componentDidMount() {
 		const {id} = this.props.match.params;
-		axios.get(`/api/trips/${id}`)
+		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
 			if (results.data[0]) {
 				this.setState({trip: results.data[0]});
