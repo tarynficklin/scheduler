@@ -19,31 +19,31 @@ class Scheduler extends Component {
 				trip_location: "",
 				trip_start_date: 0,
 				trip_end_date: 0,
-				trip_budget: 0,
-				trip_packing_list: {},
-				trip_schedule: {}
-			}
+				trip_budget: 0
+			},
+			trip_packing_list: {},
+			trip_schedule: {}
 		}
 	}
 
 	componentDidMount() {
 		const {id} = this.props.match.params;
-		axios.get(`/api/trips/trip/${id}`)
-		.then(results => results.data[0] ? this.setState({trip: results.data[0]}) : this.props.history.push('/404'))}
+		axios.get(`/api/trips/${id}`)
+		.then(results => {
+			if (results.data[0]) {
+				this.setState({trip: results.data[0]});
+				axios.get(`/api/packing/${id}`).then(results => this.setState({trip_packing_list: results.data}));
+				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data}));
+			}
+			else {this.props.history.push('/404')}
+		})
+	}
 
 	deleteTrip(id) {axios.delete(`api/trips/${id}`)}
-
 	render () {
-
-		const {
-			trip_id,
-			trip_location,
-			trip_start_date,
-			trip_end_date,
-			trip_budget,
-			trip_packing_list,
-			trip_schedule
-		} = this.state.trip;
+		
+		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state.trip;
+		const {trip_schedule, trip_packing_list} = this.state
 
 		return (
 			<div className="scheduler">

@@ -5,8 +5,11 @@ const express = require('express'),
 			bodyParser = require('body-parser'),
 			massive = require('massive'),
 			axios = require('axios'),
+			
 			userController = require('./controllers/userController'),
-			tripController = require('./controllers/tripController')
+			tripController = require('./controllers/tripController'),
+			packingController = require('./controllers/packingController'),
+			scheduleController = require('./controllers/scheduleController')
 
 //SERVER SETUP
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
@@ -64,10 +67,10 @@ app.get('/api/logout', (req, res) => {
 
 //USER ENDPOINTS
 const userOrigin = '/api/users';
-app.get    (`${userOrigin}`,     userController.read  );
-app.post   (`${userOrigin}`,     userController.create);
-app.put    (`${userOrigin}/:id`, userController.update);
-app.delete (`${userOrigin}/:id`, userController.delete);
+app.get    (`${userOrigin}`,           userController.read  );
+app.post   (`${userOrigin}`,           userController.create);
+app.put    (`${userOrigin}/:id`,       userController.update);
+app.delete (`${userOrigin}/:id`,       userController.delete);
 
 //TRIP ENDPOINTS
 const tripOrigin = '/api/trips';
@@ -76,6 +79,14 @@ app.get    (`${tripOrigin}/trip/:id`,  tripController.find  );
 app.post   (`${tripOrigin}`,           tripController.create);
 app.put    (`${tripOrigin}/:id`,       tripController.update);
 app.delete (`${tripOrigin}/:id`,       tripController.delete);
+
+//PACKING LIST ENDPOINTS
+const packingOrigin = '/api/packing';
+app.get (`${packingOrigin}/:id`,       packingController.read);
+
+//SCHEDULE ENDPOINTS
+const scheduleOrigin = '/api/schedule';
+app.get (`${scheduleOrigin}/:id`,      scheduleController.read);
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));

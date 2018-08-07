@@ -3,9 +3,8 @@ module.exports = {
 		const db = req.app.get('db');
 		const {user} = req.params;
 
-		// console.log(user)
 		db.trip_read([user])
-			.then(user => res.status(200).send(user))
+			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
@@ -14,7 +13,7 @@ module.exports = {
 		const {id} = req.params;
 
 		db.trip_find([id])
-			.then(user => res.status(200).send(user))
+			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
@@ -23,7 +22,7 @@ module.exports = {
 		const {trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
 
 		db.trip_create([trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule])
-			.then(user => res.status(200).send(user))
+			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
@@ -33,7 +32,7 @@ module.exports = {
 		const {id} = req.params;
 
 		db.trip_update([trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule, id])
-			.then(user => res.status(200).send(user))
+			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
@@ -42,7 +41,7 @@ module.exports = {
 		const {id} = req.params;
 
 		db.trip_delete([id])
-			.then(user => res.status(200).send(user))
+			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	}
 }
