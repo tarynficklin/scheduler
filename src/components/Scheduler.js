@@ -33,7 +33,7 @@ class Scheduler extends Component {
 		.then(results => {
 			if (results.data[0] && results.data[0].user_id === this.props.user.user_id) {
 				this.setState({trip: results.data[0]});
-				axios.get(`/api/packing/${id}`).then(results => this.setState({trip_packing_list: results.data}));
+				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
 				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data}));
 			}
 			else {this.props.history.push('/404')}

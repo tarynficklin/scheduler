@@ -17,18 +17,20 @@ class ListItem extends Component {
 	}
 
 	getTitleInput (val) {this.setState({title: val})}
-	handleChecked (id, checked) {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))}
+	getPriceInput (val) {this.setState({title: val})}
+	toggleChecked (id) {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))}
 
   render() {
-		const {id, title, price, time, checked} = this.props
+		const {id, title, price, time} = this.props
 		return (
 			<div>
 				<a>{title} </a>
  				<a>{price} </a>
- 				<a>{time}</a>
+ 				<a>{time} </a>
 				<input onChange={(e) => this.getTitleInput(e.target.value)} placeholder={title} />
+				<input onChange={(e) => this.getPriceInput(e.target.value)} placeholder={price} />
 				<button>X</button>
-				<input type="checkbox" checked={this.state.checked} onChange={() => this.handleChecked(id, checked)}/>
+				<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
 			</div>
 		);
   }

@@ -4,7 +4,7 @@ const //CONTROLLERS
 			auth0Controller    = require ('./controllers/auth0Controller'   ),
 			userController     = require ('./controllers/userController'    ),
 			tripController     = require ('./controllers/tripController'    ),
-			packingController  = require ('./controllers/packingController' ),
+			listController     = require ('./controllers/listController'    ),
 			scheduleController = require ('./controllers/scheduleController'),
 			//NODE MODULES
 			express            = require ('express'        ),
@@ -43,8 +43,8 @@ app.put    (`${tripOrigin}/:id`,       tripController.update);
 app.delete (`${tripOrigin}/:id`,       tripController.delete);
 
 //PACKING LIST ENDPOINTS
-const packingOrigin = '/api/packing';
-app.get    (`${packingOrigin}/:id`,    packingController.read);
+const listOrigin = '/api/list';
+app.get    (`${listOrigin}/:id`,       listController.read  );
 
 //SCHEDULE ENDPOINTS
 const scheduleOrigin = '/api/schedule';

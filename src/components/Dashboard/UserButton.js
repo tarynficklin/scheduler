@@ -10,7 +10,6 @@ class UserButton extends Component {
 	logout() {axios.get('/api/logout').then(res => {
 		const {deleteUser} = this.props;
 		deleteUser();
-		this.props.history.push('/');
 	})}
 
 	render () {
