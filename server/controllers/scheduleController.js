@@ -3,7 +3,7 @@ module.exports = {
 		const db = req.app.get('db');
 		const {id} = req.params;
 
-		db.schedule_read([id])
+		db.schedules.schedule_read([id])
 			.then(schedule => res.status(200).send(schedule))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
@@ -12,7 +12,7 @@ module.exports = {
 		const db = req.app.get('db');
 		const {id} = req.params;
 
-		db.item_read([id])
+		db.schedules.item_read([id])
 			.then(item => res.status(200).send(item))
 			.catch(err => console.log(`Error Message: ${err}`))
 	}

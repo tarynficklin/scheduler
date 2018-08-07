@@ -2,7 +2,7 @@ module.exports = {
 	read: (req, res) => {
 		const db = req.app.get('db');
 
-		db.user_read()
+		db.users.user_read()
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
@@ -11,7 +11,7 @@ module.exports = {
 		const db = req.app.get('db');
 		const {user_name, user_email, auth_id, auth_profile} = req.body;
 
-		db.user_create([user_name, user_email, auth_id, auth_profile])
+		db.users.user_create([user_name, user_email, auth_id, auth_profile])
 			.then(user => res.status(200).send(req.body))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
@@ -21,7 +21,7 @@ module.exports = {
 		const {user_name, user_email} = req.body;
 		const {id} = req.params;
 
-		db.user_update([user_name, user_email, id])
+		db.users.user_update([user_name, user_email, id])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
@@ -30,7 +30,7 @@ module.exports = {
 		const db = req.app.get('db');
 		const {id} = req.params;
 
-		db.user_delete([id])
+		db.users.user_delete([id])
 			.then(user => res.status(200).send(user))
 			.catch(err => console.log(`Error Message: ${err}`))
 	}

@@ -1,15 +1,17 @@
 //DEPENDENCIES
-require('dotenv').config();
-const express = require('express'),
-			session = require('express-session'),
-			bodyParser = require('body-parser'),
-			massive = require('massive'),
-			axios = require('axios'),
-			
-			userController = require('./controllers/userController'),
-			tripController = require('./controllers/tripController'),
-			packingController = require('./controllers/packingController'),
-			scheduleController = require('./controllers/scheduleController')
+
+const //CONTROLLERS
+			auth0Controller    = require ('./controllers/auth0Controller'   ),
+			userController     = require ('./controllers/userController'    ),
+			tripController     = require ('./controllers/tripController'    ),
+			packingController  = require ('./controllers/packingController' ),
+			scheduleController = require ('./controllers/scheduleController'),
+			//NODE MODULES
+			express            = require ('express'        ),
+			session            = require ('express-session'),
+			bodyParser         = require ('body-parser'    ),
+			massive            = require ('massive'        )
+													 require ('dotenv').config();
 
 //SERVER SETUP
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
@@ -20,74 +22,34 @@ app.use(bodyParser.json());
 massive(CONNECTION_STRING).then(db => app.set('db', db));
 app.use(session({secret: SESSION_SECRET, resave: false,	saveUninitialized: false}));
 
-//AUTH0
-app.get('/auth/callback', async (req, res) => {
-	const {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID, CLIENT_SECRET} = process.env;
+	//AUTH0 ENDPOINTS
+	app.get    ('/auth/callback',          auth0Controller.auth  );
+	app.get    ('/api/user-data',          auth0Controller.user  );
+	app.get    ('/api/logout',             auth0Controller.logout);
 
-	let payload = {
-		client_id: REACT_APP_CLIENT_ID,
-		client_secret: CLIENT_SECRET,
-		code: req.query.code,
-		grant_type: 'authorization_code',
-		redirect_uri: `http://${req.headers.host}/auth/callback`
-	}
+	//USER ENDPOINTS
+	const userOrigin = '/api/users';
+	app.get    (`${userOrigin}`,           userController.read  );
+	app.post   (`${userOrigin}`,           userController.create);
+	app.put    (`${userOrigin}/:id`,       userController.update);
+	app.delete (`${userOrigin}/:id`,       userController.delete);
 
-	let resWithToken = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload);
-	let resWithUserData = await axios.get(`https://${REACT_APP_DOMAIN}/userinfo?access_token=${resWithToken.data.access_token}`);
-	const db = req.app.get('db');
+	//TRIP ENDPOINTS
+	const tripOrigin = '/api/trips';
+	app.get    (`${tripOrigin}/:user`,     tripController.read  );
+	app.get    (`${tripOrigin}/trip/:id`,  tripController.find  );
+	app.post   (`${tripOrigin}`,           tripController.create);
+	app.put    (`${tripOrigin}/:id`,       tripController.update);
+	app.delete (`${tripOrigin}/:id`,       tripController.delete);
 
-	let {name, email, sub, picture} = resWithUserData.data;
-	let foundUser = await db.user_find([sub]);
-	
-	if (foundUser[0]) {
-		req.session.user = foundUser[0];
-		res.redirect('/#/')
-	}	else {
-		let createdUser = await db.user_create([name, email, sub, picture]);
-		req.session.user = createdUser[0];
-		res.redirect('/#/');
-	}
-});
+	//PACKING LIST ENDPOINTS
+	const packingOrigin = '/api/packing';
+	app.get    (`${packingOrigin}/:id`,    packingController.read);
 
-//AUTH0 ENDPOINTS
-app.get('/api/user-data', (req, res) => {
-	if (req.session.user) {
-		res.status(200).send(req.session.user);
-	}
-	else {
-		// res.status(401).send('Access Denied');
-		null
-	}
-});
-
-app.get('/api/logout', (req, res) => {
-	req.session.destroy();
-	res.status(200).send('Logged out');
-})
-
-//USER ENDPOINTS
-const userOrigin = '/api/users';
-app.get    (`${userOrigin}`,           userController.read  );
-app.post   (`${userOrigin}`,           userController.create);
-app.put    (`${userOrigin}/:id`,       userController.update);
-app.delete (`${userOrigin}/:id`,       userController.delete);
-
-//TRIP ENDPOINTS
-const tripOrigin = '/api/trips';
-app.get    (`${tripOrigin}/:user`,     tripController.read  );
-app.get    (`${tripOrigin}/trip/:id`,  tripController.find  );
-app.post   (`${tripOrigin}`,           tripController.create);
-app.put    (`${tripOrigin}/:id`,       tripController.update);
-app.delete (`${tripOrigin}/:id`,       tripController.delete);
-
-//PACKING LIST ENDPOINTS
-const packingOrigin = '/api/packing';
-app.get (`${packingOrigin}/:id`,       packingController.read);
-
-//SCHEDULE ENDPOINTS
-const scheduleOrigin = '/api/schedule';
-app.get (`${scheduleOrigin}/:id`,      scheduleController.read    );
-app.get (`${scheduleOrigin}/item/:id`, scheduleController.readItem);
+	//SCHEDULE ENDPOINTS
+	const scheduleOrigin = '/api/schedule';
+	app.get (`${scheduleOrigin}/:id`,      scheduleController.read    );
+	app.get (`${scheduleOrigin}/item/:id`, scheduleController.readItem);
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));
