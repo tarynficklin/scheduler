@@ -86,7 +86,8 @@ app.get (`${packingOrigin}/:id`,       packingController.read);
 
 //SCHEDULE ENDPOINTS
 const scheduleOrigin = '/api/schedule';
-app.get (`${scheduleOrigin}/:id`,      scheduleController.read);
+app.get (`${scheduleOrigin}/:id`,      scheduleController.read    );
+app.get (`${scheduleOrigin}/item/:id`, scheduleController.readItem);
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));

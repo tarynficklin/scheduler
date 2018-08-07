@@ -43,7 +43,7 @@ class Dashboard extends Component {
 						/>
 					)
 				})
-				}
+			}
 			</div>
 		)
 	}
