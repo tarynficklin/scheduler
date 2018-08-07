@@ -11,10 +11,7 @@ export default class ScheduleDay extends Component {
 		}
 	}
 	
-	componentDidMount () {
-		const {id} = this.props;
-		axios.get(`/api/schedule/item/${id}`).then(results => this.setState({listItems: results.data}));
-	}
+	componentDidMount () {axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({listItems: results.data}))}
 
 	render () {
 		const {day, month, year} = this.props;
@@ -26,6 +23,7 @@ export default class ScheduleDay extends Component {
 					return (
 						<ListItem
 							key={i}
+							id={e.item_id}
 							title={e.item_title}
 							price={e.item_price}
 							time={e.item_time}
