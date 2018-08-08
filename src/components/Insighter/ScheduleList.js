@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import ScheduleItem from './ScheduleItem';
 import axios from 'axios';
-import './ScheduleDay.css';
+import './ScheduleList.css';
 
-export default class ScheduleDay extends Component {
+export default class ScheduleList extends Component {
 	constructor () {
 		super ();
 		this.state = {
@@ -17,7 +17,7 @@ export default class ScheduleDay extends Component {
 		const {day, month, year} = this.props;
 		const {scheduleItems} = this.state;
 		return (
-			<div className="schedule-day">
+			<div className="schedule-list">
    			<a>• {month}/{day}/{year}</a>
 				 {scheduleItems.map((e, i) => {
 					return (

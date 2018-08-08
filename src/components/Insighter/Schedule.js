@@ -1,5 +1,5 @@
 import React from 'react';
-import ScheduleDay from './ScheduleDay';
+import ScheduleList from './ScheduleList';
 import './Schedule.css';
 
 export default function Schedule(props) {
@@ -8,7 +8,7 @@ export default function Schedule(props) {
 		<div className="schedule">
 			{schedule.map((e, i) => {
 				return (
-					<ScheduleDay
+					<ScheduleList
 						key={i}
 						id={e.schedule_id}
 						day={e.schedule_day}
