@@ -11,7 +11,7 @@ import Landing   from './components/Common/Landing';
 import Missing   from './components/Common/Missing';
 import Dashboard from './components/Dashboard';
 import Creator   from './components/Creator';
-import Scheduler from './components/Scheduler';
+import Insighter from './components/Insighter';
 
 class App extends Component {
 
@@ -28,7 +28,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/"   component={Dashboard}/>
               <Route path="/new"      component={Creator} />
-              <Route path="/trip/:id" component={Scheduler} />
+              <Route path="/trip/:id" component={Insighter} />
               <Route path="/404"      component={Missing} />
             </Switch>
           </HashRouter>

@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import './Scheduler.css';
+import './Insighter.css';
 
-import Header from './Scheduler/Header';
-import WeekSelector from './Scheduler/WeekSelector';
-import WeekTimeline from './Scheduler/WeekTimeline';
-import Schedule from './Scheduler/Schedule';
-import BudgetWidget from './Scheduler/BudgetWidget';
-import PackingWidget from './Scheduler/PackingWidget';
-import SettingsWidget from './Scheduler/SettingsWidget';
+import Header from './Insighter/Header';
+import WeekSelector from './Insighter/WeekSelector';
+import WeekTimeline from './Insighter/WeekTimeline';
+import Schedule from './Insighter/Schedule';
+import BudgetWidget from './Insighter/BudgetWidget';
+import PackingWidget from './Insighter/PackingWidget';
+import SettingsWidget from './Insighter/SettingsWidget';
 
-class Scheduler extends Component {
+class Insighter extends Component {
 	constructor () {
 		super();
 		this.state = {
@@ -47,7 +47,7 @@ class Scheduler extends Component {
 		const {trip_schedule, trip_packing_list} = this.state
 
 		return (
-			<div className="scheduler">
+			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />
 				{/* <WeekSelector /> */}
 				{/* <WeekTimeline /> */}
@@ -65,4 +65,4 @@ class Scheduler extends Component {
 	}
 }
 function mapStateToProps (state) {return {user: state.auth0.user}};
-export default connect(mapStateToProps)(Scheduler);
+export default connect(mapStateToProps)(Insighter);
