@@ -18,12 +18,22 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	update: (req, res) => {
+		const db = req.app.get('db');
+		const {packing_title} = req.body;
+		const {id} = req.params;
+
+		db.packing_lists.list_update([packing_title, id])
+			.then(list => res.status(200).send(list))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	delete: (req, res) => {
 		const db = req.app.get('db');
 		const {id} = req.params;
 
 		db.packing_lists.list_delete([id])
-			.then(user => res.status(200).send(user))
+			.then(list => res.status(200).send(list))
 			.catch(err => console.log(`Error Message: ${err}`))
 	}
 }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import './Insighter.css';
-import _ from 'lodash';
 
 import Header from './Insighter/Header';
 import Schedule from './Insighter/Schedule';
@@ -24,7 +23,6 @@ class Insighter extends Component {
 			trip_packing_list: [],
 			trip_schedule: []
 		}
-		this.deletePackingItem = this.deletePackingItem.bind(this);
 	}
 
 	componentDidMount() {
@@ -41,14 +39,6 @@ class Insighter extends Component {
 	}
 
 	deleteTrip (id) {axios.delete(`api/trips/${id}`)}
-
-	deletePackingItem (id) {
-		axios.delete(`/api/list/${id}`)
-		let {trip_packing_list} = this.state;
-		let listIndex = _.findIndex(trip_packing_list, i => i.packing_id === id);
-		trip_packing_list.splice(listIndex, 1);
-		this.setState({trip_packing_list});
-	}
 
 	render () {
 		

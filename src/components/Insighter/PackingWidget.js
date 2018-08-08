@@ -3,7 +3,7 @@ import PackingItem from './PackingItem'
 import './PackingWidget.css'
 
 export default function PackingWidget(props) {
-	const {packingList, deletePackingItem} = props
+	const {packingList} = props
 	return (
 		<div className="packing-widget">
 			<h3>Packing List Widget</h3>
@@ -14,7 +14,6 @@ export default function PackingWidget(props) {
 							id={e.packing_id}
 							title={e.packing_title}
 							checked={e.packing_checked}
-							deletePackingItem={deletePackingItem}
 						/>
 					)
 				})
