@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './ScheduleItem.css'
 
-class ListItem extends Component {
-	constructor() {
-		super();
+class ScheduleItem extends Component {
+	constructor(props) {
+		super(props);
 		this.state = {
-			title: '',
-			price: 0,
-			checked: false
+			title: this.props.title,
+			price: this.props.price,
+			checked: this.props.checked
 		}
-	}
-
-	componentDidMount() {
-		const {title, price, checked} = this.props;
-		this.setState({title, price, checked})
 	}
 
 	getTitleInput (val) {this.setState({title: val})}
@@ -23,7 +19,7 @@ class ListItem extends Component {
   render() {
 		const {id, title, price, time} = this.props
 		return (
-			<div>
+			<div className="schedule-item">
 				<a>{title} </a>
  				<a>{price} </a>
  				<a>{time} </a>
@@ -36,4 +32,4 @@ class ListItem extends Component {
   }
 }
 
-export default ListItem;
+export default ScheduleItem;

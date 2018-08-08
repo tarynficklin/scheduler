@@ -8,7 +8,7 @@ export default function Info(props) {
 		<div className="header">
 			<Link to="/"><button>X</button></Link>
 			<h1>{location}</h1>
-			<p>id: {id}</p>
+			{/* <p>id: {id}</p> */}
 		</div>
 	)
 }

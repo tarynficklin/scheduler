@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ListItem from './ListItem';
+import ScheduleItem from './ScheduleItem';
 import axios from 'axios';
 import './ScheduleDay.css';
 
@@ -7,21 +7,21 @@ export default class ScheduleDay extends Component {
 	constructor () {
 		super ();
 		this.state = {
-			listItems: []
+			scheduleItems: []
 		}
 	}
 	
-	componentDidMount () {axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({listItems: results.data}))}
+	componentDidMount () {axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))}
 
 	render () {
 		const {day, month, year} = this.props;
-		const {listItems} = this.state;
+		const {scheduleItems} = this.state;
 		return (
 			<div className="schedule-day">
    			<a>• {month}/{day}/{year}</a>
-				 {listItems.map((e, i) => {
+				 {scheduleItems.map((e, i) => {
 					return (
-						<ListItem
+						<ScheduleItem
 							key={i}
 							id={e.item_id}
 							title={e.item_title}

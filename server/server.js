@@ -44,7 +44,8 @@ app.delete (`${tripOrigin}/:id`,       tripController.delete);
 
 //PACKING LIST ENDPOINTS
 const listOrigin = '/api/list';
-app.get    (`${listOrigin}/:id`,       listController.read  );
+app.get (`${listOrigin}/:id`,          listController.read );
+app.put (`${listOrigin}/check/:id`,    listController.check);
 
 //SCHEDULE ENDPOINTS
 const scheduleOrigin = '/api/schedule';

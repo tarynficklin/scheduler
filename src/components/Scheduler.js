@@ -17,7 +17,7 @@ class Scheduler extends Component {
 		this.state = {
 			trip: {
 				trip_id: 0,
-				trip_location: "",
+				trip_location: "Trip",
 				trip_start_date: 0,
 				trip_end_date: 0,
 				trip_budget: 0
@@ -49,8 +49,8 @@ class Scheduler extends Component {
 		return (
 			<div className="scheduler">
 				<Header id={trip_id} location={trip_location} />
-				<WeekSelector />
-				<WeekTimeline />
+				{/* <WeekSelector /> */}
+				{/* <WeekTimeline /> */}
 				<Schedule schedule={trip_schedule} />
 				<BudgetWidget budget={trip_budget}/>
 				<PackingWidget packingList={trip_packing_list} />
