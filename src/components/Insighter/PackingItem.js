@@ -3,8 +3,8 @@ import axios from 'axios';
 import './PackingItem.css';
 
 class PackingItem extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			title: '',
 			checked: false
@@ -20,12 +20,12 @@ class PackingItem extends Component {
 	toggleChecked (id) {axios.put(`/api/list/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))}
 
   render() {
-		const {id, title} = this.props
+		const {id, title, deletePackingItem} = this.props
 		return (
 			<div className="packing-item">
 				<a>• {title} </a>
 				<input onChange={(e) => this.getTitleInput(e.target.value)} placeholder={title} />
-				<button>X</button>
+				<button onClick={() => deletePackingItem(id)}>X</button>
 				<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
 			</div>
 		);
