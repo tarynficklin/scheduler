@@ -12,7 +12,7 @@ module.exports = {
 		const db = req.app.get('db');
 		const {id} = req.params;
 
-		db.schedules.schedule_item_read([id])
+		db.schedules.item_read([id])
 			.then(item => res.status(200).send(item))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
