@@ -13,13 +13,11 @@ class Insighter extends Component {
 	constructor () {
 		super();
 		this.state = {
-			trip: {
-				trip_id: 0,
-				trip_location: "Trip",
-				trip_start_date: 0,
-				trip_end_date: 0,
-				trip_budget: 0
-			},
+			trip_id: 0,
+			trip_location: "Trip",
+			trip_start_date: 0,
+			trip_end_date: 0,
+			trip_budget: 0,
 			trip_packing_list: [],
 			trip_schedule: []
 		}
@@ -29,8 +27,9 @@ class Insighter extends Component {
 		const {id} = this.props.match.params;
 		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
-			if (results.data[0] && results.data[0].user_id === this.props.user.user_id) {
-				this.setState({trip: results.data[0]});
+			const userData = results.data[0];
+			if (userData && userData.user_id === this.props.user.user_id) {
+				this.setState(userData);
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
 				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data}));
 			}
@@ -42,8 +41,7 @@ class Insighter extends Component {
 
 	render () {
 		
-		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state.trip;
-		const {trip_schedule, trip_packing_list} = this.state;
+		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list} = this.state;
 		const {deletePackingItem} = this;
 
 		return (
