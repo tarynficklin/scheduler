@@ -41,7 +41,7 @@ module.exports = {
 		const {budget} = req.body;
 		const {id} = req.params;
 
-		db.trips.trip_update([budget, id])
+		db.trips.trip_budget([budget, id])
 			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
@@ -51,7 +51,7 @@ module.exports = {
 		const {location} = req.body;
 		const {id} = req.params;
 
-		db.trips.trip_update([location, id])
+		db.trips.trip_location([location, id])
 			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},

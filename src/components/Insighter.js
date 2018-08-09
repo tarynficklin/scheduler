@@ -48,7 +48,7 @@ class Insighter extends Component {
 			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />
 				<Schedule schedule={trip_schedule}/>
-				<BudgetWidget budget={trip_budget}/>
+				<BudgetWidget id={trip_id} budget={trip_budget}/>
 				<PackingWidget packingList={trip_packing_list} deletePackingItem={deletePackingItem}/>
 				<SettingsWidget
 					location={trip_location}
