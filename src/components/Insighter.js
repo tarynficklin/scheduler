@@ -38,18 +38,19 @@ class Insighter extends Component {
 	}
 
 	deleteTrip (id) {axios.delete(`api/trips/${id}`)}
+	getBudgetInput (val) {this.setState({budget: val})}
+	updateBudget (id) {axios.put(`/api/trips/budget/${id}`, {budget: this.state.budget})}
 
 	render () {
 		
 		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list} = this.state;
-		const {deletePackingItem} = this;
 
 		return (
 			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />
 				<Schedule schedule={trip_schedule}/>
 				<BudgetWidget id={trip_id} budget={trip_budget}/>
-				<PackingWidget packingList={trip_packing_list} deletePackingItem={deletePackingItem}/>
+				<PackingWidget packingList={trip_packing_list}/>
 				<SettingsWidget
 					location={trip_location}
 					startDate={trip_start_date}
