@@ -36,6 +36,46 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	budget: (req, res) => {
+		const db = req.app.get('db');
+		const {budget} = req.body;
+		const {id} = req.params;
+
+		db.trips.trip_update([budget, id])
+			.then(trip => res.status(200).send(trip))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
+	location: (req, res) => {
+		const db = req.app.get('db');
+		const {location} = req.body;
+		const {id} = req.params;
+
+		db.trips.trip_update([location, id])
+			.then(trip => res.status(200).send(trip))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
+	startDate: (req, res) => {
+		const db = req.app.get('db');
+		const {startDate} = req.body;
+		const {id} = req.params;
+
+		db.trips.trip_start_date([startDate, id])
+			.then(trip => res.status(200).send(trip))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
+	endDate: (req, res) => {
+		const db = req.app.get('db');
+		const {endDate} = req.body;
+		const {id} = req.params;
+
+		db.trips.trip_end_date([endDate, id])
+			.then(trip => res.status(200).send(trip))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	delete: (req, res) => {
 		const db = req.app.get('db');
 		const {id} = req.params;

@@ -23,24 +23,28 @@ massive(CONNECTION_STRING).then(db => app.set('db', db));
 app.use(session({secret: SESSION_SECRET, resave: false,	saveUninitialized: false}));
 
 //AUTH0 ENDPOINTS
-app.get    ('/auth/callback',          auth0Controller.auth  );
-app.get    ('/api/user-data',          auth0Controller.user  );
-app.get    ('/api/logout',             auth0Controller.logout);
+app.get    ('/auth/callback', auth0Controller.auth  );
+app.get    ('/api/user-data', auth0Controller.user  );
+app.get    ('/api/logout',    auth0Controller.logout);
 
 //USER ENDPOINTS
 const userOrigin = '/api/users';
-app.get    (`${userOrigin}`,           userController.read  );
-app.post   (`${userOrigin}`,           userController.create);
-app.put    (`${userOrigin}/:id`,       userController.update);
-app.delete (`${userOrigin}/:id`,       userController.delete);
+app.get    (`${userOrigin}`,     userController.read  );
+app.post   (`${userOrigin}`,     userController.create);
+app.put    (`${userOrigin}/:id`, userController.update);
+app.delete (`${userOrigin}/:id`, userController.delete);
 
 //TRIP ENDPOINTS
 const tripOrigin = '/api/trips';
-app.get    (`${tripOrigin}/:user`,     tripController.read  );
-app.get    (`${tripOrigin}/trip/:id`,  tripController.find  );
-app.post   (`${tripOrigin}`,           tripController.create);
-app.put    (`${tripOrigin}/:id`,       tripController.update);
-app.delete (`${tripOrigin}/:id`,       tripController.delete);
+app.get    (`${tripOrigin}/:user`,         tripController.read     );
+app.get    (`${tripOrigin}/trip/:id`,      tripController.find     );
+app.post   (`${tripOrigin}`,               tripController.create   );
+app.put    (`${tripOrigin}/:id`,           tripController.update   );
+app.put    (`${tripOrigin}/budget/:id`,    tripController.budget   );
+app.put    (`${tripOrigin}/location/:id`,  tripController.location );
+app.put    (`${tripOrigin}/startDate/:id`, tripController.startDate);
+app.put    (`${tripOrigin}/endDate/:id`,   tripController.endDate  );
+app.delete (`${tripOrigin}/:id`,           tripController.delete   );
 
 //PACKING LIST ENDPOINTS
 const listOrigin = '/api/list';
