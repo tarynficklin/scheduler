@@ -51,9 +51,12 @@ app.delete (`${listOrigin}/:id`,			 listController.delete);
 
 //SCHEDULE ENDPOINTS
 const scheduleOrigin = '/api/schedule';
-app.get (`${scheduleOrigin}/:id`,            scheduleController.read     );
-app.get (`${scheduleOrigin}/item/:id`,       scheduleController.readItem );
-app.put (`${scheduleOrigin}/item/check/:id`, scheduleController.checkItem);
+app.get    (`${scheduleOrigin}/:id`,            scheduleController.read      );
+app.get    (`${scheduleOrigin}/item/:id`,       scheduleController.readItem  );
+app.put    (`${scheduleOrigin}/item/title/:id`, scheduleController.titleItem );
+app.put    (`${scheduleOrigin}/item/price/:id`, scheduleController.priceItem );
+app.put    (`${scheduleOrigin}/item/check/:id`, scheduleController.checkItem );
+app.delete (`${scheduleOrigin}/item/:id`,       scheduleController.deleteItem);
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));

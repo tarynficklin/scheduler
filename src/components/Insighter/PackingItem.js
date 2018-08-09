@@ -13,17 +13,10 @@ class PackingItem extends Component {
 		}
 	}
 
-	componentDidMount() {
-		const {title, checked} = this.props;
-		this.setState({title, checked})
-	}
-	deleteItem() {
-		axios.delete(`/api/list/${this.props.id}`)
-		this.setState({deleted: true})
-	}
-	getTitleInput (val) {this.setState({title: val})}
-	updateTitle (id) {axios.put(`/api/list/${id}`, {packing_title: this.state.title})}
-	toggleChecked (id) {axios.put(`/api/list/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))}
+	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/list/${id}`)};
+	getTitleInput (val) {this.setState({title: val})};
+	updateTitle   (id)  {axios.put(`/api/list/${id}`, {packing_title: this.state.title})};
+	toggleChecked (id)  {axios.put(`/api/list/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
 
   render() {
 		const {id, title, checked, deleted} = this.state
@@ -32,7 +25,7 @@ class PackingItem extends Component {
 			<div className="packing-item">
 				<a>• {this.state.title} </a>
 				<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
-				<button onClick={() => this.deleteItem()}>X</button>
+				<button onClick={() => this.deleteItem(id)}>X</button>
 				<input type="checkbox" checked={checked} onChange={() => this.toggleChecked(id)}/>
 			</div> : null
 		);
