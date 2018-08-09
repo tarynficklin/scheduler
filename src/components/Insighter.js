@@ -21,6 +21,8 @@ class Insighter extends Component {
 			trip_packing_list: [],
 			trip_schedule: []
 		}
+		this.getBudgetInput = this.getBudgetInput.bind(this);
+		this.updateBudget = this.updateBudget.bind(this);
 	}
 
 	componentDidMount() {
@@ -38,18 +40,24 @@ class Insighter extends Component {
 	}
 
 	deleteTrip (id) {axios.delete(`api/trips/${id}`)}
-	getBudgetInput (val) {this.setState({budget: val})}
-	updateBudget (id) {axios.put(`/api/trips/budget/${id}`, {budget: this.state.budget})}
+	getBudgetInput (val) {this.setState({trip_budget: val})}
+	updateBudget (id) {axios.put(`/api/trips/budget/${id}`, {budget: this.state.trip_budget})}
 
 	render () {
 		
 		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list} = this.state;
+		const {getBudgetInput, updateBudget} = this;
 
+		console.log(this.state)
 		return (
 			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />
 				<Schedule schedule={trip_schedule}/>
-				<BudgetWidget id={trip_id} budget={trip_budget}/>
+				<BudgetWidget
+					id={trip_id}
+					budget={trip_budget}
+					getBudgetInput={getBudgetInput}
+					updateBudget={updateBudget} />
 				<PackingWidget packingList={trip_packing_list}/>
 				<SettingsWidget
 					location={trip_location}
