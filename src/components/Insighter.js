@@ -13,13 +13,13 @@ class Insighter extends Component {
 	constructor () {
 		super();
 		this.state = {
-			trip_id: 0,
-			trip_location: "Trip",
-			trip_start_date: '1/1/20XX',
-			trip_end_date: '1/1/20XX',
-			trip_budget: 0,
+			trip_id:           0,
+			trip_location:     'Trip',
+			trip_start_date:   '1/1/20XX',
+			trip_end_date:     '1/1/20XX',
+			trip_budget:       0,
 			trip_packing_list: [],
-			trip_schedule: []
+			trip_schedule:     []
 		}
 		//input bindings
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
@@ -64,7 +64,6 @@ class Insighter extends Component {
 		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list} = this.state;
 		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, updateBudget, updateLocation, updateStartDate, updatEndDate} = this;
 
-		console.log(this.state)
 		return (
 			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />

@@ -37,6 +37,7 @@ app.delete (`${userOrigin}/:id`, userController.delete);
 //TRIP ENDPOINTS
 const tripOrigin = '/api/trips';
 app.get    (`${tripOrigin}/:user`,         tripController.read     );
+app.get    (`${tripOrigin}`,               tripController.readLast );
 app.get    (`${tripOrigin}/trip/:id`,      tripController.find     );
 app.post   (`${tripOrigin}`,               tripController.create   );
 app.put    (`${tripOrigin}/:id`,           tripController.update   );

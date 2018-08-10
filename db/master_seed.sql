@@ -37,7 +37,7 @@ CREATE TABLE trips (
 	trip_location       TEXT,
 	trip_start_date     VARCHAR(10),
 	trip_end_date       VARCHAR(10),
-	trip_budget         INTEGER
+	trip_budget         FLOAT DEFAULT 0
 );
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
@@ -60,7 +60,7 @@ SELECT * FROM trips;
 CREATE TABLE packing_lists (
 	packing_id       SERIAL PRIMARY KEY,
 	trip_id          INTEGER REFERENCES trips(trip_id),
-	packing_title    VARCHAR(100),
+	packing_title    VARCHAR(100) DEFAULT NULL,
 	packing_checked  BOOLEAN DEFAULT false
 );
 

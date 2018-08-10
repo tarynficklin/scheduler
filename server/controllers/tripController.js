@@ -8,6 +8,14 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	readLast: (req, res) => {
+		const db = req.app.get('db');
+
+		db.trips.trip_read_last()
+			.then(trip => res.status(200).send(trip))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	find: (req, res) => {
 		const db = req.app.get('db');
 		const {id} = req.params;
@@ -19,9 +27,9 @@ module.exports = {
 
 	create: (req, res) => {
 		const db = req.app.get('db');
-		const {trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
+		const {user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
 
-		db.trips.trip_create([trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule])
+		db.trips.trip_create([user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule])
 			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
