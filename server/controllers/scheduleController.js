@@ -17,6 +17,15 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	createItem: (req, res) => {
+		const db = req.app.get('db');
+		const {schedule_id, item_title, item_price, item_time} = req.body;
+
+		db.schedules.item_create([schedule_id, item_title, item_price, item_time])
+			.then(trip => res.status(200).send(trip))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	titleItem: (req, res) => {
 		const db = req.app.get('db');
 		const {id} = req.params;

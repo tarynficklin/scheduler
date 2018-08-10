@@ -13,12 +13,23 @@ export default class ScheduleList extends Component {
 	
 	componentDidMount () {axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))}
 
+	addScheduleItem() {
+		const {id} = this.props;
+		const {scheduleItems} = this.state;
+		axios.post(`/api/schedule/item`, {schedule_id: id, item_title: "", item_price: 0, item_time: "morning"}).then(results => {
+			console.log(results.data[0])
+			scheduleItems.push(results.data[0]);
+			this.setState({scheduleItems});
+		})
+	}
+
 	render () {
 		const {day, month, year} = this.props;
 		const {scheduleItems} = this.state;
 		return (
 			<div className="schedule-list">
-   			<a>• {month}/{day}/{year}</a>
+   			<a>• {month}/{day}/{year} </a>
+				<button onClick={() => this.addScheduleItem()}>+</button>
 				 {scheduleItems.map((e, i) => {
 					return (
 						<ScheduleItem

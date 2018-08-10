@@ -59,6 +59,7 @@ app.delete (`${listOrigin}/:id`,			 listController.delete);
 const scheduleOrigin = '/api/schedule';
 app.get    (`${scheduleOrigin}/:id`,            scheduleController.read      );
 app.get    (`${scheduleOrigin}/item/:id`,       scheduleController.readItem  );
+app.post   (`${scheduleOrigin}/item`,           scheduleController.createItem);
 app.put    (`${scheduleOrigin}/item/title/:id`, scheduleController.titleItem );
 app.put    (`${scheduleOrigin}/item/price/:id`, scheduleController.priceItem );
 app.put    (`${scheduleOrigin}/item/check/:id`, scheduleController.checkItem );
