@@ -21,7 +21,7 @@ class Dashboard extends Component {
 		const {tripCards} = this.state;
 		return (
 			<div className="dashboard">
-				<UserButton />
+				<UserButton id={this.props.user.user_id}/>
 				{tripCards.map((e, i) => {
 					return (
 						<TripCard

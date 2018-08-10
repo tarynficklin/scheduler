@@ -6,4 +6,4 @@ INSERT INTO trips (
 	trip_end_date,
 	trip_budget
 	)
-VALUES ( $1, $2, $3, $4, 5 );
+VALUES ( $1, $2, $3, $4, $5 );

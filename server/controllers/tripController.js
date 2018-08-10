@@ -36,10 +36,10 @@ module.exports = {
 
 	update: (req, res) => {
 		const db = req.app.get('db');
-		const {trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
+		const {trip_location, trip_start_date, trip_end_date, trip_budget} = req.body;
 		const {id} = req.params;
 
-		db.trips.trip_update([trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule, id])
+		db.trips.trip_update([trip_location, trip_start_date, trip_end_date, trip_budget, id])
 			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},

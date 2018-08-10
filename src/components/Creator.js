@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import './Creator.css'
 
@@ -16,26 +15,35 @@ class Creator extends Component {
 		super();
 		this.state = {
 			trip_id: 0,
-			user_id: 0,
 			trip_location: '',
 			trip_start_date: '',
 			trip_end_date: '',
 			trip_budget: 0,
 			trip_packing_list: []
 		}
+		this.deleteTrip				 = this.deleteTrip.bind(this);
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
 		this.getLocationInput  = this.getLocationInput.bind(this);
 		this.getStartDateInput = this.getStartDateInput.bind(this);
 		this.getEndDateInput   = this.getEndDateInput.bind(this);
 	}
 
-	componentDidMount () {axios.get((`/api/trips/`)).then(results => this.setState({trip_id: results.data[0].max + 1}))}
+	async componentDidMount () {
+		axios.post('/api/trips', {user_id: this.props.user.user_id, trip_location: null, trip_start_date: null,	trip_end_date: null, trip_budget: null}).then(
+			axios.get((`/api/trips/`)).then(results => {this.setState({trip_id: results.data[0].max})})
+		)
+	}
 
 	createTrip () {
-		const {user_id} = this.props.user;
 		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
-		axios.post((`/api/trips`), {user_id, trip_location, trip_start_date, trip_end_date, trip_budget})
+		axios.put(`/api/trips/${trip_id}`, {trip_location, trip_start_date, trip_end_date, trip_budget})
 		this.props.history.push(`/trip/${trip_id}`)
+	}
+
+	deleteTrip () {
+		axios.delete(`api/trips/${this.state.trip_id}`);
+		console.log(this.state.trip_id)
+		this.props.history.push('/');
 	}
 
 	getBudgetInput    (val) {this.setState({trip_budget: val})}
@@ -45,10 +53,10 @@ class Creator extends Component {
 
 	render () {
 		const {trip_id} = this.state
-		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput} = this
+		const {deleteTrip, getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput} = this
 		return (
 			<div className="creator">
-				<Header />
+				<Header deleteTrip={deleteTrip}/>
 				<a>new trip id: {this.state.trip_id}</a>
 				<Location getLocationInput={getLocationInput}/>
 				<Calendar getStartDateInput={getStartDateInput} getEndDateInput={getEndDateInput}/>
@@ -61,4 +69,4 @@ class Creator extends Component {
 }
 
 function mapStateToProps (state) {return {user: state.auth0.user}};
-export default withRouter(connect(mapStateToProps)(Creator));
+export default connect(mapStateToProps)(Creator);

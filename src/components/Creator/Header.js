@@ -1,11 +1,11 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import './Header.css'
 
 export default function Header(props) {
+	const {deleteTrip} = props;
 	return (
 		<div className="header">
-			<Link to="/"><button>X</button></Link>
+			<button onClick={() => deleteTrip()}>X</button>
 			<p>New Vacation</p>
 		</div>
 	)

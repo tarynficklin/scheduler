@@ -31,6 +31,7 @@ class Insighter extends Component {
 		this.updateLocation  = this.updateLocation.bind(this);
 		this.updateStartDate = this.updateStartDate.bind(this);
 		this.updatEndDate    = this.updatEndDate.bind(this);
+		this.addPackingItem	 = this.addPackingItem.bind(this);
 	}
 
 	componentDidMount() {
@@ -59,10 +60,20 @@ class Insighter extends Component {
 	updateStartDate (id) {axios.put(`/api/trips/startDate/${id}`, {startDate: this.state.trip_start_date})}
 	updatEndDate    (id) {axios.put(`/api/trips/endDate/${id}`,   {endDate: this.state.trip_end_date})}
 
+	addPackingItem() {
+		const {trip_packing_list, trip_id} = this.state
+		axios.post(`/api/list`, {trip_id, packing_title: ""}).then(results => {
+			trip_packing_list.push(results.data[0]);
+			this.setState({trip_packing_list});
+		})
+	}
+
 	render () {
 		
 		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list} = this.state;
-		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, updateBudget, updateLocation, updateStartDate, updatEndDate} = this;
+		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput} = this;
+		const {updateBudget, updateLocation, updateStartDate, updatEndDate} = this;
+		const {addPackingItem} = this;
 
 		return (
 			<div className="insighter">
@@ -73,7 +84,7 @@ class Insighter extends Component {
 					budget={trip_budget}
 					getBudgetInput={getBudgetInput}
 					updateBudget={updateBudget} />
-				<PackingWidget packingList={trip_packing_list}/>
+				<PackingWidget packingList={trip_packing_list} addPackingItem={addPackingItem} />
 				<SettingsWidget
 					location={trip_location}
 					startDate={trip_start_date}
