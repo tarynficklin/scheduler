@@ -6,7 +6,7 @@ import './Insighter.css';
 import Header from './Insighter/Header';
 import Schedule from './Insighter/Schedule';
 import BudgetWidget from './Insighter/BudgetWidget';
-import PackingWidget from './Insighter/PackingWidget';
+import PackingWidget from './Common/PackingWidget';
 import SettingsWidget from './Insighter/SettingsWidget';
 
 class Insighter extends Component {
