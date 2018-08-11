@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import axios from 'axios';
 import './Creator.css'
@@ -38,6 +39,10 @@ class Creator extends Component {
 		)
 	}
 
+	componentWillUnmount() {
+		alert('you have left the page')
+	}
+
 	createTrip () {
 		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
 		axios.put(`/api/trips/${trip_id}`, {trip_location, trip_start_date, trip_end_date, trip_budget})
@@ -45,7 +50,9 @@ class Creator extends Component {
 	}
 
 	deleteTrip () {
-		axios.delete(`api/trips/${this.state.trip_id}`);
+		const {trip_id} = this.state
+		axios.delete(`api/trips/${trip_id}`);
+		axios.delete(`api/list/purge/${trip_id}`);
 		this.props.history.push('/');
 	}
 
@@ -65,6 +72,8 @@ class Creator extends Component {
 	render () {
 		const {trip_packing_list} = this.state;
 		const {deleteTrip, getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, addPackingItem} = this;
+		console.log(this.props)
+
 		return (
 			<div className="creator">
 				<Header deleteTrip={deleteTrip}/>
@@ -80,4 +89,4 @@ class Creator extends Component {
 }
 
 function mapStateToProps (state) {return {user: state.auth0.user}};
-export default connect(mapStateToProps)(Creator);
+export default withRouter(connect(mapStateToProps)(Creator));

@@ -34,9 +34,9 @@ SELECT * FROM users;
 CREATE TABLE trips (
 	trip_id             SERIAL PRIMARY KEY,
 	user_id             INTEGER REFERENCES users(user_id),
-	trip_location       TEXT,
-	trip_start_date     VARCHAR(10),
-	trip_end_date       VARCHAR(10),
+	trip_location       TEXT DEFAULT '',
+	trip_start_date     VARCHAR(10) DEFAULT '',
+	trip_end_date       VARCHAR(10) DEFAULT '',
 	trip_budget         FLOAT DEFAULT 0
 );
 
@@ -60,7 +60,7 @@ SELECT * FROM trips;
 CREATE TABLE packing_lists (
 	packing_id       SERIAL PRIMARY KEY,
 	trip_id          INTEGER REFERENCES trips(trip_id),
-	packing_title    VARCHAR(100) DEFAULT NULL,
+	packing_title    VARCHAR(100) DEFAULT '',
 	packing_checked  BOOLEAN DEFAULT false
 );
 
@@ -96,9 +96,9 @@ SELECT * FROM packing_lists;
 CREATE TABLE schedules (
 	schedule_id     SERIAL PRIMARY KEY,
 	trip_id	        INTEGER REFERENCES trips(trip_id),
-	schedule_day    VARCHAR(20),
-	schedule_month  VARCHAR(10),
-	schedule_year   VARCHAR(10)
+	schedule_day    VARCHAR(20) DEFAULT '',
+	schedule_month  VARCHAR(10) DEFAULT '',
+	schedule_year   VARCHAR(10) DEFAULT ''
 );
 
 INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
@@ -145,9 +145,9 @@ SELECT * FROM schedules;
 CREATE TABLE schedule_items (
 	item_id       SERIAL PRIMARY KEY,
 	schedule_id   INTEGER REFERENCES schedules(schedule_id),
-	item_title    VARCHAR(100),
-	item_price    FLOAT,
-	item_time     VARCHAR(10),
+	item_title    VARCHAR(100) DEFAULT '',
+	item_price    FLOAT DEFAULT 0,
+	item_time     VARCHAR(10) DEFAULT 'morning',
 	item_checked  BOOLEAN DEFAULT false
 );
 

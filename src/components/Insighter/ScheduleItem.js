@@ -30,7 +30,7 @@ class ScheduleItem extends Component {
  				<a>{price} </a>
  				<a>{time} </a>
 				<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
-				<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} />
+				<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' />
 				<button onClick={() => this.deleteItem(id)}>X</button>
 				<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
 			</div> : null

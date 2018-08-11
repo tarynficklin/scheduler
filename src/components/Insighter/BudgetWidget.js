@@ -7,7 +7,7 @@ export default function BudgetWidget(props) {
 		<div className="budget-widget">
 			<h3>Budget Widget</h3>
 			<p>Current Budget: {budget}</p>
-			<input onChange={(e) => getBudgetInput(e.target.value)} onBlur={() => updateBudget(id)} value={budget} />
+			<input onChange={(e) => getBudgetInput(e.target.value)} onBlur={() => updateBudget(id)} value={budget} type='number' min='0'/>
 		</div>
 	)
 }
