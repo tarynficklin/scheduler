@@ -1,1 +1,0 @@
-SELECT NEXTVAL(PG_GET_SERIAL_SEQUENCE('packing_lists', 'packing_id')) AS packing_id;

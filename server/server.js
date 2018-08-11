@@ -50,7 +50,6 @@ app.delete (`${tripOrigin}/:id`,           tripController.delete   );
 //PACKING LIST ENDPOINTS
 const listOrigin = '/api/list';
 app.get    (`${listOrigin}/:id`,       listController.read    );
-app.get    (`${listOrigin}`,           listController.readLast);
 app.post   (`${listOrigin}`,           listController.create  );
 app.put		 (`${listOrigin}/:id`,			 listController.update  );
 app.put    (`${listOrigin}/check/:id`, listController.check   );

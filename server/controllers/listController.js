@@ -8,14 +8,6 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
-	readLast: (req, res) => {
-		const db = req.app.get('db');
-
-		db.packing_lists.list_read_last()
-			.then(list => res.status(200).send(list[0]))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
 	create: (req, res) => {
 		const db = req.app.get('db');
 		const {trip_id, packing_title} = req.body;
