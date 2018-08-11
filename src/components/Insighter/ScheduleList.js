@@ -17,7 +17,7 @@ export default class ScheduleList extends Component {
 		const {id} = this.props;
 		const {scheduleItems} = this.state;
 		axios.post(`/api/schedule/item`, {schedule_id: id, item_title: "", item_price: 0, item_time: "morning"}).then(results => {
-			scheduleItems.push(results.data[0]);
+			scheduleItems.push(results.data);
 			this.setState({scheduleItems});
 		})
 	}

@@ -6,7 +6,7 @@ import './Insighter.css';
 import Header from './Insighter/Header';
 import Schedule from './Insighter/Schedule';
 import BudgetWidget from './Insighter/BudgetWidget';
-import PackingWidget from './Common/PackingWidget';
+import PackingWidget from './Insighter/PackingWidget';
 import SettingsWidget from './Insighter/SettingsWidget';
 
 class Insighter extends Component {
@@ -39,7 +39,7 @@ class Insighter extends Component {
 		const {id} = this.props.match.params;
 		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
-			const userData = results.data[0];
+			const userData = results.data;
 			if (userData && userData.user_id === this.props.user.user_id) {
 				this.setState(userData);
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
@@ -65,9 +65,13 @@ class Insighter extends Component {
 	addPackingItem() {
 		const {trip_packing_list, trip_id} = this.state
 		axios.post(`/api/list`, {trip_id, packing_title: ""}).then(results => {
-			trip_packing_list.push(results.data[0]);
+			trip_packing_list.push(results.data);
 			this.setState({trip_packing_list});
 		})
+	}
+
+	deletePackingItem() {
+
 	}
 
 	render () {

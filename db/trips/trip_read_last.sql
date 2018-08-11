@@ -1,1 +1,1 @@
-SELECT MAX(trip_id) FROM trips;
+SELECT NEXTVAL(PG_GET_SERIAL_SEQUENCE('trips', 'trip_id')) AS trip_id;

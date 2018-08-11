@@ -12,7 +12,7 @@ module.exports = {
 		const db = req.app.get('db');
 
 		db.trips.trip_read_last()
-			.then(trip => res.status(200).send(trip))
+			.then(trip => res.status(200).send(trip[0]))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
@@ -21,15 +21,15 @@ module.exports = {
 		const {id} = req.params;
 
 		db.trips.trip_find([id])
-			.then(trip => res.status(200).send(trip))
+			.then(trip => res.status(200).send(trip[0]))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
 	create: (req, res) => {
 		const db = req.app.get('db');
-		const {user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
+		const {trip_id, user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule} = req.body;
 
-		db.trips.trip_create([user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule])
+		db.trips.trip_create([trip_id, user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_packing_list, trip_schedule])
 			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
