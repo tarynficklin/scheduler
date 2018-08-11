@@ -13,7 +13,16 @@ module.exports = {
 		const {trip_id, schedule_day, schedule_month, schedule_year} = req.body;
 
 		db.schedules.schedule_create([trip_id, schedule_day, schedule_month, schedule_year])
-			.then(trip => res.status(200).send(trip[0]))
+			.then(schedule => res.status(200).send(schedule[0]))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
+	find: (req, res) => {
+		const db = req.app.get('db');
+		const {id} = req.params;
+
+		db.schedules.schedule_find([id])
+			.then(schedule => res.status(200).send(schedule[0]))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 

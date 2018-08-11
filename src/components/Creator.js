@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom'
+import {withRouter, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import axios from 'axios';
 import './Creator.css'
@@ -19,7 +19,7 @@ class Creator extends Component {
 			trip_start_date: '',
 			trip_end_date: '',
 			trip_budget: 0,
-			day_count: 0,
+			day_count: 1,
 			schedule_days: []
 		}
 		this.deleteTrip				 = this.deleteTrip.bind(this);
@@ -39,7 +39,6 @@ class Creator extends Component {
 		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget, day_count} = this.state;
 		axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget}).then(() => {
 			for (let i=0; i < day_count; i++) {
-				console.log(trip_id)
 				axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_day: "12", schedule_month: "12", schedule_year: "2018"})
 				if (i===day_count-1) {this.props.history.push(`/trip/${trip_id}`)}
 			}
@@ -64,9 +63,10 @@ class Creator extends Component {
 		return (
 			<div className="creator">
 				<Header deleteTrip={deleteTrip}/>
+				<Route path="/trip/1" component={Header}/>
 				<a>new trip id: {this.state.trip_id}</a>
 				<Location getLocationInput={getLocationInput}/>
-				<Calendar getStartDateInput={getStartDateInput} getEndDateInput={getEndDateInput} getDayCount={getDayCount}/>
+				<Calendar getStartDateInput={getStartDateInput} getEndDateInput={getEndDateInput} getDayCount={getDayCount} day_count={this.state.day_count}/>
 				<Budget getBudgetInput={getBudgetInput}/>
 				<button onClick={() => this.createTrip()}>Done</button>
 			</div>

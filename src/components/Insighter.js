@@ -36,7 +36,7 @@ class Insighter extends Component {
 	}
 
 	componentDidMount() {
-		const {id} = this.props.match.params;
+		const {id, day} = this.props.match.params;
 		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
 			const userData = results.data;

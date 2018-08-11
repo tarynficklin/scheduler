@@ -59,6 +59,7 @@ app.delete (`${listOrigin}/purge/:id`, listController.purge   );
 //SCHEDULE ENDPOINTS
 const scheduleOrigin = '/api/schedule';
 app.get    (`${scheduleOrigin}/:id`,            scheduleController.read      );
+app.get    (`${scheduleOrigin}/schedule/:id`,   scheduleController.find      );
 app.post   (`${scheduleOrigin}`,                scheduleController.create    );
 app.get    (`${scheduleOrigin}/item/:id`,       scheduleController.readItem  );
 app.post   (`${scheduleOrigin}/item`,           scheduleController.createItem);
