@@ -8,6 +8,15 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	create: (req, res) => {
+		const db = req.app.get('db');
+		const {trip_id, schedule_day, schedule_month, schedule_year} = req.body;
+
+		db.schedules.schedule_create([trip_id, schedule_day, schedule_month, schedule_year])
+			.then(trip => res.status(200).send(trip[0]))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	readItem: (req, res) => {
 		const db = req.app.get('db');
 		const {id} = req.params;

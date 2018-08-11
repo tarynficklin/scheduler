@@ -18,13 +18,16 @@ class Creator extends Component {
 			trip_location: '',
 			trip_start_date: '',
 			trip_end_date: '',
-			trip_budget: 0
+			trip_budget: 0,
+			day_count: 0,
+			schedule_days: []
 		}
 		this.deleteTrip				 = this.deleteTrip.bind(this);
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
 		this.getLocationInput  = this.getLocationInput.bind(this);
 		this.getStartDateInput = this.getStartDateInput.bind(this);
 		this.getEndDateInput   = this.getEndDateInput.bind(this);
+		this.getDayCount		   = this.getDayCount.bind(this);
 	}
 
 	async componentDidMount () {
@@ -33,9 +36,14 @@ class Creator extends Component {
 
 	
 	createTrip () {
-		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
-		axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget});
-		this.props.history.push(`/trip/${trip_id}`)
+		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget, day_count} = this.state;
+		axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget}).then(() => {
+			for (let i=0; i < day_count; i++) {
+				console.log(trip_id)
+				axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_day: "12", schedule_month: "12", schedule_year: "2018"})
+				if (i===day_count-1) {this.props.history.push(`/trip/${trip_id}`)}
+			}
+		})
 	}
 
 	deleteTrip () {
@@ -48,16 +56,17 @@ class Creator extends Component {
 	getLocationInput  (val) {this.setState({trip_location: val})}
 	getStartDateInput (val) {this.setState({trip_start_date: val})}
 	getEndDateInput   (val) {this.setState({trip_end_date: val})}
+	getDayCount				(val) {this.setState({day_count: val})}
 
 	render () {
-		const {deleteTrip, getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput} = this;
+		const {deleteTrip, getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, getDayCount} = this;
 
 		return (
 			<div className="creator">
 				<Header deleteTrip={deleteTrip}/>
 				<a>new trip id: {this.state.trip_id}</a>
 				<Location getLocationInput={getLocationInput}/>
-				<Calendar getStartDateInput={getStartDateInput} getEndDateInput={getEndDateInput}/>
+				<Calendar getStartDateInput={getStartDateInput} getEndDateInput={getEndDateInput} getDayCount={getDayCount}/>
 				<Budget getBudgetInput={getBudgetInput}/>
 				<button onClick={() => this.createTrip()}>Done</button>
 			</div>
