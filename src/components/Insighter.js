@@ -21,7 +21,7 @@ class Insighter extends Component {
 			trip_budget:       0,
 			trip_packing_list: [],
 			trip_schedule:     [],
-			current_schedule:  1
+			current_schedule:  0
 		}
 		//input bindings
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
@@ -84,7 +84,7 @@ class Insighter extends Component {
 		return (
 			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />
-				<ScheduleSelector schedule={trip_schedule} scheduleIndex={scheduleIndex}/>
+				<ScheduleSelector schedule={trip_schedule} scheduleIndex={scheduleIndex} currentSchedule={current_schedule}/>
 				<Schedule schedule={trip_schedule} currentSchedule={current_schedule}/>
 				<BudgetWidget
 					id={trip_id}
