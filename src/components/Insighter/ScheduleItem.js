@@ -35,7 +35,7 @@ class ScheduleItem extends Component {
 			
 				!editMode ?
 					<div className="schedule-item">
-						<a>{title} </a>
+						<a>• {title} </a>
 						<a>{price} </a>
 						<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
 					</div>
