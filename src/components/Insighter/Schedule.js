@@ -3,7 +3,7 @@ import ScheduleList from './ScheduleList';
 import './Schedule.css';
 
 export default function Schedule(props) {
-	const {schedule, packingList} = props
+	const {schedule, currentSchedule} = props;
 	return (
 		<div className="schedule">
 			{schedule.map((e, i) => {
@@ -14,7 +14,7 @@ export default function Schedule(props) {
 						day={e.schedule_day}
 						month={e.schedule_month}
 						year={e.schedule_year}
-						packingList={packingList}
+						currentSchedule={currentSchedule}
 					/>
 				)
 			})

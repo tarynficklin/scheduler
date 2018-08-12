@@ -5,6 +5,7 @@ import './Insighter.css';
 
 import Header from './Insighter/Header';
 import Schedule from './Insighter/Schedule';
+import ScheduleSelector from './Insighter/ScheduleSelector';
 import BudgetWidget from './Insighter/BudgetWidget';
 import PackingWidget from './Insighter/PackingWidget';
 import SettingsWidget from './Insighter/SettingsWidget';
@@ -19,7 +20,8 @@ class Insighter extends Component {
 			trip_end_date:     '1/1/20XX',
 			trip_budget:       0,
 			trip_packing_list: [],
-			trip_schedule:     []
+			trip_schedule:     [],
+			current_schedule:  1
 		}
 		//input bindings
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
@@ -32,11 +34,12 @@ class Insighter extends Component {
 		this.updateStartDate = this.updateStartDate.bind(this);
 		this.updatEndDate    = this.updatEndDate.bind(this);
 		//adding bindings
-		this.addPackingItem	 = this.addPackingItem.bind(this);
+		this.addPackingItem = this.addPackingItem.bind(this);
+		this.scheduleIndex  = this.scheduleIndex.bind(this);
 	}
 
 	componentDidMount() {
-		const {id, day} = this.props.match.params;
+		const {id} = this.props.match.params;
 		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
 			const userData = results.data;
@@ -69,22 +72,22 @@ class Insighter extends Component {
 			this.setState({trip_packing_list});
 		})
 	}
-
-	deletePackingItem() {
-
-	}
+	scheduleIndex(id) {this.setState({current_schedule: id})}
 
 	render () {
 		
-		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list} = this.state;
-		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput} = this;
+		const {trip_id,	trip_location, trip_start_date,	trip_end_date, trip_budget, trip_schedule, trip_packing_list, current_schedule} = this.state;
+		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, scheduleIndex} = this;
 		const {updateBudget, updateLocation, updateStartDate, updatEndDate} = this;
 		const {addPackingItem} = this;
+
+		console.log(current_schedule)
 
 		return (
 			<div className="insighter">
 				<Header id={trip_id} location={trip_location} />
-				<Schedule schedule={trip_schedule} />
+				<ScheduleSelector schedule={trip_schedule} scheduleIndex={scheduleIndex}/>
+				<Schedule schedule={trip_schedule} currentSchedule={current_schedule}/>
 				<BudgetWidget
 					id={trip_id}
 					budget={trip_budget}

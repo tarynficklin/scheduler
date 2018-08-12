@@ -28,7 +28,6 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Dashboard}/>
               <Route path="/new" component={Creator}/>
-              <Route path="/trip/:id/day/:day" component={Insighter}/>
               <Route path="/trip/:id" component={Insighter}/>
               <Route path="/404" component={Missing} />
             </Switch>

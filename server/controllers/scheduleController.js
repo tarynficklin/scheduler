@@ -22,7 +22,7 @@ module.exports = {
 		const {id} = req.params;
 
 		db.schedules.schedule_find([id])
-			.then(schedule => res.status(200).send(schedule[0]))
+			.then(schedule => res.status(200).send(schedule))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 

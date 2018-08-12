@@ -4,14 +4,26 @@ import axios from 'axios';
 import './ScheduleList.css';
 
 export default class ScheduleList extends Component {
-	constructor () {
-		super ();
+	constructor (props) {
+		super (props);
 		this.state = {
-			scheduleItems: []
+			scheduleItems: [],
+			selected: false
 		}
 	}
 	
-	componentDidMount () {axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))}
+	componentDidMount () {
+		axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))
+		const {id, currentSchedule} = this.props
+		if (id === currentSchedule) {this.setState({selected: true})}
+		console.log(id, currentSchedule)
+	}
+
+	componentWillReceiveProps (props) {
+		const {id, currentSchedule} = props
+		if (id === currentSchedule) {this.setState({selected: true})}
+		else {this.setState({selected: false})}
+	}
 
 	addScheduleItem() {
 		const {id} = this.props;
@@ -23,9 +35,11 @@ export default class ScheduleList extends Component {
 	}
 
 	render () {
+		console.log()
 		const {day, month, year} = this.props;
-		const {scheduleItems} = this.state;
+		const {scheduleItems, selected} = this.state;
 		return (
+			selected ?
 			<div className="schedule-list">
    			<a>• {month}/{day}/{year} </a>
 				<button onClick={() => this.addScheduleItem()}>+</button>
@@ -42,7 +56,7 @@ export default class ScheduleList extends Component {
 					)
 				})
 			}
-   		</div>
+   		</div> : null
 		)
 	}
 }
