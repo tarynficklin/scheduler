@@ -21,7 +21,6 @@ class ScheduleItem extends Component {
 		else {this.setState({editMode: false})}
 	}
 
-
 	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 	getTitleInput (val) {this.setState({title: val})};
 	getPriceInput (val) {this.setState({price: val})};
