@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {withRouter, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import axios from 'axios';
-import './Creator.css'
+import './NewTrip.css'
 
-import Header from './Creator/Header'
-import Calendar from './Creator/Calendar';
-import Location from './Creator/Location';
-import Budget from './Creator/Budget';
+import Header from './NewTrip/Header'
+import Calendar from './NewTrip/Calendar';
+import Location from './NewTrip/Location';
+import Budget from './NewTrip/Budget';
 
-class Creator extends Component {
+class NewTrip extends Component {
 
 	constructor () {
 		super();
@@ -61,7 +61,7 @@ class Creator extends Component {
 		const {deleteTrip, getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, getDayCount} = this;
 
 		return (
-			<div className="creator">
+			<div className="new-trip">
 				<Header deleteTrip={deleteTrip}/>
 				<Route path="/trip/1" component={Header}/>
 				<a>new trip id: {this.state.trip_id}</a>
@@ -75,4 +75,4 @@ class Creator extends Component {
 }
 
 function mapStateToProps (state) {return {user: state.auth0.user}};
-export default withRouter(connect(mapStateToProps)(Creator));
+export default withRouter(connect(mapStateToProps)(NewTrip));
