@@ -20,11 +20,11 @@ class PackingItem extends Component {
 		else {this.setState({editMode: false})}
 	}
 
-	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/list/${id}`)};
 	getTitleInput (val) {this.setState({title: val})};
 	updateTitle   (id)  {axios.put(`/api/list/${id}`, {packing_title: this.state.title})};
 	toggleChecked (id)  {axios.put(`/api/list/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
-
+	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/list/${id}`)};
+	
   render() {
 		const {id, title, checked, deleted, editMode} = this.state
 		return (

@@ -21,12 +21,12 @@ class ScheduleItem extends Component {
 		else {this.setState({editMode: false})}
 	}
 
-	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 	getTitleInput (val) {this.setState({title: val})};
 	getPriceInput (val) {this.setState({price: val})};
 	updateTitle   (id)  {axios.put(`/api/schedule/item/title/${id}`, {title: this.state.title})};
 	updatePrice   (id)  {axios.put(`/api/schedule/item/price/${id}`, {price: this.state.price})};
 	toggleChecked (id)  {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
+	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 
   render() {
 		const {id, title, price, deleted, editMode} = this.state

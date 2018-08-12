@@ -12,7 +12,7 @@ export default function SettingsWidget(props) {
 			<input value={location} onChange={(e) => getLocationInput(e.target.value)} onBlur={() => updateLocation(id)}/>
 			<p>Current Date: {startDate} - {endDate}</p>
 			<input value={startDate} onChange={(e) => getStartDateInput(e.target.value)} onBlur={() => updateStartDate(id)} />
-			<input value={endDate} onChange={(e) => getEndDateInput(e.target.value)} onBlur={() => updatEndDate(id)} />
+			<input value={endDate} onChange={(e) => getEndDateInput(e.target.value)} onBlur={() => updatEndDate(id)} /><br />
 			<Link to="/"><button onClick={() => deleteTrip(id)}>Delete Trip</button></Link>
 		</div>
 	)
