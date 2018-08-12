@@ -46,7 +46,7 @@ class Insighter extends Component {
 			if (userData && userData.user_id === this.props.user.user_id) {
 				this.setState(userData);
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
-				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data}));
+				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
 			}
 			else {this.props.history.push('/404')}
 		})
@@ -80,8 +80,6 @@ class Insighter extends Component {
 		const {getBudgetInput, getLocationInput, getStartDateInput, getEndDateInput, scheduleIndex} = this;
 		const {updateBudget, updateLocation, updateStartDate, updatEndDate} = this;
 		const {addPackingItem} = this;
-
-		console.log(current_schedule)
 
 		return (
 			<div className="insighter">

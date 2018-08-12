@@ -16,7 +16,6 @@ export default class ScheduleList extends Component {
 		axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))
 		const {id, currentSchedule} = this.props
 		if (id === currentSchedule) {this.setState({selected: true})}
-		console.log(id, currentSchedule)
 	}
 
 	componentWillReceiveProps (props) {
@@ -35,7 +34,6 @@ export default class ScheduleList extends Component {
 	}
 
 	render () {
-		console.log()
 		const {day, month, year} = this.props;
 		const {scheduleItems, selected} = this.state;
 		return (
