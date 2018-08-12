@@ -7,9 +7,11 @@ export default class ScheduleList extends Component {
 	constructor (props) {
 		super (props);
 		this.state = {
-			scheduleItems: [],
-			selected: false
+			scheduleItems : [],
+			selected      : false,
+			edit_mode     : false
 		}
+		this.toggleEditMode = this.toggleEditMode.bind(this);
 	}
 	
 	componentDidMount () {
@@ -33,14 +35,15 @@ export default class ScheduleList extends Component {
 		})
 	}
 
+	toggleEditMode() {this.setState({edit_mode: !this.state.edit_mode})}
+
 	render () {
-		const {day, month, year} = this.props;
-		const {scheduleItems, selected} = this.state;
+		const {scheduleItems, selected, edit_mode} = this.state;
 		return (
 			selected ?
 			<div className="schedule-list">
-   			<a>• {month}/{day}/{year} </a>
 				<button onClick={() => this.addScheduleItem()}>+</button>
+				<button onClick={() => this.toggleEditMode()}>Edit</button>
 				 {scheduleItems.map((e, i) => {
 					return (
 						<ScheduleItem
@@ -50,6 +53,7 @@ export default class ScheduleList extends Component {
 							price={e.item_price}
 							time={e.item_time}
 							checked={e.item_checked}
+							editMode={edit_mode}
 						/>
 					)
 				})

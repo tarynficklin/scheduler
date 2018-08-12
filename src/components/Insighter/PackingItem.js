@@ -6,10 +6,10 @@ class PackingItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: this.props.id,
-			title: this.props.title,
-			checked: this.props.checked,
-			deleted: false
+			id      : this.props.id,
+			title   : this.props.title,
+			checked : this.props.checked,
+			deleted : false
 		}
 	}
 
