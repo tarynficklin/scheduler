@@ -5,8 +5,8 @@ export default function Calendar(props) {
 	const {getStartDateInput, getEndDateInput} = props
 	return (
 		<div className="calendar">
-			<input onChange={(e) => getStartDateInput(e.target.value)} placeholder="start date" /><br />
-			<input onChange={(e) => getEndDateInput(e.target.value)} placeholder="end date" /><br />
+			<input onChange={(e) => getStartDateInput(e.target.value)} type="date" placeholder="start date" /><br />
+			<input onChange={(e) => getEndDateInput(e.target.value)} type="date" placeholder="end date" /><br />
 		</div>
 	)
 }
