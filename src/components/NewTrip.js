@@ -58,7 +58,6 @@ class NewTrip extends Component {
 		let lastDay  = moment(endDate).startOf('day').add(1, 'day');
 		while (firstDay.add(1, 'days').diff(lastDay ) < 0) {dates.push(firstDay.clone().toDate())}
 		for   (let i in dates) {days.push(moment(dates[i]).format("MMMM Do YYYY"))}
-		// for   (let i in dates) {days.push(moment(dates[i]).format("MM/DD/YYYY"))}
 		return days;
 	}
 	

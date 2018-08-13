@@ -32,7 +32,7 @@ class Insighter extends Component {
 		this.updateBudget    = this.updateBudget.bind(this);
 		this.updateLocation  = this.updateLocation.bind(this);
 		this.updateStartDate = this.updateStartDate.bind(this);
-		this.updatEndDate    = this.updatEndDate.bind(this);
+		this.updateEndDate    = this.updateEndDate.bind(this);
 		//misc bindings
 		this.addPackingItem = this.addPackingItem.bind(this);
 		this.scheduleIndex  = this.scheduleIndex.bind(this);
@@ -64,11 +64,11 @@ class Insighter extends Component {
 	updateBudget    (id) {axios.put(`/api/trips/budget/${id}`,    {budget: this.state.trip_budget})}
 	updateLocation  (id) {axios.put(`/api/trips/location/${id}`,  {location: this.state.trip_location})}
 	updateStartDate (id) {axios.put(`/api/trips/startDate/${id}`, {startDate: this.state.trip_start_date})}
-	updatEndDate    (id) {axios.put(`/api/trips/endDate/${id}`,   {endDate: this.state.trip_end_date})}
+	updateEndDate    (id) {axios.put(`/api/trips/endDate/${id}`,   {endDate: this.state.trip_end_date})}
   //add packing list item function
 	addPackingItem() {
 		const {trip_packing_list, trip_id} = this.state
-		axios.post(`/api/list`, {trip_id, packing_title: ""}).then(results => {
+		axios.post(`/api/list`, {trip_id, packing_title: "New Item"}).then(results => {
 			trip_packing_list.push(results.data);
 			this.setState({trip_packing_list});
 		})
@@ -96,7 +96,7 @@ class Insighter extends Component {
 			updateBudget,
 			updateLocation,
 			updateStartDate,
-			updatEndDate,
+			updateEndDate,
 			addPackingItem,
 			deleteTrip
 		} = this;
@@ -129,7 +129,7 @@ class Insighter extends Component {
 					getEndDateInput   = {getEndDateInput}
 					updateLocation    = {updateLocation}
 					updateStartDate   = {updateStartDate}
-					updatEndDate      = {updatEndDate}
+					updateEndDate      = {updateEndDate}
 					deleteTrip        = {deleteTrip} />
 			</div>
 		)

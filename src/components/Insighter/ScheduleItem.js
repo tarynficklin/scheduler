@@ -28,6 +28,8 @@ class ScheduleItem extends Component {
 	toggleChecked (id)  {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
 	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 
+	price () {return this.state.price===0 ? null : `- $${this.state.price}`}
+
   render() {
 		const {id, title, price, deleted, editMode} = this.state
 		return (
@@ -36,7 +38,7 @@ class ScheduleItem extends Component {
 				!editMode ?
 					<div className="schedule-item">
 						<a>• {title} </a>
-						<a>{price} </a>
+						<a>{this.price()}</a>
 						<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
 					</div>
 				:
