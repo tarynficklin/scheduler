@@ -11,9 +11,7 @@ export default function Schedule(props) {
 					<ScheduleList
 						key={i}
 						id={e.schedule_id}
-						day={e.schedule_day}
-						month={e.schedule_month}
-						year={e.schedule_year}
+						date={e.schedule_date}
 						currentSchedule={currentSchedule}
 					/>
 				)

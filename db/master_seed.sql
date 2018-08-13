@@ -96,46 +96,44 @@ SELECT * FROM packing_lists;
 CREATE TABLE schedules (
 	schedule_id     SERIAL PRIMARY KEY,
 	trip_id	        INTEGER REFERENCES trips(trip_id),
-	schedule_day    VARCHAR(20) DEFAULT '',
-	schedule_month  VARCHAR(10) DEFAULT '',
-	schedule_year   VARCHAR(10) DEFAULT ''
+	schedule_date   VARCHAR(50) DEFAULT ''
 );
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (1, '26', '7', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (1, 'July 26th 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (1, '27', '7', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (1, 'July 27th 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (1, '28', '7', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (1, 'July 28th 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (2, '20', '9', '2019');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (2, 'September 20th 2019');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (2, '21', '9', '2019');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (2, 'September 21st 2019');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (2, '22', '9', '2019');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (2, 'September 22nd 2019');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (3, '23', '8', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (3, 'August 23rd 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (3, '24', '8', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (3, 'August 24th 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (3, '25', '8', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (3, 'August 25th 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (4, '31', '12', '2018');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (4, 'December 31st 2018');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (4, '1', '1', '2019');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (4, 'Janurary 1st 2019');
 
-INSERT INTO schedules (trip_id, schedule_day, schedule_month, schedule_year)
-VALUES (4, '2', '1', '2019');
+INSERT INTO schedules (trip_id, schedule_date)
+VALUES (4, 'January 2nd 2019');
 
 SELECT * FROM schedules;
 

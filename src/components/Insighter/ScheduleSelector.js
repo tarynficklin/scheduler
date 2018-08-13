@@ -6,10 +6,9 @@ export default function ScheduleSelector(props) {
 	return (
 		<form className="schedule-selector">
 			{schedule.map((e, i) => {
-				const {schedule_id, schedule_day, schedule_month, schedule_year} = e
+				const {schedule_id, schedule_date} = e
 				return (
 					<div style={{display: 'inline'}} key={i}>
-						<a>{schedule_month}/{schedule_day}/{schedule_year}</a>
 						<input
 							type="radio"
 							name="weekday"
@@ -17,6 +16,7 @@ export default function ScheduleSelector(props) {
 							checked={e.schedule_id === currentSchedule ? true : false}
 							val={schedule_id} onClick={() => scheduleIndex(schedule_id)}
 						/>
+						<a>{schedule_date}</a>
 					</div>
 				)
 			})

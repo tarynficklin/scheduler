@@ -20,8 +20,6 @@ class NewTrip extends Component {
 			trip_start_date : '',
 			trip_end_date   : '',
 			trip_budget     : 0,
-			day_count       : 1,
-			schedule_days   : []
 		}
 		this.deleteTrip				 = this.deleteTrip.bind(this);
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
@@ -37,11 +35,13 @@ class NewTrip extends Component {
 
 	
 	createTrip () {
-		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget, day_count} = this.state;
-		axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget}).then(() => {
-			for (let i=0; i < day_count; i++) {
-				axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_day: "12", schedule_month: "12", schedule_year: "2018"})
-				if (i===day_count-1) {this.props.history.push(`/trip/${trip_id}`)}
+		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
+		let days = this.getDaysBetween(trip_start_date, trip_end_date)
+		axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget})
+		.then(() => {
+			for (let i in days) {
+				axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_date: days[i]})
+				if (i*1===days.length-1) {this.props.history.push(`/trip/${trip_id}`)}
 			}
 		})
 	}
@@ -57,7 +57,8 @@ class NewTrip extends Component {
 		let firstDay = moment(startDate).startOf('day').subtract(1, 'day');
 		let lastDay  = moment(endDate).startOf('day').add(1, 'day');
 		while (firstDay.add(1, 'days').diff(lastDay ) < 0) {dates.push(firstDay.clone().toDate())}
-		for   (let i in dates) {days.push(moment(dates[i]).format("MMMM Do YY"))}
+		for   (let i in dates) {days.push(moment(dates[i]).format("MMMM Do YYYY"))}
+		// for   (let i in dates) {days.push(moment(dates[i]).format("MM/DD/YYYY"))}
 		return days;
 	}
 	
@@ -73,12 +74,12 @@ class NewTrip extends Component {
 		return (
 			<div className="new-trip">
 				<Header deleteTrip={deleteTrip}/>
+				<a>id: {this.state.trip_id}</a>
 				<Location getLocationInput={getLocationInput}/>
 				<Calendar
 					getStartDateInput={getStartDateInput}
 					getEndDateInput={getEndDateInput}
-					getDayCount={getDayCount}
-					day_count={this.state.day_count} />
+					getDayCount={getDayCount} />
 				<Budget getBudgetInput={getBudgetInput}/>
 				<button onClick={() => this.createTrip()}>Done</button>
 			</div>

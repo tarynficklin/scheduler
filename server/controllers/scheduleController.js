@@ -10,9 +10,9 @@ module.exports = {
 
 	create: (req, res) => {
 		const db = req.app.get('db');
-		const {trip_id, schedule_day, schedule_month, schedule_year} = req.body;
+		const {trip_id, schedule_date} = req.body;
 
-		db.schedules.schedule_create([trip_id, schedule_day, schedule_month, schedule_year])
+		db.schedules.schedule_create([trip_id, schedule_date])
 			.then(schedule => res.status(200).send(schedule[0]))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
