@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
+import moment from 'moment';
 import axios from 'axios';
 import './NewTrip.css'
 
@@ -49,6 +50,15 @@ class NewTrip extends Component {
 		const {trip_id} = this.state
 		axios.delete(`api/list/purge/${trip_id}`);
 		this.props.history.push('/');
+	}
+
+	getDaysBetween (startDate, endDate) {
+		let dates = [], days = []
+		let firstDay = moment(startDate).startOf('day').subtract(1, 'day');
+		let lastDay  = moment(endDate).startOf('day').add(1, 'day');
+		while (firstDay.add(1, 'days').diff(lastDay ) < 0) {dates.push(firstDay.clone().toDate())}
+		for   (let i in dates) {days.push(moment(dates[i]).format("MMMM Do YY"))}
+		return days;
 	}
 	
 	getBudgetInput    (val) {this.setState({trip_budget: val})}
