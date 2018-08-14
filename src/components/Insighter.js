@@ -26,13 +26,9 @@ class Insighter extends Component {
 		//input bindings
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
 		this.getLocationInput  = this.getLocationInput.bind(this);
-		this.getStartDateInput = this.getStartDateInput.bind(this);
-		this.getEndDateInput   = this.getEndDateInput.bind(this);
 		//axios bindings
 		this.updateBudget    = this.updateBudget.bind(this);
 		this.updateLocation  = this.updateLocation.bind(this);
-		this.updateStartDate = this.updateStartDate.bind(this);
-		this.updateEndDate    = this.updateEndDate.bind(this);
 		//misc bindings
 		this.addPackingItem = this.addPackingItem.bind(this);
 		this.scheduleIndex  = this.scheduleIndex.bind(this);
@@ -53,18 +49,14 @@ class Insighter extends Component {
 	}
 
 	//misc functions
-	deleteTrip   (id) {axios.delete(`api/trips/${id}`)}
-	scheduleIndex(id) {this.setState({current_schedule: id})}
+	deleteTrip    (id) {axios.delete(`api/trips/${id}`)}
+	scheduleIndex (id) {this.setState({current_schedule: id})}
 	//input functions
 	getBudgetInput    (val) {this.setState({trip_budget: val})}
 	getLocationInput  (val) {this.setState({trip_location: val})}
-	getStartDateInput (val) {this.setState({trip_start_date: val})}
-	getEndDateInput   (val) {this.setState({trip_end_date: val})}
 	//axios functions
 	updateBudget    (id) {axios.put(`/api/trips/budget/${id}`,    {budget: this.state.trip_budget})}
 	updateLocation  (id) {axios.put(`/api/trips/location/${id}`,  {location: this.state.trip_location})}
-	updateStartDate (id) {axios.put(`/api/trips/startDate/${id}`, {startDate: this.state.trip_start_date})}
-	updateEndDate    (id) {axios.put(`/api/trips/endDate/${id}`,   {endDate: this.state.trip_end_date})}
   //add packing list item function
 	addPackingItem() {
 		const {trip_packing_list, trip_id} = this.state
@@ -90,20 +82,19 @@ class Insighter extends Component {
 		const {
 			getBudgetInput,
 			getLocationInput,
-			getStartDateInput,
-			getEndDateInput,
 			scheduleIndex,
-			updateBudget,
 			updateLocation,
-			updateStartDate,
-			updateEndDate,
+			updateBudget,
 			addPackingItem,
 			deleteTrip
 		} = this;
 
 		return (
 			<div className="insighter">
-				<Header location = {trip_location} />
+				<Header
+					location  = {trip_location}
+					startDate = {trip_start_date}
+					endDate   = {trip_end_date} />
 				<ScheduleSelector
 					schedule        = {trip_schedule}
 					scheduleIndex   = {scheduleIndex}
@@ -122,14 +113,8 @@ class Insighter extends Component {
 				<SettingsWidget
 					id                = {trip_id}
 					location          = {trip_location}
-					startDate         = {trip_start_date}
-					endDate           = {trip_end_date}
 					getLocationInput  = {getLocationInput}
-					getStartDateInput = {getStartDateInput}
-					getEndDateInput   = {getEndDateInput}
 					updateLocation    = {updateLocation}
-					updateStartDate   = {updateStartDate}
-					updateEndDate      = {updateEndDate}
 					deleteTrip        = {deleteTrip} />
 			</div>
 		)

@@ -39,6 +39,7 @@ const tripOrigin = '/api/trips';
 app.get    (`${tripOrigin}/:user`,         tripController.read     );
 app.get    (`${tripOrigin}`,               tripController.readLast );
 app.get    (`${tripOrigin}/trip/:id`,      tripController.find     );
+app.get    (`${tripOrigin}/total/:id`,     tripController.total    );
 app.post   (`${tripOrigin}`,               tripController.create   );
 app.put    (`${tripOrigin}/:id`,           tripController.update   );
 app.put    (`${tripOrigin}/budget/:id`,    tripController.budget   );

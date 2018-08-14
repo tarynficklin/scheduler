@@ -41,16 +41,16 @@ CREATE TABLE trips (
 );
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (1, 'New York', '7/26/2018', '7/28/2018', 499.99);
+VALUES (1, 'New York', '7-26-2018', '7-28-2018', 499.99);
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (1, 'San Francisco', '9/20/2019', '9/22/2019', 699.99);
+VALUES (1, 'San Francisco', '9-20-2019', '9-22-2019', 699.99);
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (2, 'Chicago', '8/23/2018', '8/25/2018', 799.99);
+VALUES (2, 'Chicago', '8-23-2018', '8-25-2018', 799.99);
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (2, 'Hawaii', '12/31/2018', '1/2/2019', 1999.99);
+VALUES (2, 'Hawaii', '12-31-2018', '1-2-2019', 1999.99);
 
 SELECT * FROM trips;
 

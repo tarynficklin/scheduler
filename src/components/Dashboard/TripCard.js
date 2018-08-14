@@ -8,7 +8,7 @@ export default function TripCard(props) {
 		
 			<Link to={`/trip/${id}`} className="trip-card">
 				<h3>{location}</h3>
-				<p>{startDate} - {endDate}</p>
+				<p>{startDate} to {endDate}</p>
 			</Link>
 	)
 }

@@ -54,6 +54,15 @@ module.exports = {
 			.catch(err => console.log(`Error Message: ${err}`))
 	},
 
+	total: (req, res) => {
+		const db = req.app.get('db');
+		const {id} = req.params;
+
+		db.trips.trip_total_budget([id])
+			.then(trip => res.status(200).send(trip[0]))
+			.catch(err => console.log(`Error Message: ${err}`))
+	},
+
 	location: (req, res) => {
 		const db = req.app.get('db');
 		const {location} = req.body;
