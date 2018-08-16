@@ -35,12 +35,14 @@ class NewTrip extends Component {
 
 	async createTrip () {
 		const {REACT_APP_UAK} = process.env;
+		const {updateBackground} = this.props;
 		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
 
 		let days = this.getDaysBetween(trip_start_date, trip_end_date)
 
 		const photo = await axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${trip_location}&client_id=${REACT_APP_UAK}`)
-		await axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background: `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1377&q=80`})
+		await axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background: `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1920&q=80`})
+		await updateBackground(`${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1920&q=80`) 
 		
 		for (let i in days) {
 			await axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_date: days[i]})
@@ -75,15 +77,17 @@ class NewTrip extends Component {
 
 		return (
 			<div className="new-trip">
-				<Header deleteTrip={deleteTrip}/>
-				<a>id: {this.state.trip_id}</a>
-				<Location getLocationInput={getLocationInput}/>
-				<Calendar
-					getStartDateInput={getStartDateInput}
-					getEndDateInput={getEndDateInput}
-					getDayCount={getDayCount} />
-				<Budget getBudgetInput={getBudgetInput}/>
-				<button onClick={() => this.createTrip()}>Done</button>
+				<frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="new-trip-card">
+					<Header deleteTrip={deleteTrip}/>
+					<a>id: {this.state.trip_id}</a>
+					<Location getLocationInput={getLocationInput}/>
+					<Calendar
+						getStartDateInput={getStartDateInput}
+						getEndDateInput={getEndDateInput}
+						getDayCount={getDayCount} />
+					<Budget getBudgetInput={getBudgetInput}/>
+					<button onClick={() => this.createTrip()}>Done</button>
+				</frosted-glass>
 			</div>
 		)
 	}

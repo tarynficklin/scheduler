@@ -1,24 +1,23 @@
-.trip-card {
+/* .blur-card {
 	display: flex;
 	justify-content: center;
 	text-align: center;
-  margin: 25px auto;
-  width: 100%;
+  margin: auto;
+  width: 90%;
+  padding: 3.125rem;
 	border-radius: 10px;
 	overflow: hidden;
 	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.15);
-	transition: 0.5s;
-	padding: 25px;
+	transition: 0.25s;
+	background: #FFF;
 	color: black;
-	transition: 0.15s;
 }
 
-.trip-card a {
+.blur-card a {
 	text-decoration: none;
 	color: black;
 }
 
-.trip-card:hover {
-	padding: 35px;
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-}
+.blur-card:hover {
+	opacity: 0.97;
+} */

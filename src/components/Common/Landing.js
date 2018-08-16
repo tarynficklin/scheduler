@@ -12,8 +12,10 @@ export default class Landing extends Component {
   render(){
     return(
       <div className="landing">
-        <p>Please Log in.</p>
-        <button onClick={() => this.login()}>Login</button>
+        <frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="landing-card">
+          <h2>Please Log in.</h2>
+          <button onClick={() => this.login()}>Login</button>
+        </frosted-glass>
       </div>
     )
   }

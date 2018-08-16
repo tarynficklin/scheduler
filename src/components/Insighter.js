@@ -97,31 +97,33 @@ class Insighter extends Component {
 
 		return (
 			<div className="insighter">
-				<Header
-					location  = {trip_location}
-					startDate = {trip_start_date}
-					endDate   = {trip_end_date} />
-				<ScheduleSelector
-					schedule        = {trip_schedule}
-					scheduleIndex   = {scheduleIndex}
-					currentSchedule = {current_schedule} />
-				<Schedule
-					schedule        = {trip_schedule}
-					currentSchedule = {current_schedule} />
-				<BudgetWidget
-					id             = {trip_id}
-					budget         = {trip_budget}
-					getBudgetInput = {getBudgetInput}
-					updateBudget   = {updateBudget} />
-				<PackingWidget
-					packingList    = {trip_packing_list}
-					addPackingItem = {addPackingItem} />
-				<SettingsWidget
-					id                = {trip_id}
-					location          = {trip_location}
-					getLocationInput  = {getLocationInput}
-					updateLocation    = {updateLocation}
-					deleteTrip        = {deleteTrip} />
+				<frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="insighter-card">
+					<Header
+						location  = {trip_location}
+						startDate = {trip_start_date}
+						endDate   = {trip_end_date} />
+					<ScheduleSelector
+						schedule        = {trip_schedule}
+						scheduleIndex   = {scheduleIndex}
+						currentSchedule = {current_schedule} />
+					<Schedule
+						schedule        = {trip_schedule}
+						currentSchedule = {current_schedule} />
+					<BudgetWidget
+						id             = {trip_id}
+						budget         = {trip_budget}
+						getBudgetInput = {getBudgetInput}
+						updateBudget   = {updateBudget} />
+					<PackingWidget
+						packingList    = {trip_packing_list}
+						addPackingItem = {addPackingItem} />
+					<SettingsWidget
+						id                = {trip_id}
+						location          = {trip_location}
+						getLocationInput  = {getLocationInput}
+						updateLocation    = {updateLocation}
+						deleteTrip        = {deleteTrip} />
+				</frosted-glass>
 			</div>
 		)
 	}

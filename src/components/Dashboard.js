@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import UserButton from './Dashboard/UserButton';
@@ -18,7 +19,9 @@ class Dashboard extends Component {
 	componentWillReceiveProps (props) {axios.get(`/api/trips/${props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
 
 	render () {
+		const {updateBackground} = this.props;
 		const {tripCards} = this.state;
+		console.log('history', this.props.history)
 		return (
 			<div className="dashboard">
 				<UserButton id={this.props.user.user_id}/>
@@ -33,7 +36,10 @@ class Dashboard extends Component {
 							budget={e.trip_budget}
 							packingList={e.trip_packing_list}
 							schedule={e.trip_schedule}
+							background={e.trip_background}
 							deleteTrip={this.deleteTrip}
+							updateBackground={updateBackground}
+							router={this.props.history}
 						/>
 					)
 				})
@@ -48,4 +54,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 }
-export default connect(mapStateToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps)(Dashboard));

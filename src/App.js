@@ -12,6 +12,7 @@ import Missing   from './components/Common/Missing';
 import Dashboard from './components/Dashboard';
 import NewTrip   from './components/NewTrip';
 import Insighter from './components/Insighter';
+import Blur from './Blur';
 
 class App extends Component {
   constructor () {
@@ -40,10 +41,11 @@ class App extends Component {
             user.user_name ? (
               <HashRouter>
                 <Switch>
-                  <Route exact path="/" component={Dashboard}/>
-                  <Route path="/new" component={NewTrip}/>
+                  <Route exact path="/" render={() => ( <Dashboard updateBackground={this.updateBackground}/> )}/>
+                  <Route path="/new" render={() => ( <NewTrip updateBackground={this.updateBackground}/> )} />/>
                   <Route path="/trip/:id" render={() => ( <Insighter updateBackground={this.updateBackground}/> )} />
                   <Route path="/404" component={Missing} />
+                  <Route path="/blur" component={Blur} />
                 </Switch>
               </HashRouter>
             ) : <Landing />

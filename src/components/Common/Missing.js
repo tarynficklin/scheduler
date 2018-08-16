@@ -6,8 +6,10 @@ export default class Missing extends Component {
   render(){
     return(
       <div className="missing">
-        <p>Page not found</p>
-        <Link to="/"><button>Dashboard</button></Link>
+        <frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="missing-card">
+          <p>Page not found</p>
+          <Link to="/"><button>Dashboard</button></Link>
+        </frosted-glass>
       </div>
     )
   }
