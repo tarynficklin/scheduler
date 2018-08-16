@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import './Insighter.css';
-import updateBackground from '../ducks/auth0'
 
 import Header           from './Insighter/Header';
 import Schedule         from './Insighter/Schedule';
@@ -44,7 +44,7 @@ class Insighter extends Component {
 			console.log(userData)
 			if (userData && userData.user_id === this.props.user.user_id) {
 				this.setState(userData);
-				// updateBackground(this.state.trip_background);
+				this.props.updateBackground(this.state.trip_background);
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
 				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
 			}
@@ -72,7 +72,6 @@ class Insighter extends Component {
 	}
 
 	render () {
-		
 		const {
 			trip_id,
 			trip_location,
@@ -94,7 +93,7 @@ class Insighter extends Component {
 			deleteTrip
 		} = this;
 
-		console.log(this.state)
+		console.log(this.props)
 
 		return (
 			<div className="insighter">
@@ -133,4 +132,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 };
-export default connect(mapStateToProps, {updateBackground})(Insighter);
+export default withRouter(connect(mapStateToProps)(Insighter));
