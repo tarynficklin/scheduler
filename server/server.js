@@ -16,6 +16,8 @@ const //CONTROLLERS
 //SERVER SETUP
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 const app = express();
+app.use( express.static( `${__dirname}/../build` ) );
+const path = require('path');
 app.use(bodyParser.json());
 
 //MIDDLEWARE
@@ -68,6 +70,9 @@ app.put    (`${scheduleOrigin}/item/title/:id`, scheduleController.titleItem );
 app.put    (`${scheduleOrigin}/item/price/:id`, scheduleController.priceItem );
 app.put    (`${scheduleOrigin}/item/check/:id`, scheduleController.checkItem );
 app.delete (`${scheduleOrigin}/item/:id`,       scheduleController.deleteItem);
+
+//SERVER ENDPOINT
+app.get('*', (req, res)=>{res.sendFile(path.join(__dirname, '../build/index.html'))});
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));
