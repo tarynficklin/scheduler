@@ -18,7 +18,7 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
-      background: 'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=13b58b0343d8efc06a88c55e843f624f&auto=format&fit=crop&w=1500&q=80'
+      background: 'https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9c7ebd41ce42bc44af4c1fff64cb39ba&auto=format&fit=crop&w=1920&q=80'
     }
     this.updateBackground = this.updateBackground.bind(this);
   }
