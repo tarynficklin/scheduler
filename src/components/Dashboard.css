@@ -1,7 +1,5 @@
 .dashboard {
 	padding: 25px;
 	text-align: center;
-	background: url('https://images.unsplash.com/photo-1533272716424-69efaa4d6b32?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5e2559db66798a4feb7bd55ce8c4816c&auto=format&fit=crop&w=1934&q=80') center top fixed;
-	background-size: cover;
 	min-height: 100vh;
 }

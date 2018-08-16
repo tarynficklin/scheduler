@@ -37,20 +37,21 @@ CREATE TABLE trips (
 	trip_location       TEXT DEFAULT '',
 	trip_start_date     VARCHAR(10) DEFAULT '',
 	trip_end_date       VARCHAR(10) DEFAULT '',
-	trip_budget         FLOAT DEFAULT 0
+	trip_budget         FLOAT DEFAULT 0,
+	trip_background			TEXT DEFAULT ''
 );
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (1, 'New York', '7-26-2018', '7-28-2018', 499.99);
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
+VALUES (1, 'New York', '7-26-2018', '7-28-2018', 499.99, 'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=914557809736ed30ad71c94ec4415162&auto=format&fit=crop&w=1377&q=80');
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (1, 'San Francisco', '9-20-2019', '9-22-2019', 699.99);
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
+VALUES (1, 'San Francisco', '9-20-2019', '9-22-2019', 699.99, 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7402cc297bdfbb4a4856e764971dc013&auto=format&fit=crop&w=1377&q=80');
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (2, 'Chicago', '8-23-2018', '8-25-2018', 799.99);
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
+VALUES (2, 'Chicago', '8-23-2018', '8-25-2018', 799.99, 'https://images.unsplash.com/photo-1494522855154-9297ac14b55f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=78da260f3928a32011405c465f5422f4&auto=format&fit=crop&w=1377&q=80');
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget)
-VALUES (2, 'Hawaii', '12-31-2018', '1-2-2019', 1999.99);
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
+VALUES (2, 'Hawaii', '12-31-2018', '1-2-2019', 1999.99, 'https://images.unsplash.com/photo-1507187632231-5beb21a654a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=389363124411392dd4c44663b4800211&auto=format&fit=crop&w=1377&q=80');
 
 SELECT * FROM trips;
 

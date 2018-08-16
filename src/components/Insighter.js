@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import './Insighter.css';
+import updateBackground from '../ducks/auth0'
 
 import Header           from './Insighter/Header';
 import Schedule         from './Insighter/Schedule';
@@ -9,8 +10,6 @@ import ScheduleSelector from './Insighter/ScheduleSelector';
 import BudgetWidget     from './Insighter/BudgetWidget';
 import PackingWidget    from './Insighter/PackingWidget';
 import SettingsWidget   from './Insighter/SettingsWidget';
-
-// import  from '../ducks/insighter'
 
 class Insighter extends Component {
 	constructor () {
@@ -21,6 +20,7 @@ class Insighter extends Component {
 			trip_start_date   : '1/1/20XX',
 			trip_end_date     : '1/1/20XX',
 			trip_budget       : 0,
+			trip_background   : '',
 			trip_packing_list : [],
 			trip_schedule     : [],
 			current_schedule  : 0
@@ -41,8 +41,10 @@ class Insighter extends Component {
 		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
 			const userData = results.data;
+			console.log(userData)
 			if (userData && userData.user_id === this.props.user.user_id) {
 				this.setState(userData);
+				// updateBackground(this.state.trip_background);
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
 				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
 			}
@@ -92,6 +94,8 @@ class Insighter extends Component {
 			deleteTrip
 		} = this;
 
+		console.log(this.state)
+
 		return (
 			<div className="insighter">
 				<Header
@@ -129,4 +133,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 };
-export default connect(mapStateToProps)(Insighter);
+export default connect(mapStateToProps, {updateBackground})(Insighter);

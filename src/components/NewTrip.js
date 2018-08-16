@@ -10,8 +10,7 @@ import Calendar from './NewTrip/Calendar';
 import Location from './NewTrip/Location';
 import Budget   from './NewTrip/Budget';
 
-import updateBudget from '../ducks/newTrip';
-import {createTrip} from '../ducks/newTrip';
+require ('dotenv').config();
 
 class NewTrip extends Component {
 
@@ -32,23 +31,22 @@ class NewTrip extends Component {
 		this.getDayCount		   = this.getDayCount.bind(this);
 	}
 
-	//Q2 HOW DO I SEND THIS TO REDUX INSTEAD OF STATE?
-	componentDidMount () {
-		axios.get(`/api/trips/`).then(results => this.setState({trip_id: results.data.trip_id}))
-	}
+	componentDidMount () {axios.get(`/api/trips/`).then(results => this.setState({trip_id: results.data.trip_id}))}
 
-	//Q1 HOW DO I DO THIS IN REDUX INSTEAD?
-	//THIS FUNCTION ALSO DEPENDS ON ANOTHER FUNCTION
-	createTrip () {
+	async createTrip () {
+		const {REACT_APP_UAK} = process.env;
 		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
+
 		let days = this.getDaysBetween(trip_start_date, trip_end_date)
-		axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget})
-		.then(() => {
-			for (let i in days) {
-				axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_date: days[i]})
-				if (i*1===days.length-1) {this.props.history.push(`/trip/${trip_id}`)}
-			}
-		})
+
+		const photo = await axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${trip_location}&client_id=${REACT_APP_UAK}`)
+		await axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background: `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1377&q=80`})
+		
+		for (let i in days) {
+			await axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_date: days[i]})
+			if (i*1===days.length-1) {this.props.history.push(`/trip/${trip_id}`)}
+		}
+
 	}
 
 	deleteTrip () {
@@ -66,7 +64,6 @@ class NewTrip extends Component {
 		return days;
 	}
 	
-	//IS SETSTATE THE SAME AS OBJECT.ASSIGN?
 	getBudgetInput    (val) {this.setState({trip_budget: val})}
 	getLocationInput  (val) {this.setState({trip_location: val})}
 	getStartDateInput (val) {this.setState({trip_start_date: val})}
@@ -80,7 +77,6 @@ class NewTrip extends Component {
 			<div className="new-trip">
 				<Header deleteTrip={deleteTrip}/>
 				<a>id: {this.state.trip_id}</a>
-				<button onClick={() => createTrip(this.state.trip_id, this.props.history)}>Create Trip</button>
 				<Location getLocationInput={getLocationInput}/>
 				<Calendar
 					getStartDateInput={getStartDateInput}
@@ -98,4 +94,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 };
-export default withRouter(connect(mapStateToProps, {updateBudget})(NewTrip));
+export default withRouter(connect(mapStateToProps)(NewTrip));

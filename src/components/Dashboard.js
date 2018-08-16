@@ -6,8 +6,6 @@ import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
 import './Dashboard.css'
 
-// import  from '../ducks/dashboard'
-
 class Dashboard extends Component {
 	constructor () {
 		super();
@@ -17,7 +15,7 @@ class Dashboard extends Component {
 	}
 
 	componentDidMount()  {axios.get(`/api/trips/${this.props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
-	componentDidUpdate() {axios.get(`/api/trips/${this.props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
+	componentWillReceiveProps (props) {axios.get(`/api/trips/${props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
 
 	render () {
 		const {tripCards} = this.state;
