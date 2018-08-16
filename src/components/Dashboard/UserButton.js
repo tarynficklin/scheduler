@@ -6,17 +6,38 @@ import {Link} from 'react-router-dom';
 import './UserButton.css';
 
 class UserButton extends Component {
-	componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})}
+	constructor () {
+		super();
+		this.state = {
+			loggingOut: false,
+			background: '#00AEFF'
+		}
+	}
 
-	logout () {axios.get('/api/logout').then(res => {this.props.deleteUser()})}
+	componentDidMount () {axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data)})}
+	toggleLogOut () {
+		this.setState({loggingOut: !this.state.loggingOut})
+		if (this.state.loggingOut) {this.setState({background: '#00AEFF'})}
+		else {this.setState({background: 'red'})}
+	}
+	logout () {axios.get('/api/logout').then(() => {this.props.deleteUser()})}
 
 	render () {
-		let {user} = this.props;
+		const {loggingOut} = this.state;
+		const {user} = this.props;
 		return (
-			<div className="user-button">
-				<img src={user.auth_profile} alt="" className="profile-pic"/><br />
-				<button onClick={() => this.logout()}>Logout</button>
-				<Link to="/new"><button>New Trip +</button></Link>
+			<div className="user-button" style={{background: `${this.state.background}`}}>
+			{!loggingOut ?
+				<div className="user-div">
+					<Link to="/new"><button className="new-button">New Trip +</button></Link>
+					<img src={user.auth_profile} at="" className="profile-pic" onClick={() => this.toggleLogOut()} alt=""/>
+				</div>
+			: 
+				<div className="user-div">
+					<button onClick={() => this.logout()} className="logout-button">Logout</button>
+					<button onClick={() => this.toggleLogOut()} className="exit-button">X</button>
+					<img src={user.auth_profile} at="" className="profile-pic" onClick={() => this.toggleLogOut()} alt=""/>
+				</div>}
 			</div>
 		)
 	}

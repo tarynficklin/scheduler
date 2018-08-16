@@ -1,23 +1,42 @@
-.profile-pic {
-	border-radius: 50%;
-	height: 150px;
-	margin: 25px;
-	box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.25);
+.user-button {
+	border-radius: 50px;
+	overflow: hidden;
+	height: 50px;
+	width: 250px;
+	display: flex;
+	box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.25);
+	transition: 0.25s;
+	margin: auto;
+	background-size: 10px;
+}
+
+.user-div {
+	display: flex;
 }
 
 .user-button button {
-	margin: 10px;
+	height: 50px;
 	outline: none;
 	border: none;
-	border-radius: 3px;
-	padding: 10px 20px;;
-	background: #00AEFF;
+	padding: 10px 20px;
 	color: white;
 	text-transform: uppercase;
-	box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.15);
 	transition: 0.25s;
 }
 
 .user-button button:hover {
-	background: rgb(0, 107, 156);
+	background: rgba(0, 0, 0, .25);
+}
+
+.new-button {width: 200px; background: rgba(0, 0, 0, 0);}
+.exit-button {width: 50px; background: rgba(0, 0, 0, 0.1);}
+.logout-button {width: 150px; background: rgba(0, 0, 0, 0);}
+
+.profile-pic {
+	height: 50px;
+	width: 50px;
+	transition: 0.25s;
+}
+
+.profile-pic:hover {
 }

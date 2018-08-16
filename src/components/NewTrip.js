@@ -10,6 +10,9 @@ import Calendar from './NewTrip/Calendar';
 import Location from './NewTrip/Location';
 import Budget   from './NewTrip/Budget';
 
+import updateBudget from '../ducks/newTrip';
+import {createTrip} from '../ducks/newTrip';
+
 class NewTrip extends Component {
 
 	constructor () {
@@ -19,7 +22,7 @@ class NewTrip extends Component {
 			trip_location   : '',
 			trip_start_date : '',
 			trip_end_date   : '',
-			trip_budget     : 0,
+			trip_budget     : 0
 		}
 		this.deleteTrip				 = this.deleteTrip.bind(this);
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
@@ -29,11 +32,13 @@ class NewTrip extends Component {
 		this.getDayCount		   = this.getDayCount.bind(this);
 	}
 
-	async componentDidMount () {
+	//Q2 HOW DO I SEND THIS TO REDUX INSTEAD OF STATE?
+	componentDidMount () {
 		axios.get(`/api/trips/`).then(results => this.setState({trip_id: results.data.trip_id}))
 	}
 
-	
+	//Q1 HOW DO I DO THIS IN REDUX INSTEAD?
+	//THIS FUNCTION ALSO DEPENDS ON ANOTHER FUNCTION
 	createTrip () {
 		const {trip_id, trip_location, trip_start_date,	trip_end_date, trip_budget} = this.state;
 		let days = this.getDaysBetween(trip_start_date, trip_end_date)
@@ -61,6 +66,7 @@ class NewTrip extends Component {
 		return days;
 	}
 	
+	//IS SETSTATE THE SAME AS OBJECT.ASSIGN?
 	getBudgetInput    (val) {this.setState({trip_budget: val})}
 	getLocationInput  (val) {this.setState({trip_location: val})}
 	getStartDateInput (val) {this.setState({trip_start_date: val})}
@@ -74,6 +80,7 @@ class NewTrip extends Component {
 			<div className="new-trip">
 				<Header deleteTrip={deleteTrip}/>
 				<a>id: {this.state.trip_id}</a>
+				<button onClick={() => createTrip(this.state.trip_id, this.props.history)}>Create Trip</button>
 				<Location getLocationInput={getLocationInput}/>
 				<Calendar
 					getStartDateInput={getStartDateInput}
@@ -86,5 +93,9 @@ class NewTrip extends Component {
 	}
 }
 
-function mapStateToProps (state) {return {user: state.auth0.user}};
-export default withRouter(connect(mapStateToProps)(NewTrip));
+function mapStateToProps (state) {
+	return {
+		user: state.auth0.user
+	}
+};
+export default withRouter(connect(mapStateToProps, {updateBudget})(NewTrip));

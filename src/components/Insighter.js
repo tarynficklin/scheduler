@@ -10,6 +10,8 @@ import BudgetWidget     from './Insighter/BudgetWidget';
 import PackingWidget    from './Insighter/PackingWidget';
 import SettingsWidget   from './Insighter/SettingsWidget';
 
+// import  from '../ducks/insighter'
+
 class Insighter extends Component {
 	constructor () {
 		super();
@@ -47,6 +49,7 @@ class Insighter extends Component {
 			else {this.props.history.push('/404')}
 		})
 	}
+
 
 	//misc functions
 	deleteTrip    (id) {axios.delete(`api/trips/${id}`)}
@@ -121,5 +124,9 @@ class Insighter extends Component {
 	}
 }
 
-function mapStateToProps (state) {return {user: state.auth0.user}};
+function mapStateToProps (state) {
+	return {
+		user: state.auth0.user
+	}
+};
 export default connect(mapStateToProps)(Insighter);

@@ -6,6 +6,8 @@ import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
 import './Dashboard.css'
 
+// import  from '../ducks/dashboard'
+
 class Dashboard extends Component {
 	constructor () {
 		super();
@@ -43,5 +45,9 @@ class Dashboard extends Component {
 	}
 }
 
-function mapStateToProps (state) {return {user: state.auth0.user}}
+function mapStateToProps (state) {
+	return {
+		user: state.auth0.user
+	}
+}
 export default connect(mapStateToProps)(Dashboard);

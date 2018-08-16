@@ -9,31 +9,30 @@ export default class ScheduleList extends Component {
 		this.state = {
 			scheduleItems : [],
 			selected      : false,
-			edit_mode     : false
+			edit_mode     : false,
 		}
 		this.toggleEditMode = this.toggleEditMode.bind(this);
 	}
-	
-	componentDidMount () {
+
+	componentDidMount () {this.selectedSchedule(this.props.id, this.props.currentSchedule)}
+	componentWillReceiveProps (props) {this.selectedSchedule(props.id, props.currentSchedule)}
+
+	selectedSchedule (id, currentSchedule) {
 		axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))
-		const {id, currentSchedule} = this.props
-		if (id === currentSchedule) {this.setState({selected: true})}
+		id === currentSchedule ? this.setState({selected: true}) : this.setState({selected: false})
 	}
 
-	componentWillReceiveProps (props) {
-		axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))
-		const {id, currentSchedule} = props
-		if (id === currentSchedule) {this.setState({selected: true})}
-		else {this.setState({selected: false})}
-	}
-
-	addScheduleItem() {
+	async addScheduleItem() {
 		const {id} = this.props;
 		const {scheduleItems} = this.state;
-		axios.post(`/api/schedule/item`, {schedule_id: id, item_title: "New Schedule Item", item_price: 0, item_time: "morning"}).then(results => {
-			scheduleItems.push(results.data);
-			this.setState({scheduleItems});
+		const results = await axios.post(`/api/schedule/item`, {
+			schedule_id : id,
+			item_title  : "New Schedule Item",
+			item_price  : 0,
+			item_time   : "morning"
 		})
+		scheduleItems.push(results.data);
+		this.setState({scheduleItems});
 	}
 
 	toggleEditMode() {this.setState({edit_mode: !this.state.edit_mode})}

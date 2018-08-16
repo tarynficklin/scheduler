@@ -6,13 +6,14 @@ class PackingWidget extends Component {
 	constructor () {
 		super();
 		this.state = {
+			packingList: [],
 			revealed: false,
 			editMode: false
 		}
 	}
 
-	revealWidget () {this.setState({revealed: !this.state.revealed})}
-	toggleEditMode() {this.setState({editMode: !this.state.editMode})}
+	revealWidget   () {this.setState({revealed: !this.state.revealed})}
+	toggleEditMode () {this.setState({editMode: !this.state.editMode})}
 
 	render () {
 		const {revealed} = this.state

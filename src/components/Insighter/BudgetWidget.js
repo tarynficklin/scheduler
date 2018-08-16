@@ -12,33 +12,19 @@ class BudgetWidget extends Component {
 		}
 	}
 
-	componentWillReceiveProps (props) {
-		if (props.id !== 0) {axios.get(`/api/trips/total/${this.props.id}`)
-			.then(results => {
-				this.setState({budgetTotal: results.data.sum})
-				if (this.state.budgetTotal > this.props.budget) {this.setState({alert: 'red'})}
-				else {this.setState({alert: null})}
-			})
-		}
-	}
-
-	// componentDidUpdate(props) {
-	// 	if (props.id !== 0) {axios.get(`/api/trips/total/${this.props.id}`)
-	// 		.then(results => {
-	// 			this.setState({budgetTotal: results.data.sum})
-	// 			if (this.state.budgetTotal > this.props.budget) {this.setState({alert: 'red'})}
-	// 			else {this.setState({alert: null})}
-	// 		})
-	// 	}
-	// }
+	componentWillReceiveProps (props) {this.refreshTotal(props.id, props.budget, this.state.budgetTotal)}
 
 	revealWidget () {
-		this.setState({revealed: !this.state.revealed})
-		if (this.props.id !== 0) {axios.get(`/api/trips/total/${this.props.id}`)
+		this.setState({revealed: !this.state.revealed});
+		this.refreshTotal(this.props.id, this.props.budget, this.state.budgetTotal);
+	}
+	
+	async refreshTotal(id, budget, budgetTotal) {
+		if (id !== 0) {
+			axios.get(`/api/trips/total/${id}`)
 			.then(results => {
 				this.setState({budgetTotal: results.data.sum})
-				if (this.state.budgetTotal > this.props.budget) {this.setState({alert: 'red'})}
-				else {this.setState({alert: null})}
+				budgetTotal > budget ? this.setState({alert: 'red'}) : this.setState({alert: null});
 			})
 		}
 	}
@@ -49,21 +35,20 @@ class BudgetWidget extends Component {
 		return (
 			<div className="budget-widget" style={{display: 'inline'}}>
 				<button
-				onClick={() => this.revealWidget()}
-				style={{backgroundColor: this.state.alert}}>Budget</button>
+				onClick={() => this.revealWidget()}>Budget</button>
 				{
 					revealed ? 
 					<div>
 					<h3>Budget Widget</h3>
 					<p>Budget: {budget}</p>
-					<p>Total Spent: {budgetTotal}</p>
+					<p style={{color: this.state.alert}}>Total Spent: {budgetTotal}</p>
 					<input
 						onChange={(e) => getBudgetInput(e.target.value)}
 						onBlur={() => updateBudget(id)} value={budget}
 						type='number'
 						min='0'/>
 				</div>
-				: null}
+				: null }
 			</div>
 		)
 	}

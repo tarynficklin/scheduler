@@ -16,9 +16,7 @@ class ScheduleItem extends Component {
 	}
 
 	componentWillReceiveProps (props) {
-		const {editMode} = props
-		if (editMode) {this.setState({editMode: true})}
-		else {this.setState({editMode: false})}
+		props.editMode ? this.setState({editMode: true}) : this.setState({editMode: false})
 	}
 
 	getTitleInput (val) {this.setState({title: val})};
@@ -28,8 +26,6 @@ class ScheduleItem extends Component {
 	toggleChecked (id)  {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
 	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 
-	price () {return this.state.price*1===0 ? null : `- $${this.state.price}`}
-
   render() {
 		const {id, title, price, deleted, editMode} = this.state
 		return (
@@ -38,7 +34,7 @@ class ScheduleItem extends Component {
 				!editMode ?
 					<div className="schedule-item">
 						<a>• {title} </a>
-						<a>{this.price()}</a>
+						<a>{this.state.price*1===0 ? null : `- $${this.state.price}`}</a>
 						<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
 					</div>
 				:
@@ -46,7 +42,7 @@ class ScheduleItem extends Component {
 						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
 						<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' />
 						<button onClick={() => this.deleteItem(id)}>X</button>
-						<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
+						<button onClick={() => this.setState({editMode: false})}>Done</button>
 					</div>
 			
 			: null
