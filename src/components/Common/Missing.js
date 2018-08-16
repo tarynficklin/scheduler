@@ -7,7 +7,7 @@ export default class Missing extends Component {
     return(
       <div className="missing">
         <frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="missing-card">
-          <p>Page not found</p>
+          <h3>Page not found</h3>
           <Link to="/"><button>Dashboard</button></Link>
         </frosted-glass>
       </div>

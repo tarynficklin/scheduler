@@ -12,7 +12,6 @@ import Missing   from './components/Common/Missing';
 import Dashboard from './components/Dashboard';
 import NewTrip   from './components/NewTrip';
 import Insighter from './components/Insighter';
-import Blur from './Blur';
 
 class App extends Component {
   constructor () {
@@ -45,7 +44,6 @@ class App extends Component {
                   <Route path="/new" render={() => ( <NewTrip updateBackground={this.updateBackground}/> )} />/>
                   <Route path="/trip/:id" render={() => ( <Insighter updateBackground={this.updateBackground}/> )} />
                   <Route path="/404" component={Missing} />
-                  <Route path="/blur" component={Blur} />
                 </Switch>
               </HashRouter>
             ) : <Landing />
