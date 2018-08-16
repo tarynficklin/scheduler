@@ -13,7 +13,7 @@ export default class Landing extends Component {
     return(
       <div className="landing">
         <frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="landing-card">
-          <h2>Please Log in.</h2>
+          <h2>Please Log in</h2>
           <button onClick={() => this.login()}>Login</button>
         </frosted-glass>
       </div>
