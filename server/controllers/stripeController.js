@@ -6,7 +6,7 @@ module.exports = {
 		const pennies = [];
 		const amountArray = req.body.amount.toString().split('');
 
-		for (var i = 0; i < amountArray.length; i++) {
+		for (let i in amountArray) {
 			if (amountArray[i] === ".") {
 
 				typeof amountArray[i + 1] === "string" ? pennies.push(amountArray[i + 1]) : pennies.push("0")
