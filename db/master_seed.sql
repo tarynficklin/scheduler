@@ -39,7 +39,7 @@ CREATE TABLE trips (
 	trip_end_date       	VARCHAR(10) DEFAULT '',
 	trip_budget         	FLOAT DEFAULT 0,
 	trip_background       TEXT DEFAULT '',
-	trip_background_color TEXT DEFAULT ''
+	trip_bg_color TEXT DEFAULT ''
 );
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
