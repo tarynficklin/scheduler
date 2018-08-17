@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import moment from 'moment';
 import axios from 'axios';
+import {updateBackground} from '../ducks/reducer';
 import './NewTrip.css'
 
 import Header   from './NewTrip/Header'
@@ -98,4 +99,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 };
-export default withRouter(connect(mapStateToProps)(NewTrip));
+export default withRouter(connect(mapStateToProps, {updateBackground})(NewTrip));

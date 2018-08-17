@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {updateBackground} from '../ducks/reducer';
 import './Insighter.css';
 
 import Header           from './Insighter/Header';
@@ -134,4 +135,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 };
-export default withRouter(connect(mapStateToProps)(Insighter));
+export default withRouter(connect(mapStateToProps, {updateBackground})(Insighter));

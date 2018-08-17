@@ -3,7 +3,6 @@ import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout'
-import {updateBackground} from '../ducks/reducer';
 
 import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
@@ -19,7 +18,7 @@ class Dashboard extends Component {
 		}
 	}
 
-	componentDidMount()  {axios.get(`/api/trips/${this.props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
+	componentDidMount() {axios.get(`/api/trips/${this.props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
 	componentWillReceiveProps (props) {axios.get(`/api/trips/${props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
 
 	onToken = (token) => {
@@ -33,7 +32,6 @@ class Dashboard extends Component {
 	}
 
 	render () {
-		const {updateBackground} = this.props;
 		const {tripCards} = this.state;
 		console.log('history', this.props.history)
 		return (
@@ -52,7 +50,6 @@ class Dashboard extends Component {
 							schedule={e.trip_schedule}
 							background={e.trip_background}
 							deleteTrip={this.deleteTrip}
-							updateBackground={updateBackground}
 							router={this.props.history}
 						/>
 					)
@@ -73,4 +70,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 }
-export default withRouter(connect(mapStateToProps, {updateBackground})(Dashboard));
+export default withRouter(connect(mapStateToProps)(Dashboard));

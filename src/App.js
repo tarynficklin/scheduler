@@ -14,35 +14,21 @@ import NewTrip   from './components/NewTrip';
 import Insighter from './components/Insighter';
 
 class App extends Component {
-  constructor () {
-    super();
-    this.state = {
-      background: 'https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9c7ebd41ce42bc44af4c1fff64cb39ba&auto=format&fit=crop&w=1920&q=80'
-    }
-    this.updateBackground = this.updateBackground.bind(this);
-  }
 
-  componentDidMount () {
-    axios.get('/api/user-data').then(res => {this.props.updateUserData(res.data);})
-  }
-
-  updateBackground(background) {
-    this.setState({background})
-    document.getElementById("app").style.cssText = `background: center fixed url(${this.state.background}); background-size: cover; min-height: 100vh; transition: 1s;`
-  }
+  componentDidMount () {axios.get('/api/user-data').then(res => this.props.updateUserData(res.data))}
 
   render() {
     let {user} = this.props;
     return (
       <frosted-glass-container>
-        <div id="app" style={{background: `center fixed url(${this.state.background})`, backgroundSize: `cover`, minHeight: `100vh`, transition: `1s`}}>
+        <div id="app" style={{background: `center fixed url(${this.props.background})`, backgroundSize: `cover`, minHeight: `100vh`, transition: `1s`}}>
           {
             user.user_name ? (
               <HashRouter>
                 <Switch>
-                  <Route exact path="/" render={() => ( <Dashboard updateBackground={this.updateBackground}/> )}/>
-                  <Route path="/new" render={() => ( <NewTrip updateBackground={this.updateBackground}/> )} />/>
-                  <Route path="/trip/:id" render={() => ( <Insighter updateBackground={this.updateBackground}/> )} />
+                  <Route exact path="/" component={Dashboard}/>
+                  <Route path="/new"  component={NewTrip}/>
+                  <Route path="/trip/:id" component={Insighter} />
                   <Route path="/404" component={Missing} />
                 </Switch>
               </HashRouter>

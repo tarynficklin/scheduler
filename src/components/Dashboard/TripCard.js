@@ -1,13 +1,15 @@
 import React from 'react';
 import './TripCard.css';
+import {connect} from 'react-redux'
+import {updateBackground} from '../../ducks/reducer';
 
 async function selectTrip(props) {
-	const {id, background, updateBackground, router} = props
-	await updateBackground(background);
+	const {id, background, router} = props
+	await props.updateBackground(background);
 	await router.push(`/trip/${id}`);
 }
 
-export default function TripCard(props) {
+function TripCard(props) {
 	console.log(props)
 	const {location, startDate, endDate} = props;
 	return (
@@ -17,3 +19,5 @@ export default function TripCard(props) {
 		</frosted-glass>
 	)
 }
+
+export default connect(null, {updateBackground})(TripCard);
