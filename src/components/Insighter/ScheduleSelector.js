@@ -19,7 +19,7 @@ export default function ScheduleSelector (props) {
 						<a>{schedule_date}</a>
 					</div>
 				)
-			})};
+			})}
 		</form>
 	);
 };
