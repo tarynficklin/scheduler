@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
-import './Landing.css'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import './Landing.css';
 
-export default class Landing extends Component {
+class Landing extends Component {
 
   login () {
     const {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
@@ -12,11 +13,15 @@ export default class Landing extends Component {
   render(){
     return(
       <div className="landing">
-        <frosted-glass overlay-color="#ffffff52" blur-amount="1.6rem" class="landing-card">
+        <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="landing-card">
           <h2>Please Log in</h2>
-          <button onClick={() => this.login()}>Login</button>
+          <button onClick={() => this.login()} style={{backgroundColor: `rgb(${this.props.color})`}}>Login</button>
         </frosted-glass>
       </div>
     )
   }
 }
+
+
+function mapStateToProps (state) {return {color: state.reducer.color}};
+export default connect(mapStateToProps)(Landing);

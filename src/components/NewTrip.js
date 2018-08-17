@@ -104,19 +104,19 @@ class NewTrip extends Component {
 		return (
 			<div className="new-trip">
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
-					<Header />
+					<Header color={this.props.color}/>
 					<Location getLocationInput={getLocationInput} />
 					<Calendar
 						getStartDateInput={getStartDateInput}
 						getEndDateInput={getEndDateInput}
 						getDayCount={getDayCount} />
 					<Budget getBudgetInput={getBudgetInput} />
-					<button onClick={() => this.createTrip()}>Done</button>
+					<button onClick={() => this.createTrip()} className="button" style={{backgroundColor: `rgb(${this.props.color})`}}>Done</button>
 				</frosted-glass>
 			</div>
 		);
 	};
 };
 
-function mapStateToProps (state) {return {user: state.auth0.user}};
+function mapStateToProps (state) {return {user: state.auth0.user, color: state.reducer.color}};
 export default withRouter(connect(mapStateToProps, {updateBackground, updateColor})(NewTrip));

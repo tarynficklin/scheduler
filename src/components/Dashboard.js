@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import StripeCheckout from 'react-stripe-checkout'
 import {withRouter} from 'react-router-dom';
-import {onToken} from '../ducks/stripe';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
@@ -41,7 +39,6 @@ class Dashboard extends Component {
 					)
 				})
 			}
-			  <StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
 			</div>
 		);
 	};

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {updateBackground, updateColor} from '../ducks/reducer';
+import StripeCheckout from 'react-stripe-checkout'
 import {withRouter} from 'react-router-dom';
+import {onToken} from '../ducks/stripe';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import './Insighter.css';
@@ -119,6 +121,7 @@ class Insighter extends Component {
 						deleteTrip        = {deleteTrip} />
 					<div className="hero" style={{backgroundColor: `rgb(${trip_bg_color})`}}></div>
 				</frosted-glass>
+				<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
 			</div>
 		);
 	};

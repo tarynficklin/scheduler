@@ -5,6 +5,8 @@ body {
 	font-family: 'Titillium Web', sans-serif;
 }
 
+button:focus {outline:0;}
+
 input {
 	background: rgba(255,255,255,0.5);
 	border: none;
