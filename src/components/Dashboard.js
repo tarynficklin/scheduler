@@ -3,6 +3,7 @@ import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout'
+import {updateBackground} from '../ducks/reducer';
 
 import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
@@ -72,4 +73,4 @@ function mapStateToProps (state) {
 		user: state.auth0.user
 	}
 }
-export default withRouter(connect(mapStateToProps)(Dashboard));
+export default withRouter(connect(mapStateToProps, {updateBackground})(Dashboard));
