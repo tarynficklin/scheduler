@@ -33,7 +33,6 @@ class Dashboard extends Component {
 
 	render () {
 		const {tripCards} = this.state;
-		console.log('history', this.props.history)
 		return (
 			<div className="dashboard">
 				<UserButton id={this.props.user.user_id}/>

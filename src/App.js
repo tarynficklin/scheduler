@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {HashRouter, Switch, Route} from 'react-router-dom';
 import {updateUserData} from './ducks/auth0';
+import * as Vibrant from 'node-vibrant'
 import {connect} from 'react-redux';
 import axios from 'axios';
 import './App.css'
@@ -13,9 +14,19 @@ import Dashboard from './components/Dashboard';
 import NewTrip   from './components/NewTrip';
 import Insighter from './components/Insighter';
 
+require ('dotenv').config();
+
 class App extends Component {
 
   componentDidMount () {axios.get('/api/user-data').then(res => this.props.updateUserData(res.data))}
+
+  // captureColor () {
+  //   Vibrant.from(`${this.props.background}&client_id=${process.env.REACT_APP_UAK}`)
+  //   .getPalette((err, palette) => {
+  //     console.log(palette.Vibrant._rgb)
+  //     console.log(err)
+  //   });
+  // }
 
   render() {
     let {user} = this.props;
