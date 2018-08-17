@@ -17,7 +17,7 @@ const //CONTROLLERS
 //SERVER SETUP
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 const app  = express();
-const path = require('path');
+// const path = require('path');
       cors = require('cors');
 
 //MIDDLEWARE
@@ -77,7 +77,7 @@ app.delete (`${scheduleOrigin}/item/:id`,       scheduleController.deleteItem);
 app.post('/api/payment', stripeController.stripe);
 
 //SERVER ENDPOINT
-app.get('*', (req, res)=>{res.sendFile(path.join(__dirname, '../build/index.html'))});
+// app.get('*', (req, res)=>{res.sendFile(path.join(__dirname, '../build/index.html'))});
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));
