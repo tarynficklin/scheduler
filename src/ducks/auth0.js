@@ -1,8 +1,5 @@
 // const initialState = {user: {}}
-const initialState = {
-	user: {user_id: 1, user_name: "Taryn Ficklin", user_email: "tarynficklin@gmail.com", auth_id: "google-oauth2|100800992512531079080", auth_profile: "https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg"},
-	background: 'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=13b58b0343d8efc06a88c55e843f624f&auto=format&fit=crop&w=1500&q=80'
-}
+const initialState = {user: {user_id: 1, user_name: "Taryn Ficklin", user_email: "tarynficklin@gmail.com", auth_id: "google-oauth2|100800992512531079080", auth_profile: "https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg"}}
 
 const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 const DELETE_USER = "DELETE_USER";

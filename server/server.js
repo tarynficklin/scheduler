@@ -14,11 +14,13 @@ const //CONTROLLERS
 													 require ('dotenv').config();
 
 //SERVER SETUP
-const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
+const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING, STRIPE_SECRET_KEY} = process.env;
 const app = express();
 app.use( express.static( `${__dirname}/../build` ) );
 const path = require('path');
 app.use(bodyParser.json());
+cors = require(`cors`);
+const stripe = require(`stripe`)(STRIPE_SECRET_KEY);
 
 //MIDDLEWARE
 massive(CONNECTION_STRING).then(db => app.set('db', db));
@@ -70,6 +72,41 @@ app.put    (`${scheduleOrigin}/item/title/:id`, scheduleController.titleItem );
 app.put    (`${scheduleOrigin}/item/price/:id`, scheduleController.priceItem );
 app.put    (`${scheduleOrigin}/item/check/:id`, scheduleController.checkItem );
 app.delete (`${scheduleOrigin}/item/:id`,       scheduleController.deleteItem);
+
+//STRIPE ENDPOINT
+app.post('/api/payment', function (req, res) {
+  const amountArray = req.body.amount.toString().split('');
+  const pennies = [];
+  for (var i = 0; i < amountArray.length; i++) {
+    if (amountArray[i] === ".") {
+      if (typeof amountArray[i + 1] === "string") {
+        pennies.push(amountArray[i + 1]);
+      } else {
+        pennies.push("0");
+      }
+      if (typeof amountArray[i + 2] === "string") {
+        pennies.push(amountArray[i + 2]);
+      } else {
+        pennies.push("0");
+      }
+      break;
+    } else {
+      pennies.push(amountArray[i])
+    }
+  }
+  const convertedAmt = parseInt(pennies.join(''));
+
+  const charge = stripe.charges.create({
+    amount: convertedAmt, // amount in cents, again
+    currency: 'usd',
+    source: req.body.token.id,
+    description: 'Test charge from react app'
+  }, function(err, charge){
+    if (err) {return res.sendStatus(500)}
+    else{
+    return res.sendStatus(200)}
+  });
+});
 
 //SERVER ENDPOINT
 app.get('*', (req, res)=>{res.sendFile(path.join(__dirname, '../build/index.html'))});

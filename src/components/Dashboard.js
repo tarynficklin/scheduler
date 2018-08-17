@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import StripeCheckout from 'react-stripe-checkout'
 
 import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
 import './Dashboard.css'
+
+require ('dotenv').config();
 
 class Dashboard extends Component {
 	constructor () {
@@ -17,6 +20,16 @@ class Dashboard extends Component {
 
 	componentDidMount()  {axios.get(`/api/trips/${this.props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
 	componentWillReceiveProps (props) {axios.get(`/api/trips/${props.user.user_id}`).then(results => this.setState({tripCards: results.data}))}
+
+	onToken = (token) => {
+		token.card = void 0;
+		var total = 500
+		total = total * 100;
+		console.log('token', token, 'total', total);
+		axios.post('/api/payment', { token, amount: total }).then(response => {
+			alert('success!');
+		}).catch(error => console.log(error));
+	}
 
 	render () {
 		const {updateBackground} = this.props;
@@ -44,6 +57,11 @@ class Dashboard extends Component {
 					)
 				})
 			}
+			 <StripeCheckout
+					token={this.onToken}
+					stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}
+					amount={500}
+				/>
 			</div>
 		)
 	}
