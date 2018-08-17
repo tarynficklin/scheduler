@@ -22,6 +22,7 @@ class Insighter extends Component {
 			trip_end_date     : '1/1/20XX',
 			trip_budget       : 0,
 			trip_background   : '',
+			trip_bg_color     : '',
 			trip_packing_list : [],
 			trip_schedule     : [],
 			current_schedule  : 0
@@ -38,9 +39,9 @@ class Insighter extends Component {
 		const {id} = this.props.match.params;
 		axios.get(`/api/trips/trip/${id}`)
 		.then(results => {
-			const userData = results.data;
-			if (userData && userData.user_id === this.props.user.user_id) {
-				this.setState(userData);
+			const tripData = results.data;
+			if (tripData && tripData.user_id === this.props.user.user_id) {
+				this.setState(tripData);
 				this.props.updateBackground(this.state.trip_background);
 				document.getElementById("app").style.cssText = `background: center fixed url(${this.state.trip_background}); background-size: cover; min-height: 100vh; transition: 1s;`
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
@@ -71,6 +72,7 @@ class Insighter extends Component {
 			trip_start_date,
 			trip_end_date,
 			trip_budget,
+			trip_bg_color,
 			trip_schedule,
 			trip_packing_list,
 			current_schedule
@@ -114,6 +116,7 @@ class Insighter extends Component {
 						getLocationInput  = {getLocationInput}
 						updateLocation    = {updateLocation}
 						deleteTrip        = {deleteTrip} />
+					<div style={{height: '100px', width: '200px', backgroundColor: `rgb(${trip_bg_color})`}}></div>
 				</frosted-glass>
 			</div>
 		);

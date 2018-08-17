@@ -42,17 +42,17 @@ CREATE TABLE trips (
 	trip_bg_color TEXT DEFAULT ''
 );
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
-VALUES (1, 'New York', '7-26-2018', '7-28-2018', 499.99, 'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=914557809736ed30ad71c94ec4415162&auto=format&fit=crop&w=1400&q=80');
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+VALUES (1, 'New York', '7-26-2018', '7-28-2018', 499.99, 'https://images.unsplash.com/photo-1531228040767-7a99c3ff4489?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=bbfdb8aaa361abebf9d03cfcb42f861a&auto=format&fit=crop&w=1400&q=80', '198, 68, 25');
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
-VALUES (1, 'San Francisco', '9-20-2019', '9-22-2019', 699.99, 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7402cc297bdfbb4a4856e764971dc013&auto=format&fit=crop&w=1400&q=80');
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+VALUES (1, 'San Francisco', '9-20-2019', '9-22-2019', 699.99, 'https://images.unsplash.com/photo-1527905876394-1e5115891cba?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=03e900ad7822e824a78afd2c706ff241&auto=format&fit=crop&w=1400&q=80', '205, 105, 86');
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
-VALUES (2, 'Chicago', '8-23-2018', '8-25-2018', 799.99, 'https://images.unsplash.com/photo-1494522855154-9297ac14b55f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=78da260f3928a32011405c465f5422f4&auto=format&fit=crop&w=1400&q=80');
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+VALUES (2, 'Chicago', '8-23-2018', '8-25-2018', 799.99, 'https://images.unsplash.com/photo-1531755029835-073f601388c1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=61276352d7fe320b4943aa1de401932a&auto=format&fit=crop&w=1400&q=80', '219, 126, 19');
 
-INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
-VALUES (2, 'Hawaii', '12-31-2018', '1-2-2019', 1999.99, 'https://images.unsplash.com/photo-1507187632231-5beb21a654a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=389363124411392dd4c44663b4800211&auto=format&fit=crop&w=1400&q=80');
+INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+VALUES (2, 'Hawaii', '12-31-2018', '1-2-2019', 1999.99, 'https://images.unsplash.com/photo-1531226208074-94fb5a1bb26c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=a17775835cbbd7c40b2610f15e6f96f7&auto=format&fit=crop&w=1400&q=80', '75, 154, 191');
 
 SELECT * FROM trips;
 

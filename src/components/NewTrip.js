@@ -44,9 +44,11 @@ class NewTrip extends Component {
 
 		const photo = await axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${trip_location}&client_id=${REACT_APP_UAK}`);
 		const colors = await Vibrant.from(`${photo.data.results[0].urls.raw}&client_id=${process.env.REACT_APP_UAK}`)
-		.getPalette((err, palette) => palette);
-		const swatch = colors.Vibrant._rgb;
-		const trip_bg_color = `rgb(${swatch[0]}, ${swatch[1]}, ${swatch[2]})`;
+			.getPalette((err, palette) => palette);
+			const swatch = colors.Vibrant._rgb;
+			const trip_bg_color = `${swatch[0]}, ${swatch[1]}, ${swatch[2]}`;
+			console.log (photo.data.results[0].urls.raw)
+			console.log (trip_bg_color)
 		await axios
 			.post(`/api/trips/`, {
 				trip_id					: trip_id,
