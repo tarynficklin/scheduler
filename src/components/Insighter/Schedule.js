@@ -2,7 +2,7 @@ import React from 'react';
 import ScheduleList from './ScheduleList';
 import './Schedule.css';
 
-export default function Schedule(props) {
+export default function Schedule (props) {
 	const {schedule, currentSchedule} = props;
 	return (
 		<div className="schedule">
@@ -15,8 +15,7 @@ export default function Schedule(props) {
 						currentSchedule={currentSchedule}
 					/>
 				)
-			})
-		}
+			})}
 		</div>
-	)
-}
+	);
+};

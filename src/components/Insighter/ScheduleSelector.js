@@ -1,7 +1,7 @@
 import React from 'react';
 import './ScheduleSelector.css';
 
-export default function ScheduleSelector(props) {
+export default function ScheduleSelector (props) {
 	const {schedule, scheduleIndex, currentSchedule} = props
 	return (
 		<form className="schedule-selector">
@@ -19,8 +19,7 @@ export default function ScheduleSelector(props) {
 						<a>{schedule_date}</a>
 					</div>
 				)
-			})
-		}
+			})};
 		</form>
-	)
-}
+	);
+};

@@ -37,9 +37,9 @@ class Dashboard extends Component {
 							deleteTrip={this.deleteTrip}
 							router={this.props.history}
 						/>
-					);
+					)
 				})
-			};
+			}
 			  <StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
 			</div>
 		);

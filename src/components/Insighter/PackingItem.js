@@ -11,13 +11,12 @@ class PackingItem extends Component {
 			checked  : this.props.checked,
 			editMode : false,
 			deleted  : false
-		}
-	}
+		};
+	};
 
 	componentWillReceiveProps (props) {
-		const {editMode} = props
-		if (editMode) {this.setState({editMode: true})}
-		else {this.setState({editMode: false})}
+		const {editMode} = props;
+		editMode ? this.setState({editMode: true}) : this.setState({editMode: false});
 	}
 
 	getTitleInput (val) {this.setState({title: val})};
@@ -26,7 +25,8 @@ class PackingItem extends Component {
 	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/list/${id}`)};
 	
   render() {
-		const {id, title, checked, deleted, editMode} = this.state
+		const {id, title, checked, deleted, editMode} = this.state;
+
 		return (
 			!deleted ? 
 
@@ -45,7 +45,7 @@ class PackingItem extends Component {
 
 			: null
 		);
-  }
-}
+  };
+};
 
 export default PackingItem;

@@ -1,17 +1,17 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import './SettingsWidget.css'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import './SettingsWidget.css';
 
 class SettingsWidget extends Component {
 	constructor () {
 		super ();
 		this.state = {
-			revealed: false,
+			revealed      : false,
 			confirmDelete : false
-		}
-	}
+		};
+	};
 
-	revealWidget () {this.setState({revealed: !this.state.revealed})}
+	revealWidget () {this.setState({revealed: !this.state.revealed})};
 
 	render () {
 		const {
@@ -41,8 +41,8 @@ class SettingsWidget extends Component {
 					}
 				</div> : null }
 			</div>
-		)
-	}
-}
+		);
+	};
+};
 
-export default SettingsWidget
+export default SettingsWidget;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './ScheduleItem.css'
+import './ScheduleItem.css';
 
 class ScheduleItem extends Component {
 	constructor(props) {
@@ -12,12 +12,10 @@ class ScheduleItem extends Component {
 			checked  : this.props.checked,
 			editMode : false,
 			deleted  : false
-		}
-	}
+		};
+	};
 
-	componentWillReceiveProps (props) {
-		props.editMode ? this.setState({editMode: true}) : this.setState({editMode: false})
-	}
+	componentWillReceiveProps (props) {props.editMode ? this.setState({editMode: true}) : this.setState({editMode: false})};
 
 	getTitleInput (val) {this.setState({title: val})};
 	getPriceInput (val) {this.setState({price: val})};
@@ -26,8 +24,9 @@ class ScheduleItem extends Component {
 	toggleChecked (id)  {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
 	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 
-  render() {
-		const {id, title, price, deleted, editMode} = this.state
+  render () {
+		const {id, title, price, deleted, editMode} = this.state;
+
 		return (
 			!deleted ?
 			
@@ -43,12 +42,9 @@ class ScheduleItem extends Component {
 						<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' />
 						<button onClick={() => this.deleteItem(id)}>X</button>
 						<button onClick={() => this.setState({editMode: false})}>Done</button>
-					</div>
-			
-			: null
-			
+					</div> : null
 		);
-  }
-}
+  };
+};
 
 export default ScheduleItem;

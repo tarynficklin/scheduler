@@ -24,7 +24,6 @@ class NewTrip extends Component {
 			trip_end_date   : '',
 			trip_budget     : 0
 		};
-		this.deleteTrip				 = this.deleteTrip.bind(this);
 		this.getBudgetInput    = this.getBudgetInput.bind(this);
 		this.getLocationInput  = this.getLocationInput.bind(this);
 		this.getStartDateInput = this.getStartDateInput.bind(this);
@@ -52,12 +51,6 @@ class NewTrip extends Component {
 
 	};
 
-	deleteTrip () {
-		const {trip_id} = this.state;
-		axios.delete(`api/list/purge/${trip_id}`);
-		this.props.history.push('/');
-	};
-
 	getDaysBetween (startDate, endDate) {
 		let dates = [], days = [];
 		let firstDay = moment(startDate).startOf('day').subtract(1, 'day');
@@ -75,7 +68,6 @@ class NewTrip extends Component {
 
 	render () {
 		const {
-			deleteTrip,
 			getBudgetInput,
 			getLocationInput,
 			getStartDateInput,
@@ -86,7 +78,7 @@ class NewTrip extends Component {
 		return (
 			<div className="new-trip">
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
-					<Header deleteTrip={deleteTrip} />
+					<Header />
 					<Location getLocationInput={getLocationInput} />
 					<Calendar
 						getStartDateInput={getStartDateInput}

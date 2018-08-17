@@ -9,29 +9,29 @@ class BudgetWidget extends Component {
 			budgetTotal: 0,
 			alert: null,
 			revealed: false		
-		}
-	}
+		};
+	};
 
-	componentWillReceiveProps (props) {this.refreshTotal(props.id, props.budget, this.state.budgetTotal)}
+	componentWillReceiveProps (props) {this.refreshTotal(props.id, props.budget, this.state.budgetTotal)};
 
 	revealWidget () {
 		this.setState({revealed: !this.state.revealed});
 		this.refreshTotal(this.props.id, this.props.budget, this.state.budgetTotal);
 	}
 	
-	async refreshTotal(id, budget, budgetTotal) {
+	async refreshTotal (id, budget, budgetTotal) {
 		if (id !== 0) {
 			axios.get(`/api/trips/total/${id}`)
 			.then(results => {
 				this.setState({budgetTotal: results.data.sum})
 				budgetTotal > budget ? this.setState({alert: 'red'}) : this.setState({alert: null});
-			})
-		}
-	}
+			});
+		};
+	};
 
 	render () {
-		const {budgetTotal, revealed} = this.state
-		const {id, budget, getBudgetInput, updateBudget} = this.props
+		const {budgetTotal, revealed} = this.state;
+		const {id, budget, getBudgetInput, updateBudget} = this.props;
 		return (
 			<div className="budget-widget" style={{display: 'inline'}}>
 				<button
@@ -47,11 +47,10 @@ class BudgetWidget extends Component {
 						onBlur={() => updateBudget(id)} value={budget}
 						type='number'
 						min='0'/>
-				</div>
-				: null }
+				</div> : null }
 			</div>
-		)
-	}
-}
+		);
+	};
+};
 
-export default BudgetWidget
+export default BudgetWidget;

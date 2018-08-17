@@ -39,7 +39,7 @@ class UserButton extends Component {
 					<button onClick={() => this.logout()} className="logout-button">Logout</button>
 					<button onClick={() => this.toggleLogOut()} className="exit-button">X</button>
 					<img src={user.auth_profile} at="" className="profile-pic" onClick={() => this.toggleLogOut()} alt=""/>
-				</div>};
+				</div>}
 			</div>
 		);
 	};

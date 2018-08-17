@@ -14,15 +14,15 @@ export default class ScheduleList extends Component {
 		this.toggleEditMode = this.toggleEditMode.bind(this);
 	}
 
-	componentDidMount () {this.selectedSchedule(this.props.id, this.props.currentSchedule)}
-	componentWillReceiveProps (props) {this.selectedSchedule(props.id, props.currentSchedule)}
+	componentDidMount () {this.selectedSchedule(this.props.id, this.props.currentSchedule)};
+	componentWillReceiveProps (props) {this.selectedSchedule(props.id, props.currentSchedule)};
 
 	selectedSchedule (id, currentSchedule) {
-		axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}))
-		id === currentSchedule ? this.setState({selected: true}) : this.setState({selected: false})
+		axios.get(`/api/schedule/item/${this.props.id}`).then(results => this.setState({scheduleItems: results.data}));
+		id === currentSchedule ? this.setState({selected: true}) : this.setState({selected: false});
 	}
 
-	async addScheduleItem() {
+	async addScheduleItem () {
 		const {id} = this.props;
 		const {scheduleItems} = this.state;
 		const results = await axios.post(`/api/schedule/item`, {
@@ -30,12 +30,12 @@ export default class ScheduleList extends Component {
 			item_title  : "New Schedule Item",
 			item_price  : 0,
 			item_time   : "morning"
-		})
+		});
 		scheduleItems.push(results.data);
 		this.setState({scheduleItems});
 	}
 
-	toggleEditMode() {this.setState({edit_mode: !this.state.edit_mode})}
+	toggleEditMode() {this.setState({edit_mode: !this.state.edit_mode})};
 
 	render () {
 		const {scheduleItems, selected, edit_mode} = this.state;
@@ -56,9 +56,8 @@ export default class ScheduleList extends Component {
 							editMode={edit_mode}
 						/>
 					)
-				})
-			}
+				})}
    		</div> : null
-		)
-	}
-}
+		);
+	};
+};

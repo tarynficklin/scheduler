@@ -1,23 +1,24 @@
-import React, {Component} from 'react'
-import PackingItem from './PackingItem'
-import './PackingWidget.css'
+import React, {Component} from 'react';
+import PackingItem from './PackingItem';
+import './PackingWidget.css';
 
 class PackingWidget extends Component {
 	constructor () {
 		super();
 		this.state = {
-			packingList: [],
-			revealed: false,
-			editMode: false
-		}
-	}
+			packingList : [],
+			revealed    : false,
+			editMode    : false
+		};
+	};
 
-	revealWidget   () {this.setState({revealed: !this.state.revealed})}
-	toggleEditMode () {this.setState({editMode: !this.state.editMode})}
+	revealWidget   () {this.setState({revealed: !this.state.revealed})};
+	toggleEditMode () {this.setState({editMode: !this.state.editMode})};
 
 	render () {
-		const {revealed} = this.state
-		const {packingList, addPackingItem} = this.props
+		const {revealed} = this.state;
+		const {packingList, addPackingItem} = this.props;
+
 		return (
 			<div className="packing-widget" style={{display: 'inline'}}>
 			<button onClick={() => this.revealWidget()}>Packing List</button>
@@ -37,13 +38,11 @@ class PackingWidget extends Component {
 									editMode={this.state.editMode}
 								/>
 							)
-						})
-					}
-				</div> : null
-			}
+						})}
+				</div> : null }
 			</div>
-		)
-	}
-}
+		);
+	};
+};
 
 export default PackingWidget

@@ -1,8 +1,7 @@
-import React from 'react'
-import './Packing.css'
+import React from 'react';
+import './Packing.css';
 
-export default function Packing(props) {
-	// const {id} = props
+export default function Packing () {
 	return (
 		<div className="packing">
 			<a>Packing List</a>
@@ -11,5 +10,5 @@ export default function Packing(props) {
 			<button>X</button>
 			<input type="checkbox" />
 		</div>
-	)
-}
+	);
+}l
