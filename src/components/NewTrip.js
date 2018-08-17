@@ -41,8 +41,19 @@ class NewTrip extends Component {
 		let days = this.getDaysBetween(trip_start_date, trip_end_date);
 
 		const photo = await axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${trip_location}&client_id=${REACT_APP_UAK}`);
-		await axios.post(`/api/trips/`, {trip_id, user_id: this.props.user.user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background: `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`});
+		await axios
+			.post(`/api/trips/`, {
+				trip_id								: trip_id,
+				user_id								: this.props.user.user_id,
+				trip_location 				: trip_location,
+				trip_start_date				: trip_start_date,
+				trip_end_date					: trip_end_date,
+				trip_budget           : trip_budget,
+				trip_background       : `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80}`,
+				trip_background_color : `grubsy`
+			});
 		await updateBackground(`${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`);
+		document.getElementById("app").style.cssText = `background: center fixed url(${photo.data.results[0].urls.raw}); background-size: cover; min-height: 100vh; transition: 1s;`
 		
 		for (let i in days) {
 			await axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_date: days[i]});

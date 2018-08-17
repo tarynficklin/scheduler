@@ -38,7 +38,7 @@ CREATE TABLE trips (
 	trip_start_date     	VARCHAR(10) DEFAULT '',
 	trip_end_date       	VARCHAR(10) DEFAULT '',
 	trip_budget         	FLOAT DEFAULT 0,
-	trip_background				TEXT DEFAULT '',
+	trip_background       TEXT DEFAULT '',
 	trip_background_color TEXT DEFAULT ''
 );
 

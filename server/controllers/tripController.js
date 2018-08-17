@@ -27,9 +27,9 @@ module.exports = {
 
 	create: (req, res) => {
 		const db = req.app.get('db');
-		const {trip_id, user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background} = req.body;
+		const {trip_id, user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_background_color} = req.body;
 
-		db.trips.trip_create([trip_id, user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background])
+		db.trips.trip_create([trip_id, user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_background_color])
 			.then(trip => res.status(200).send(trip))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},

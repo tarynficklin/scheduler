@@ -6,6 +6,7 @@ import './TripCard.css';
 async function selectTrip(props) {
 	const {id, background, router} = props;
 	await props.updateBackground(background);
+	document.getElementById("app").style.cssText = `background: center fixed url(${background}); background-size: cover; min-height: 100vh; transition: 1s;`
 	await router.push(`/trip/${id}`);
 }
 

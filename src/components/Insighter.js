@@ -42,6 +42,7 @@ class Insighter extends Component {
 			if (userData && userData.user_id === this.props.user.user_id) {
 				this.setState(userData);
 				this.props.updateBackground(this.state.trip_background);
+				document.getElementById("app").style.cssText = `background: center fixed url(${this.state.trip_background}); background-size: cover; min-height: 100vh; transition: 1s;`
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
 				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
 			}
@@ -119,5 +120,5 @@ class Insighter extends Component {
 	};
 };
 
-function mapStateToProps (state) {return {user: state.auth0.user}};
+function mapStateToProps (state) {return {user: state.auth0.user, background: state.reducer.background}};
 export default withRouter(connect(mapStateToProps, {updateBackground})(Insighter));

@@ -7,9 +7,7 @@ const UPDATE_BACKGROUND = "UPDATE_BACKGROUND";
 //REDUCER
 export default function reducer( state = initialState, action ) {
   switch ( action.type ) {
-		case UPDATE_BACKGROUND:
-			document.getElementById("app").style.cssText = `background: center fixed url(${state.background}); background-size: cover; min-height: 100vh; transition: 1s;`
-			return Object.assign({}, state, {background: action.payload})
+		case UPDATE_BACKGROUND:	return Object.assign({}, state, {background: action.payload});
 		default: return state;
 		}
 }
