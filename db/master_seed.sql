@@ -32,13 +32,14 @@ SELECT * FROM users;
 
 --trips are a child of users
 CREATE TABLE trips (
-	trip_id             SERIAL PRIMARY KEY,
-	user_id             INTEGER REFERENCES users(user_id),
-	trip_location       TEXT DEFAULT '',
-	trip_start_date     VARCHAR(10) DEFAULT '',
-	trip_end_date       VARCHAR(10) DEFAULT '',
-	trip_budget         FLOAT DEFAULT 0,
-	trip_background			TEXT DEFAULT ''
+	trip_id             	SERIAL PRIMARY KEY,
+	user_id             	INTEGER REFERENCES users(user_id),
+	trip_location       	TEXT DEFAULT '',
+	trip_start_date     	VARCHAR(10) DEFAULT '',
+	trip_end_date       	VARCHAR(10) DEFAULT '',
+	trip_budget         	FLOAT DEFAULT 0,
+	trip_background				TEXT DEFAULT '',
+	trip_background_color TEXT DEFAULT ''
 );
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background)
