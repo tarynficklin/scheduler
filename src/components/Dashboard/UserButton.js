@@ -6,11 +6,11 @@ import axios from 'axios';
 import './UserButton.css';
 
 class UserButton extends Component {
-	constructor () {
-		super();
+	constructor (props) {
+		super(props);
 		this.state = {
 			loggingOut : false,
-			background : '#00AEFF'
+			background : `rgb(${this.props.color})`
 		};
 	};
 
@@ -20,12 +20,13 @@ class UserButton extends Component {
 	toggleLogOut () {
 		const {loggingOut} = this.state
 		this.setState({loggingOut: !loggingOut});
-		loggingOut ? this.setState({background: '#00AEFF'}) : this.setState({background: 'red'});
+		loggingOut ? this.setState({background: `rgb(${this.props.color})`}) : this.setState({background: 'red'});
 	};
 
 	render () {
 		const {user} = this.props;
 		const {loggingOut, background} = this.state;
+		console.log(this.props.color)
 
 		return (
 			<div className="user-button" style={{background}}>
@@ -45,5 +46,5 @@ class UserButton extends Component {
 	};
 };
 
-function mapStateToProps (state) {return {user: state.auth0.user}};
+function mapStateToProps (state) {return {user: state.auth0.user, color: state.reducer.color}};
 export default connect(mapStateToProps, {updateUserData, deleteUser})(UserButton);

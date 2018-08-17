@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {updateBackground} from '../ducks/reducer';
+import {updateBackground, updateColor} from '../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
@@ -22,7 +22,7 @@ class Insighter extends Component {
 			trip_end_date     : '1/1/20XX',
 			trip_budget       : 0,
 			trip_background   : '',
-			trip_bg_color     : '',
+			trip_bg_color     : '255, 255, 255',
 			trip_packing_list : [],
 			trip_schedule     : [],
 			current_schedule  : 0
@@ -43,6 +43,7 @@ class Insighter extends Component {
 			if (tripData && tripData.user_id === this.props.user.user_id) {
 				this.setState(tripData);
 				this.props.updateBackground(this.state.trip_background);
+				this.props.updateColor(this.state.trip_bg_color);
 				document.getElementById("app").style.cssText = `background: center fixed url(${this.state.trip_background}); background-size: cover; min-height: 100vh; transition: 1s;`
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
 				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
@@ -116,7 +117,7 @@ class Insighter extends Component {
 						getLocationInput  = {getLocationInput}
 						updateLocation    = {updateLocation}
 						deleteTrip        = {deleteTrip} />
-					<div style={{height: '100px', width: '200px', backgroundColor: `rgb(${trip_bg_color})`}}></div>
+					<div className="hero" style={{backgroundColor: `rgb(${trip_bg_color})`}}></div>
 				</frosted-glass>
 			</div>
 		);
@@ -124,4 +125,4 @@ class Insighter extends Component {
 };
 
 function mapStateToProps (state) {return {user: state.auth0.user, background: state.reducer.background}};
-export default withRouter(connect(mapStateToProps, {updateBackground})(Insighter));
+export default withRouter(connect(mapStateToProps, {updateBackground, updateColor})(Insighter));

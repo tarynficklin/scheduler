@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {updateBackground} from '../ducks/reducer';
+import {updateBackground, updateColor} from '../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 import * as Vibrant from 'node-vibrant';
 import {connect} from 'react-redux';
@@ -47,8 +47,6 @@ class NewTrip extends Component {
 			.getPalette((err, palette) => palette);
 			const swatch = colors.Vibrant._rgb;
 			const trip_bg_color = `${swatch[0]}, ${swatch[1]}, ${swatch[2]}`;
-			console.log (photo.data.results[0].urls.raw)
-			console.log (trip_bg_color)
 		await axios
 			.post(`/api/trips/`, {
 				trip_id					: trip_id,
@@ -61,6 +59,7 @@ class NewTrip extends Component {
 				trip_bg_color   : trip_bg_color
 			});
 		await updateBackground(`${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`);
+		await updateColor(trip_bg_color);
 		document.getElementById("app").style.cssText = `background: center fixed url(${photo.data.results[0].urls.raw}); background-size: cover; min-height: 100vh; transition: 1s;`
 
 		for (let i in days) {
@@ -120,4 +119,4 @@ class NewTrip extends Component {
 };
 
 function mapStateToProps (state) {return {user: state.auth0.user}};
-export default withRouter(connect(mapStateToProps, {updateBackground})(NewTrip));
+export default withRouter(connect(mapStateToProps, {updateBackground, updateColor})(NewTrip));

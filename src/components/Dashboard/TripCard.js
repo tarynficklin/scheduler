@@ -1,11 +1,12 @@
 import React from 'react';
-import {updateBackground} from '../../ducks/reducer';
+import {updateBackground, updateColor} from '../../ducks/reducer';
 import {connect} from 'react-redux'
 import './TripCard.css';
 
 async function selectTrip(props) {
-	const {id, background, router} = props;
+	const {id, background, color, router} = props;
 	await props.updateBackground(background);
+	await props.updateColor(color);
 	document.getElementById("app").style.cssText = `background: center fixed url(${background}); background-size: cover; min-height: 100vh; transition: 1s;`
 	await router.push(`/trip/${id}`);
 }
@@ -20,4 +21,4 @@ function TripCard (props) {
 	);
 };
 
-export default connect(null, {updateBackground})(TripCard);
+export default connect(null, {updateBackground, updateColor})(TripCard);

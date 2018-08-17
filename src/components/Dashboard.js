@@ -34,6 +34,7 @@ class Dashboard extends Component {
 							packingList={e.trip_packing_list}
 							schedule={e.trip_schedule}
 							background={e.trip_background}
+							color={e.trip_bg_color}
 							deleteTrip={this.deleteTrip}
 							router={this.props.history}
 						/>
