@@ -32,7 +32,7 @@ class SettingsWidget extends Component {
 				<div>
 					<h3>Settings Widget</h3>
 					<input placeholder={location} onChange={(e) => getLocationInput(e.target.value)} onBlur={() => updateLocation(id)}/><br /><br />
-					<button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} style={themeColor()}><i class="fas fa-trash-alt"></i>Delete Trip</button>
+					<button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} style={themeColor()} className="delete-button"><i class="fas fa-trash-alt"></i> Delete Trip</button>
 					{confirmDelete ? 
 						<div>
 							<p>Are you sure you want to delete this trip?</p>

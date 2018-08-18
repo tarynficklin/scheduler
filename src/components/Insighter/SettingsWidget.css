@@ -1,3 +1,4 @@
-.settings-widget {
-
+.settings-widget .delete-button {
+	border-radius: 0;
+	width: 100%;
 }

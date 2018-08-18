@@ -9,12 +9,17 @@
 
 .insighter-card {
 	width: 100%;
-	margin: auto;
+	height: 50vh;
+	margin-bottom: 10vh;
 	display: flex;
-	padding: 25px;
-	overflow: hidden;
 	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
 	transition: 0.25s;
+}
+
+.insighter-card .glass-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .widget-wrapper {
@@ -74,6 +79,7 @@
 	height: 45px;
 	border-radius: 50%;
 	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+	opacity: .9;
 }
 
 .insighter .done-button {
