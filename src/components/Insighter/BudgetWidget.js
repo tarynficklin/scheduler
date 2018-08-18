@@ -32,10 +32,10 @@ class BudgetWidget extends Component {
 	render () {
 		const {budgetTotal, revealed} = this.state;
 		const {id, budget, getBudgetInput, updateBudget} = this.props;
+		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 		return (
 			<div className="budget-widget" style={{display: 'inline'}}>
-				<button
-				onClick={() => this.revealWidget()}>Budget</button>
+				<button	onClick={() => this.revealWidget()} style={themeColor()}>Budget</button>
 				{
 					revealed ? 
 					<div>

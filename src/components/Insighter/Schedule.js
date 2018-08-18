@@ -13,6 +13,7 @@ export default function Schedule (props) {
 						id={e.schedule_id}
 						date={e.schedule_date}
 						currentSchedule={currentSchedule}
+						color={props.color}
 					/>
 				)
 			})}

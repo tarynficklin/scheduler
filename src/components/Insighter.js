@@ -90,36 +90,41 @@ class Insighter extends Component {
 			addPackingItem,
 			deleteTrip
 		} = this;
-
+		
 		return (
 			<div className="insighter">
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="insighter-card">
 					<Header
 						location  = {trip_location}
 						startDate = {trip_start_date}
-						endDate   = {trip_end_date} />
+						endDate   = {trip_end_date}
+						color     = {trip_bg_color} />
 					<ScheduleSelector
 						schedule        = {trip_schedule}
 						scheduleIndex   = {scheduleIndex}
-						currentSchedule = {current_schedule} />
+						currentSchedule = {current_schedule}
+						color           = {trip_bg_color} />
 					<Schedule
 						schedule        = {trip_schedule}
-						currentSchedule = {current_schedule} />
+						currentSchedule = {current_schedule}
+						color           = {trip_bg_color} />
 					<BudgetWidget
 						id             = {trip_id}
 						budget         = {trip_budget}
 						getBudgetInput = {getBudgetInput}
-						updateBudget   = {updateBudget} />
+						updateBudget   = {updateBudget}
+						color          = {trip_bg_color} />
 					<PackingWidget
 						packingList    = {trip_packing_list}
-						addPackingItem = {addPackingItem} />
+						addPackingItem = {addPackingItem}
+						color          = {trip_bg_color} />
 					<SettingsWidget
 						id                = {trip_id}
 						location          = {trip_location}
 						getLocationInput  = {getLocationInput}
 						updateLocation    = {updateLocation}
-						deleteTrip        = {deleteTrip} />
-					<div className="hero" style={{backgroundColor: `rgb(${trip_bg_color})`}}></div>
+						deleteTrip        = {deleteTrip}
+						color             = {trip_bg_color} />
 				</frosted-glass>
 				<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
 			</div>

@@ -26,6 +26,7 @@ class PackingItem extends Component {
 	
   render() {
 		const {id, title, checked, deleted, editMode} = this.state;
+		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
 			!deleted ? 
@@ -39,7 +40,7 @@ class PackingItem extends Component {
 				:
 					<div className="packing-item">
 						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
-						<button onClick={() => this.deleteItem(id)}>X</button>
+						<button style={themeColor()} onClick={() => this.deleteItem(id)}>X</button>
 						<input type="checkbox" checked={checked} onChange={() => this.toggleChecked(id)}/>
 					</div>
 

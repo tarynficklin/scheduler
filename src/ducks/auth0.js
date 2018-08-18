@@ -1,6 +1,6 @@
 //INITAL STATE
-// const initialState = {user: {user_id: 1, user_name: "Taryn Ficklin", user_email: "tarynficklin@gmail.com", auth_id: "google-oauth2|100800992512531079080", auth_profile: "https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg"}}
-const initialState = {user: {}}
+const initialState = {user: {user_id: 1, user_name: "Taryn Ficklin", user_email: "tarynficklin@gmail.com", auth_id: "google-oauth2|100800992512531079080", auth_profile: "https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg"}}
+// const initialState = {user: {}}
 
 //CONSTANTS
 const UPDATE_USER_DATA = "UPDATE_USER_DATA";

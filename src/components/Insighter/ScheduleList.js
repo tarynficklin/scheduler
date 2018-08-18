@@ -39,11 +39,12 @@ export default class ScheduleList extends Component {
 
 	render () {
 		const {scheduleItems, selected, edit_mode} = this.state;
+		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 		return (
 			selected ?
 			<div className="schedule-list">
-				<button onClick={() => this.addScheduleItem()}>+</button>
-				<button onClick={() => this.toggleEditMode()}>Edit</button>
+				<button onClick={() => this.addScheduleItem()} style={themeColor()}>+</button>
+				<button onClick={() => this.toggleEditMode()} style={themeColor()}>Edit</button>
 				 {scheduleItems.map((e, i) => {
 					return (
 						<ScheduleItem
@@ -54,6 +55,7 @@ export default class ScheduleList extends Component {
 							time={e.item_time}
 							checked={e.item_checked}
 							editMode={edit_mode}
+							color={this.props.color}
 						/>
 					)
 				})}

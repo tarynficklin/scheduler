@@ -26,6 +26,7 @@ class ScheduleItem extends Component {
 
   render () {
 		const {id, title, price, deleted, editMode} = this.state;
+		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
 			!deleted ?
@@ -40,8 +41,8 @@ class ScheduleItem extends Component {
 					<div className="schedule-item">
 						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
 						<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' />
-						<button onClick={() => this.deleteItem(id)}>X</button>
-						<button onClick={() => this.setState({editMode: false})}>Done</button>
+						<button onClick={() => this.deleteItem(id)} style={themeColor()}>X</button>
+						<button onClick={() => this.setState({editMode: false})} style={themeColor()}>Done</button>
 					</div> : null
 		);
   };

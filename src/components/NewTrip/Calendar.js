@@ -3,6 +3,7 @@ import './Calendar.css';
 
 export default function Calendar (props) {
 	const {getStartDateInput, getEndDateInput} = props;
+	// let themeColor = () => {return {backgroundColor: `rgb(${props.color})`}};
 	return (
 		<div className="calendar">
 			<input onChange={(e) => getStartDateInput(e.target.value)} type="date" placeholder="start date" /><br />

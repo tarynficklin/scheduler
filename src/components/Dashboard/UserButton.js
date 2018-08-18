@@ -26,7 +26,6 @@ class UserButton extends Component {
 	render () {
 		const {user} = this.props;
 		const {loggingOut, background} = this.state;
-		console.log(this.props.color)
 
 		return (
 			<div className="user-button" style={{background}}>

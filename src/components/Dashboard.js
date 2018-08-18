@@ -19,22 +19,22 @@ class Dashboard extends Component {
 		const {tripCards} = this.state;
 		return (
 			<div className="dashboard">
-				<UserButton id={this.props.user.user_id} />
+				<UserButton	id = {this.props.user.user_id} />
 				{tripCards.map((e, i) => {
 					return (
 						<TripCard
-							key={i}
-							id={e.trip_id}
-							location={e.trip_location}
-							startDate={e.trip_start_date}
-							endDate={e.trip_end_date}
-							budget={e.trip_budget}
-							packingList={e.trip_packing_list}
-							schedule={e.trip_schedule}
-							background={e.trip_background}
-							color={e.trip_bg_color}
-							deleteTrip={this.deleteTrip}
-							router={this.props.history}
+							key         = {i}
+							id          = {e.trip_id}
+							location    = {e.trip_location}
+							startDate   = {e.trip_start_date}
+							endDate     = {e.trip_end_date}
+							budget      = {e.trip_budget}
+							packingList = {e.trip_packing_list}
+							schedule    = {e.trip_schedule}
+							background  = {e.trip_background}
+							color       = {e.trip_bg_color}
+							deleteTrip  = {this.deleteTrip}
+							router      = {this.props.history}
 						/>
 					)
 				})

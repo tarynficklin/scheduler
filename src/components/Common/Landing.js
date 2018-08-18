@@ -11,11 +11,12 @@ class Landing extends Component {
   }
 
   render(){
+    let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
     return(
       <div className="landing">
         <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="landing-card">
           <h2>Please Log in</h2>
-          <button onClick={() => this.login()} style={{backgroundColor: `rgb(${this.props.color})`}}>Login</button>
+          <button onClick={() => this.login()} style={themeColor()}>Login</button>
         </frosted-glass>
       </div>
     )

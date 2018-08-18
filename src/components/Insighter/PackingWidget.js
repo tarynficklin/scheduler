@@ -18,16 +18,17 @@ class PackingWidget extends Component {
 	render () {
 		const {revealed} = this.state;
 		const {packingList, addPackingItem} = this.props;
+		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
 			<div className="packing-widget" style={{display: 'inline'}}>
-			<button onClick={() => this.revealWidget()}>Packing List</button>
+			<button onClick={() => this.revealWidget()} style={themeColor()}>Packing List</button>
 			{
 				revealed ? 
 				<div>
 					<h3>Packing List Widget</h3>
-					<button onClick={() => addPackingItem()}>+</button>
-					<button onClick={() => this.toggleEditMode()}>Edit</button>
+					<button onClick={() => addPackingItem()} style={themeColor()}>+</button>
+					<button onClick={() => this.toggleEditMode()} style={themeColor()}>Edit</button>
 					{packingList.map((e, i) => {
 							return (
 								<PackingItem
@@ -36,6 +37,7 @@ class PackingWidget extends Component {
 									title={e.packing_title}
 									checked={e.packing_checked}
 									editMode={this.state.editMode}
+									color={this.props.color}
 								/>
 							)
 						})}

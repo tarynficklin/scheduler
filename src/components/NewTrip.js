@@ -101,17 +101,24 @@ class NewTrip extends Component {
 			getDayCount
 		} = this;
 
+		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
+
 		return (
 			<div className="new-trip">
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
-					<Header color={this.props.color}/>
-					<Location getLocationInput={getLocationInput} />
+					<Header
+						color={this.props.color}/>
+					<Location
+						getLocationInput={getLocationInput} />
 					<Calendar
 						getStartDateInput={getStartDateInput}
 						getEndDateInput={getEndDateInput}
-						getDayCount={getDayCount} />
-					<Budget getBudgetInput={getBudgetInput} />
-					<button onClick={() => this.createTrip()} className="button" style={{backgroundColor: `rgb(${this.props.color})`}}>Done</button>
+						getDayCount={getDayCount}
+						color={this.props.color}/>
+					<Budget
+						getBudgetInput={getBudgetInput}
+						color={this.props.color} />
+					<button onClick={() => this.createTrip()} className="button" style={themeColor()}>Done</button>
 				</frosted-glass>
 			</div>
 		);
