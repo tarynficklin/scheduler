@@ -25,7 +25,7 @@ class SettingsWidget extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
-			<div className="settings-widget" style={{display: 'inline'}}>
+			<div className="settings-widget widget">
 				{
 				revealed ? 
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">

@@ -18,13 +18,13 @@ class DonateWidget extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
-			<div className="donate-widget" style={{display: 'inline'}}>
-				<button onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-heart"></i></button>
+			<div className="donate-widget widget">
 				{
 					revealed ? 
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">
 					<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
 				</frosted-glass> : null }
+				<button onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-heart"></i></button>
 			</div>
 		);
 	};

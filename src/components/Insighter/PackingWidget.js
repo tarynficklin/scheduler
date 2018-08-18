@@ -21,7 +21,7 @@ class PackingWidget extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
-			<div className="packing-widget" style={{display: 'inline'}}>
+			<div className="packing-widget widget">
 			{
 				revealed ?
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">

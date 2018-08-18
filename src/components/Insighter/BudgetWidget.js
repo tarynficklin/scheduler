@@ -34,8 +34,7 @@ class BudgetWidget extends Component {
 		const {id, budget, getBudgetInput, updateBudget} = this.props;
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 		return (
-			<div className="budget-widget" style={{display: 'inline'}}>
-				<button	onClick={() => this.revealWidget()} className="widget-button" style={themeColor()}><i class="fas fa-dollar-sign"></i></button>
+			<div className="budget-widget widget">
 				{
 					revealed ? 
 					<frosted-glass overlay-color={"#ffffff50"} blur-amount="1.6rem" class="widget-card">
@@ -50,6 +49,7 @@ class BudgetWidget extends Component {
 								min='0'/>
 					</div>
 				</frosted-glass> : null }
+				<button	onClick={() => this.revealWidget()} className="widget-button" style={themeColor()}><i class="fas fa-dollar-sign"></i></button>
 			</div>
 		);
 	};
