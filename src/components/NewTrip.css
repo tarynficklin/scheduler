@@ -1,31 +1,58 @@
 .new-trip {
-	padding: 25px;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .new-trip-card {
-	width: 100%;
+	width: 80%;
 	margin: auto;
 	display: flex;
 	border-radius: 5px;
-	padding: 25px;
 	overflow: hidden;
 	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
 	transition: 0.25s;
 }
 
-.button {
+.glass-content {
+	width: 100%;
+}
+
+.new-trip button {
 	color: white;
 	border: none;
-	padding: 10px 18px;
-	border-radius: 50px;
+	padding: 10px;
 	font-family: 'Titillium Web', sans-serif;
 	font-size: 16px;
 	text-transform: uppercase;
 	transition: 0.25s;
 	opacity: .75;
-	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
 }
 
-.button:hover {
+.new-trip button:hover {
 	opacity: 1;
+}
+
+.new-trip .exit-button {
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	padding: 0;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: black;
+	background-color: transparent;
+	font-size: 20px;
+}
+
+.new-trip .exit-button:hover {
+	background-color: rgba(0,0,0,.1);
+}
+
+.new-trip .done-button {
+	width: 100%;
 }

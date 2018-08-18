@@ -35,19 +35,21 @@ class BudgetWidget extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 		return (
 			<div className="budget-widget" style={{display: 'inline'}}>
-				<button	onClick={() => this.revealWidget()} style={themeColor()}>Budget</button>
+				<button	onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-dollar-sign"></i></button>
 				{
 					revealed ? 
-					<div>
-					<h3>Budget Widget</h3>
-					<p>Budget: {budget}</p>
-					<p style={{color: this.state.alert}}>Total Spent: {budgetTotal}</p>
-					<input
-						onChange={(e) => getBudgetInput(e.target.value)}
-						onBlur={() => updateBudget(id)} value={budget}
-						type='number'
-						min='0'/>
-				</div> : null }
+					<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">
+						<div>
+							<h3>Budget Widget</h3>
+							<p>Budget: {budget}</p>
+							<p style={{color: this.state.alert}}>Total Spent: {budgetTotal}</p>
+							<input
+								onChange={(e) => getBudgetInput(e.target.value)}
+								onBlur={() => updateBudget(id)} value={budget}
+								type='number'
+								min='0'/>
+					</div>
+				</frosted-glass> : null }
 			</div>
 		);
 	};

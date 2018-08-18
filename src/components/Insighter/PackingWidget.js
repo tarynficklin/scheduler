@@ -22,12 +22,12 @@ class PackingWidget extends Component {
 
 		return (
 			<div className="packing-widget" style={{display: 'inline'}}>
-			<button onClick={() => this.revealWidget()} style={themeColor()}>Packing List</button>
 			{
-				revealed ? 
+				revealed ?
+				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">
 				<div>
 					<h3>Packing List Widget</h3>
-					<button onClick={() => addPackingItem()} style={themeColor()}>+</button>
+					<button onClick={() => addPackingItem()} style={themeColor()}><i class="fas fa-plus"></i></button>
 					<button onClick={() => this.toggleEditMode()} style={themeColor()}>Edit</button>
 					{packingList.map((e, i) => {
 							return (
@@ -41,7 +41,9 @@ class PackingWidget extends Component {
 								/>
 							)
 						})}
-				</div> : null }
+				</div>
+				</frosted-glass> : null }
+				<button onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-briefcase"></i></button>
 			</div>
 		);
 	};

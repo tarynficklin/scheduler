@@ -118,7 +118,7 @@ class NewTrip extends Component {
 					<Budget
 						getBudgetInput={getBudgetInput}
 						color={this.props.color} />
-					<button onClick={() => this.createTrip()} className="button" style={themeColor()}>Done</button>
+					<button onClick={() => this.createTrip()} className="done-button" style={themeColor()}><i class="fas fa-check"></i></button>
 				</frosted-glass>
 			</div>
 		);

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {updateBackground, updateColor} from '../ducks/reducer';
-import StripeCheckout from 'react-stripe-checkout'
 import {withRouter} from 'react-router-dom';
-import {onToken} from '../ducks/stripe';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import './Insighter.css';
@@ -12,6 +10,7 @@ import Schedule         from './Insighter/Schedule';
 import ScheduleSelector from './Insighter/ScheduleSelector';
 import BudgetWidget     from './Insighter/BudgetWidget';
 import PackingWidget    from './Insighter/PackingWidget';
+import DonateWidget			from './Insighter/DonateWidget';
 import SettingsWidget   from './Insighter/SettingsWidget';
 
 class Insighter extends Component {
@@ -24,7 +23,7 @@ class Insighter extends Component {
 			trip_end_date     : '1/1/20XX',
 			trip_budget       : 0,
 			trip_background   : '',
-			trip_bg_color     : '255, 255, 255',
+			trip_bg_color     : '155, 155, 155',
 			trip_packing_list : [],
 			trip_schedule     : [],
 			current_schedule  : 0
@@ -108,25 +107,28 @@ class Insighter extends Component {
 						schedule        = {trip_schedule}
 						currentSchedule = {current_schedule}
 						color           = {trip_bg_color} />
-					<BudgetWidget
-						id             = {trip_id}
-						budget         = {trip_budget}
-						getBudgetInput = {getBudgetInput}
-						updateBudget   = {updateBudget}
-						color          = {trip_bg_color} />
-					<PackingWidget
-						packingList    = {trip_packing_list}
-						addPackingItem = {addPackingItem}
-						color          = {trip_bg_color} />
-					<SettingsWidget
-						id                = {trip_id}
-						location          = {trip_location}
-						getLocationInput  = {getLocationInput}
-						updateLocation    = {updateLocation}
-						deleteTrip        = {deleteTrip}
-						color             = {trip_bg_color} />
 				</frosted-glass>
-				<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
+				<div className="widget-wrapper">
+					<BudgetWidget
+							id             = {trip_id}
+							budget         = {trip_budget}
+							getBudgetInput = {getBudgetInput}
+							updateBudget   = {updateBudget}
+							color          = {trip_bg_color} />
+						<PackingWidget
+							packingList    = {trip_packing_list}
+							addPackingItem = {addPackingItem}
+							color          = {trip_bg_color} />
+						<DonateWidget
+							color          = {trip_bg_color} />
+						<SettingsWidget
+							id                = {trip_id}
+							location          = {trip_location}
+							getLocationInput  = {getLocationInput}
+							updateLocation    = {updateLocation}
+							deleteTrip        = {deleteTrip}
+							color             = {trip_bg_color} />
+					</div>
 			</div>
 		);
 	};

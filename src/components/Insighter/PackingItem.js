@@ -40,7 +40,7 @@ class PackingItem extends Component {
 				:
 					<div className="packing-item">
 						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
-						<button style={themeColor()} onClick={() => this.deleteItem(id)}>X</button>
+						<button style={themeColor()} onClick={() => this.deleteItem(id)}><i class="fas fa-trash-alt"></i></button>
 						<input type="checkbox" checked={checked} onChange={() => this.toggleChecked(id)}/>
 					</div>
 

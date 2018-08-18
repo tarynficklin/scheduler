@@ -31,13 +31,13 @@ class UserButton extends Component {
 			<div className="user-button" style={{background}}>
 			{!loggingOut ?
 				<div className="user-div">
-					<Link to="/new"><button className="new-button">New Trip +</button></Link>
+					<Link to="/new"><button className="new-button">New Trip <i class="fas fa-plus"></i></button></Link>
 					<img src={user.auth_profile} at="" className="profile-pic" onClick={() => this.toggleLogOut()} alt=""/>
 				</div>
 			: 
 				<div className="user-div">
 					<button onClick={() => this.logout()} className="logout-button">Logout</button>
-					<button onClick={() => this.toggleLogOut()} className="exit-button">X</button>
+					<button onClick={() => this.toggleLogOut()} className="exit-button"><i class="fas fa-times"></i></button>
 					<img src={user.auth_profile} at="" className="profile-pic" onClick={() => this.toggleLogOut()} alt=""/>
 				</div>}
 			</div>

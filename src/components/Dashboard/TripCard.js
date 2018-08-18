@@ -14,8 +14,8 @@ async function selectTrip(props) {
 function TripCard (props) {
 	const {location, startDate, endDate, color} = props;
 	return (
-		<frosted-glass overlay-color="#ffffff52" class="trip-card" onClick={() => selectTrip(props)}>
-			{/* <div className="color-strip" style={{backgroundColor: `rgb(${color})`, height: '100%', width: '5px', display: `relative`, left: `0`}}></div> */}
+		<frosted-glass overlay-color="#ffffff50" class="trip-card" onClick={() => selectTrip(props)}>
+			<div className="color-strip" style={{backgroundColor: `rgb(${color})`}}></div>
 			<h3>{location}</h3>
 			<p>{startDate} to {endDate}</p>
 		</frosted-glass>
