@@ -33,7 +33,7 @@ class PackingItem extends Component {
 				!editMode ?
 
 					<div className="packing-item">
-						<a>• {this.state.title} </a>
+						<a>{this.state.title} </a>
 						{checked ?
 							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>
 							:
@@ -43,7 +43,7 @@ class PackingItem extends Component {
 				:
 					<div className="packing-item">
 						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} tabIndex={this.props.tab}/>
-						<button style={themeColor()} onClick={() => this.deleteItem(id)}><i class="fas fa-trash-alt"></i></button>
+						<button className="list-delete" onClick={() => this.deleteItem(id)}><i class="fas fa-trash-alt"></i></button>
 						{checked ?
 							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>
 							:

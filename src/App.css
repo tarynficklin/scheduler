@@ -5,9 +5,9 @@ body {
 	font-family: 'Titillium Web', sans-serif;
 }
 
-button {
+button input {
 	font-family: 'Titillium Web', sans-serif;
-	transition: 2s;
+	transition: .25s;
 }
 
 button:focus {outline:0;}

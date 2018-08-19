@@ -16,6 +16,12 @@
 	transition: 0.25s;
 }
 
+.insighter-card .glass-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .widget-wrapper {
 	position: absolute;
 	bottom: 10%;

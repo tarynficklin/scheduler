@@ -1,5 +1,55 @@
+.packing-item {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	padding: 20px 0;
+	height: 70px;
+	border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+}
+
 .packing-item .check-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
 	padding: 5px;
+	border-radius: 3px;
+}
+
+.packing-item a {
+	width: 230px;
+	display: flex;
+	align-items: center;
+	height: 30px;
+	font-size: 16px;
+	padding-left: 10px;
+}
+
+.packing-item input {
+	width: 195px;
+	display: flex;
+	align-items: center;
+	height: 30px;
+	font-family: 'Titillium Web', sans-serif;
+	margin: 0 5px 0 0;
+	padding: 0 10px;
+	font-size: 16px;
+}
+
+.packing-item .list-delete {
+	color: black;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+	padding: 5px 10px 5px 5px;
 	border-radius: 3px;
 }
 
