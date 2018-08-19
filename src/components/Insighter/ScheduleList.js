@@ -42,23 +42,26 @@ export default class ScheduleList extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 		return (
 			selected ?
-			<div className="schedule-list">
-				 {scheduleItems.map((e, i) => {
-					return (
-						<ScheduleItem
-							key={i}
-							id={e.item_id}
-							title={e.item_title}
-							price={e.item_price}
-							time={e.item_time}
-							checked={e.item_checked}
-							editMode={edit_mode}
-							color={this.props.color}
-						/>
-					)
-				})}
-				<button onClick={() => this.addScheduleItem()} style={themeColor()} className="new-item"><i class="fas fa-plus"></i></button>
-   		</div> : null
+			<div>
+				{scheduleItems.length === 0 ? <a className="empty-schedule">Add new items</a> : null}
+				<div className="schedule-list">
+					{scheduleItems.map((e, i) => {
+						return (
+							<ScheduleItem
+								key={i}
+								id={e.item_id}
+								title={e.item_title}
+								price={e.item_price}
+								time={e.item_time}
+								checked={e.item_checked}
+								editMode={edit_mode}
+								color={this.props.color}
+							/>
+						)
+					})}
+					<button onClick={() => this.addScheduleItem()} style={themeColor()} className="new-item"><i class="fas fa-plus"></i></button>
+				</div>
+			 </div> : null
 		);
 	};
 };

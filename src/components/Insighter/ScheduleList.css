@@ -1,3 +1,15 @@
+.schedule-list {
+	height: 280px;
+	max-width: 1260px;
+	display: flex;
+	flex-direction: row;
+	align-items: top;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	overflow-y: scroll;
+}
+
 .schedule-list .new-item {
 	display: flex;
 	flex-direction: row;
@@ -13,14 +25,13 @@
 	width: 400px;
 }
 
-.schedule-list {
-	height: 30vh;
-	max-width: 1260px;
+.empty-schedule {
 	display: flex;
-	flex-direction: row;
-	align-items: top;
-	justify-content: flex-start;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	overflow-y: scroll;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding-bottom: 20px;
+	font-size: 20px;
+	font-style: italic;
+	opacity: .5;
 }

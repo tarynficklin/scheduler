@@ -9,7 +9,7 @@
 
 .insighter-card {
 	width: 100%;
-	height:60vh;
+	height: 500px;
 	margin-bottom: 10vh;
 	display: flex;
 	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
@@ -23,7 +23,7 @@
 }
 
 .trip-info {
-	height: 25vh;
+	height: 220px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -31,7 +31,7 @@
 }
 
 .trip-schedule {
-	height: 35vh;
+	height: 280px;
 	display: flex;
 }
 
