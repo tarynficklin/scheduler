@@ -24,7 +24,6 @@ class Insighter extends Component {
 			trip_budget       : 0,
 			trip_background   : '',
 			trip_bg_color     : '155, 155, 155',
-			trip_packing_list : [],
 			trip_schedule     : [],
 			current_schedule  : 0
 		};
@@ -32,7 +31,6 @@ class Insighter extends Component {
 		this.getLocationInput = this.getLocationInput.bind(this);
 		this.updateBudget     = this.updateBudget.bind(this);
 		this.updateLocation   = this.updateLocation.bind(this);
-		this.addPackingItem   = this.addPackingItem.bind(this);
 		this.scheduleIndex    = this.scheduleIndex.bind(this);
 	}
 
@@ -47,7 +45,6 @@ class Insighter extends Component {
 				this.props.updateColor(this.state.trip_bg_color);
 				document.getElementById("app").style.cssText = `background: center fixed url(${this.state.trip_background}); background-size: cover; min-height: 100vh; transition: 1s;`
 				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
-				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
 			}
 			else {this.props.history.push('/404')};
 		})
@@ -60,13 +57,6 @@ class Insighter extends Component {
 	scheduleIndex  (id) {this.setState({current_schedule: id})};
 	deleteTrip     (id) {axios.delete(`api/trips/${id}`)};
 
-	async addPackingItem () {
-		const {trip_packing_list, trip_id} = this.state;
-		const results = await axios.post(`/api/list`, {trip_id, packing_title: "New Item"});
-		await trip_packing_list.push(results.data);
-		await this.setState({trip_packing_list});
-	};
-
 	render () {
 		const {
 			trip_id,
@@ -76,7 +66,6 @@ class Insighter extends Component {
 			trip_budget,
 			trip_bg_color,
 			trip_schedule,
-			trip_packing_list,
 			current_schedule
 		} = this.state;
 
@@ -86,7 +75,6 @@ class Insighter extends Component {
 			scheduleIndex,
 			updateLocation,
 			updateBudget,
-			addPackingItem,
 			deleteTrip
 		} = this;
 		
@@ -117,8 +105,6 @@ class Insighter extends Component {
 							color          = {trip_bg_color} />
 						<PackingWidget
 							id             = {trip_id}
-							packingList    = {trip_packing_list}
-							addPackingItem = {addPackingItem}
 							color          = {trip_bg_color} />
 						<DonateWidget
 							color          = {trip_bg_color} />

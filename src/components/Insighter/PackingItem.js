@@ -9,13 +9,15 @@ class PackingItem extends Component {
 			id       : this.props.id,
 			title    : this.props.title,
 			checked  : this.props.checked,
+			revealed : this.props.revealed,
 			editMode : false,
 			deleted  : false
 		};
 	};
 
 	componentWillReceiveProps (props) {
-		const {editMode} = props;
+		const {editMode, revealed} = props;
+		revealed ? this.setState({revealed: true}) : this.setState({revealed: false})
 		editMode ? this.setState({editMode: true}) : this.setState({editMode: false});
 	}
 
@@ -42,7 +44,7 @@ class PackingItem extends Component {
 					</div>
 				:
 					<div className="packing-item">
-						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} tabIndex={this.props.tab}/>
+						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} tabIndex={this.props.tab + 1}/>
 						<button className="list-delete" onClick={() => this.deleteItem(id)}><i class="fas fa-trash-alt"></i></button>
 						{checked ?
 							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>

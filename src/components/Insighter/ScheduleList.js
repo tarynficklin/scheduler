@@ -43,8 +43,6 @@ export default class ScheduleList extends Component {
 		return (
 			selected ?
 			<div className="schedule-list">
-				<button onClick={() => this.addScheduleItem()} style={themeColor()}><i class="fas fa-plus"></i></button>
-				<button onClick={() => this.toggleEditMode()} style={themeColor()}>Edit</button>
 				 {scheduleItems.map((e, i) => {
 					return (
 						<ScheduleItem
@@ -59,6 +57,7 @@ export default class ScheduleList extends Component {
 						/>
 					)
 				})}
+				<button onClick={() => this.addScheduleItem()} style={themeColor()} className="new-item"><i class="fas fa-plus"></i></button>
    		</div> : null
 		);
 	};

@@ -17,12 +17,13 @@ class ScheduleItem extends Component {
 
 	componentWillReceiveProps (props) {props.editMode ? this.setState({editMode: true}) : this.setState({editMode: false})};
 
-	getTitleInput (val) {this.setState({title: val})};
-	getPriceInput (val) {this.setState({price: val})};
-	updateTitle   (id)  {axios.put(`/api/schedule/item/title/${id}`, {title: this.state.title})};
-	updatePrice   (id)  {axios.put(`/api/schedule/item/price/${id}`, {price: this.state.price})};
-	toggleChecked (id)  {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
-	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
+	getTitleInput  (val) {this.setState({title: val})};
+	getPriceInput  (val) {this.setState({price: val})};
+	updateTitle    (id)  {axios.put(`/api/schedule/item/title/${id}`, {title: this.state.title})};
+	updatePrice    (id)  {axios.put(`/api/schedule/item/price/${id}`, {price: this.state.price})};
+	toggleChecked  (id)  {axios.put(`/api/schedule/item/check/${id}`, {checked: !this.state.checked}).then(this.setState({checked: !this.state.checked}))};
+	toggleEditMode (id)  {this.setState({editMode: !this.state.editMode})};
+	deleteItem     (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 
   render () {
 		const {id, title, price, checked, deleted, editMode} = this.state;
@@ -33,8 +34,9 @@ class ScheduleItem extends Component {
 			
 				!editMode ?
 					<div className="schedule-item">
-						<a>• {title} </a>
-						<a>{this.state.price*1===0 ? null : `- $${this.state.price}`}</a>
+						<a className="item-title">{title} </a>
+						<a className="item-price">{this.state.price*1===0 ? null : `$${this.state.price}`}</a>
+						<button className="item-edit" onClick={() => this.toggleEditMode()}><i class="fas fa-edit"></i></button>
 						{checked ?
 							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>
 							:
@@ -42,15 +44,11 @@ class ScheduleItem extends Component {
 						}
 					</div>
 				:
-					<div className="schedule-item">
-						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
-						<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' />
-						<button onClick={() => this.deleteItem(id)} style={themeColor()}><i class="fas fa-trash-alt"></i></button>
-						{checked ?
-							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>
-							:
-							<div onClick={() => this.toggleChecked(id)} className="check-box unchecked"><i class="fas fa-check"></i></div>
-						}
+					<div className="schedule-item schedule-selected">
+						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} className="title-input" />
+						<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' className="price-input" />
+						<button className="item-edit" onClick={() => this.toggleEditMode()}><i class="fas fa-edit"></i></button>
+						<button onClick={() => this.deleteItem(id)} className="schedule-delete"><i class="fas fa-trash-alt"></i></button>
 					</div> : null
 		);
   };
