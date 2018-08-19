@@ -44,7 +44,7 @@ class Insighter extends Component {
 				this.props.updateBackground(this.state.trip_background);
 				this.props.updateColor(this.state.trip_bg_color);
 				document.getElementById("app").style.cssText = `background: center fixed url(${this.state.trip_background}); background-size: cover; min-height: 100vh; transition: 1s;`
-				axios.get(`/api/list/${id}`).then(results => this.setState({trip_packing_list: results.data}));
+				axios.get(`/api/schedule/${id}`).then(results => this.setState({trip_schedule: results.data, current_schedule: results.data[0].schedule_id}));
 			}
 			else {this.props.history.push('/404')};
 		})
