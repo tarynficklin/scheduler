@@ -34,7 +34,7 @@ class BudgetWidget extends Component {
 		const {id, budget, getBudgetInput, updateBudget} = this.props;
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 		return (
-			<div className="budget-widget widget">
+			<div className="budget-widget widget" >
 				{
 					revealed ? 
 					<frosted-glass overlay-color={"#ffffff50"} blur-amount="1.6rem" class="widget-card">

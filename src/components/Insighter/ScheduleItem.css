@@ -1,3 +1,25 @@
-.schedule-item {
-	
+.schedule-item .check-box {
+	padding: 5px;
+	border-radius: 3px;
+}
+
+.schedule-item .checked {
+	color: white;
+	opacity: .75;
+	transition: 0.25s;
+}
+
+.schedule-item .checked:hover {
+	color: white;
+	opacity: 1;
+}
+
+.schedule-item .unchecked {
+	color: black;
+	opacity: 0.5;
+	transition: 0.25s;
+}
+
+.schedule-item .unchecked:hover {
+	opacity: 1;
 }

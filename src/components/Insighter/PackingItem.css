@@ -1,3 +1,25 @@
-.packing-item {
+.packing-item .check-box {
+	padding: 5px;
+	border-radius: 3px;
+}
 
+.packing-item .checked {
+	color: white;
+	opacity: .75;
+	transition: 0.25s;
+}
+
+.packing-item .checked:hover {
+	color: white;
+	opacity: 1;
+}
+
+.packing-item .unchecked {
+	color: black;
+	opacity: 0.5;
+	transition: 0.25s;
+}
+
+.packing-item .unchecked:hover {
+	opacity: 1;
 }

@@ -1,3 +1,37 @@
 .schedule-selector {
+	display: flex;
+	flex-direction: row;
+}
 
+.schedule-selector .radio-button {
+	padding: 5px;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	font-size: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+}
+
+.schedule-selector .selected {
+	color: white;
+	opacity: .75;
+	transition: 0.25s;
+}
+
+.schedule-selector .selected:hover {
+	color: white;
+	opacity: 1;
+}
+
+.schedule-selector .unselected {
+	background: white;
+	opacity: 0.5;
+	transition: 0.25s;
+}
+
+.schedule-selector .unselected:hover {
+	opacity: 1;
 }

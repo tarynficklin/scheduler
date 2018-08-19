@@ -25,7 +25,7 @@ class ScheduleItem extends Component {
 	deleteItem    (id)  {this.setState({deleted: true}); axios.delete(`/api/schedule/item/${id}`)};
 
   render () {
-		const {id, title, price, deleted, editMode} = this.state;
+		const {id, title, price, checked, deleted, editMode} = this.state;
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
@@ -35,7 +35,11 @@ class ScheduleItem extends Component {
 					<div className="schedule-item">
 						<a>• {title} </a>
 						<a>{this.state.price*1===0 ? null : `- $${this.state.price}`}</a>
-						<input type="checkbox" checked={this.state.checked} onChange={() => this.toggleChecked(id)}/>
+						{checked ?
+							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>
+							:
+							<div onClick={() => this.toggleChecked(id)} className="check-box unchecked"><i class="fas fa-check"></i></div>
+						}
 					</div>
 				:
 					<div className="schedule-item">

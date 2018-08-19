@@ -116,6 +116,7 @@ class Insighter extends Component {
 							updateBudget   = {updateBudget}
 							color          = {trip_bg_color} />
 						<PackingWidget
+							id             = {trip_id}
 							packingList    = {trip_packing_list}
 							addPackingItem = {addPackingItem}
 							color          = {trip_bg_color} />

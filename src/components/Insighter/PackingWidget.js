@@ -33,6 +33,7 @@ class PackingWidget extends Component {
 							return (
 								<PackingItem
 									key={i}
+									tab={i}
 									id={e.packing_id}
 									title={e.packing_title}
 									checked={e.packing_checked}
