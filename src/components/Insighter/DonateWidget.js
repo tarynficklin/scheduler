@@ -22,6 +22,7 @@ class DonateWidget extends Component {
 				{
 					revealed ? 
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">
+					<h3>Donate $5</h3>
 					<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
 				</frosted-glass> : null }
 				<button onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-heart"></i></button>

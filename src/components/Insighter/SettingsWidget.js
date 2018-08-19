@@ -30,7 +30,7 @@ class SettingsWidget extends Component {
 				revealed ? 
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="widget-card">
 				<div>
-					<h3>Settings Widget</h3>
+					<h3>Settings</h3>
 					<input placeholder={location} onChange={(e) => getLocationInput(e.target.value)} onBlur={() => updateLocation(id)}/><br /><br />
 					<button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} style={themeColor()} className="delete-button"><i class="fas fa-trash-alt"></i> Delete Trip</button>
 					{confirmDelete ? 

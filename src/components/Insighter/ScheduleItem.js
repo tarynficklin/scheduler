@@ -46,7 +46,11 @@ class ScheduleItem extends Component {
 						<input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} />
 						<input onChange={(e) => this.getPriceInput(e.target.value)} onBlur={() => this.updatePrice(id)} value={price} type='number' min='0' />
 						<button onClick={() => this.deleteItem(id)} style={themeColor()}><i class="fas fa-trash-alt"></i></button>
-						<button onClick={() => this.setState({editMode: false})} style={themeColor()}><i class="fas fa-check"></i></button>
+						{checked ?
+							<div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor()}><i class="fas fa-check"></i></div>
+							:
+							<div onClick={() => this.toggleChecked(id)} className="check-box unchecked"><i class="fas fa-check"></i></div>
+						}
 					</div> : null
 		);
   };

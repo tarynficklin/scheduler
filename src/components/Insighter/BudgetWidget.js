@@ -39,7 +39,7 @@ class BudgetWidget extends Component {
 					revealed ? 
 					<frosted-glass overlay-color={"#ffffff50"} blur-amount="1.6rem" class="widget-card">
 						<div>
-							<h3>Budget Widget</h3>
+							<h3>Budget</h3>
 							<p>Budget: {budget}</p>
 							<p style={{color: this.state.alert}}>Total Spent: {budgetTotal}</p>
 							<input

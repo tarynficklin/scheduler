@@ -48,6 +48,15 @@ VALUES (1, 'New York', '7-26-2018', '7-28-2018', 499.99, 'https://images.unsplas
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
 VALUES (1, 'San Francisco', '9-20-2019', '9-22-2019', 699.99, 'https://images.unsplash.com/photo-1527905876394-1e5115891cba?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=03e900ad7822e824a78afd2c706ff241&auto=format&fit=crop&w=1400&q=80', '205, 105, 86');
 
+-- INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+-- VALUES (1, 'Iceland', '9-20-2019', '9-22-2019', 399.99, 'https://images.unsplash.com/photo-1531168556467-80aace0d0144?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=37362017baff4c3a623845195f4916c8&auto=format&fit=crop&w=1400&q=80', '162, 124, 40');
+
+-- INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+-- VALUES (1, 'New Hampshire', '9-20-2019', '9-22-2019', 799.99, '	https://images.unsplash.com/photo-1508433203421-4951509ee8f0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=a03e01db0676acf02385eff418af75d6&auto=format&fit=crop&w=1400&q=80', '81.96428571428571, 173.0357142857143, 136.6071428571429');
+
+-- INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
+-- VALUES (1, 'Africa', '9-20-2019', '9-22-2019', 499.99, 'https://images.unsplash.com/photo-1529158733375-6a6e7a425c04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=0972460f68caef3e839cd5a61445883b&auto=format&fit=crop&w=1400&q=80', '197, 196, 40');
+
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
 VALUES (2, 'Chicago', '8-23-2018', '8-25-2018', 799.99, 'https://images.unsplash.com/photo-1531755029835-073f601388c1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjMyMzAyfQ&s=61276352d7fe320b4943aa1de401932a&auto=format&fit=crop&w=1400&q=80', '219, 126, 19');
 
@@ -102,40 +111,40 @@ CREATE TABLE schedules (
 );
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (1, 'July 26th 2018');
+VALUES (1, 'July 26 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (1, 'July 27th 2018');
+VALUES (1, 'July 27 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (1, 'July 28th 2018');
+VALUES (1, 'July 28 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (2, 'September 20th 2019');
+VALUES (2, 'September 20 2019');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (2, 'September 21st 2019');
+VALUES (2, 'September 21 2019');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (2, 'September 22nd 2019');
+VALUES (2, 'September 22 2019');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (3, 'August 23rd 2018');
+VALUES (3, 'August 23 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (3, 'August 24th 2018');
+VALUES (3, 'August 24 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (3, 'August 25th 2018');
+VALUES (3, 'August 25 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (4, 'December 31st 2018');
+VALUES (4, 'December 31 2018');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (4, 'Janurary 1st 2019');
+VALUES (4, 'Janurary 1 2019');
 
 INSERT INTO schedules (trip_id, schedule_date)
-VALUES (4, 'January 2nd 2019');
+VALUES (4, 'January 2 2019');
 
 SELECT * FROM schedules;
 

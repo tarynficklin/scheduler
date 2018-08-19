@@ -55,7 +55,7 @@ class NewTrip extends Component {
 				trip_start_date	: trip_start_date,
 				trip_end_date		: trip_end_date,
 				trip_budget     : trip_budget,
-				trip_background : `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80}`,
+				trip_background : `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`,
 				trip_bg_color   : trip_bg_color
 			});
 		await updateBackground(`${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`);
@@ -82,7 +82,7 @@ class NewTrip extends Component {
 		let firstDay = moment(startDate).startOf('day').subtract(1, 'day');
 		let lastDay  = moment(endDate).startOf('day').add(1, 'day');
 		while (firstDay.add(1, 'days').diff(lastDay ) < 0) {dates.push(firstDay.clone().toDate())};
-		for   (let i in dates) {days.push(moment(dates[i]).format("MMMM Do YYYY"))};
+		for   (let i in dates) {days.push(moment(dates[i]).format("MMMM DD YYYY"))};
 		return days;
 	};
 	

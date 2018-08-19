@@ -30,6 +30,11 @@
 	flex-direction: column;
 }
 
+.widget h3 {
+	padding: 0;
+	margin: 0;
+}
+
 .widget-card {
 	position: absolute;
 	bottom: 60px;

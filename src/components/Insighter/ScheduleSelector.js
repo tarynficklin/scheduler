@@ -10,11 +10,18 @@ export default function ScheduleSelector (props) {
 				const {schedule_id, schedule_date} = e
 				return (
 					<div style={{display: 'inline'}} key={i}>
-						<a>{schedule_date}</a>
 						{e.schedule_id === currentSchedule ?
-							<div onClick={() => scheduleIndex(schedule_id)} className="radio-button selected" style={themeColor()}><i class="fas fa-circle"></i></div>
+							// <div onClick={() => scheduleIndex(schedule_id)} className="radio-button selected" style={themeColor()}><i class="fas fa-circle"></i></div>
+							<div className="date selected" onClick={() => scheduleIndex(schedule_id)} style={themeColor()}>
+								<a className="month">{schedule_date.split(' ')[0]}</a>
+								<a className="day">{schedule_date.split(' ')[1]}</a>
+							</div>
 							:
-							<div onClick={() => scheduleIndex(schedule_id)} className="radio-button unselected"></div>
+							// <div onClick={() => scheduleIndex(schedule_id)} className="radio-button unselected"></div>
+								<div className="date unselected" onClick={() => scheduleIndex(schedule_id)}>
+									<a className="month">{schedule_date.split(' ')[0]}</a>
+									<a className="day">{schedule_date.split(' ')[1]}</a>
+								</div>
 						}
 					</div>
 				)
