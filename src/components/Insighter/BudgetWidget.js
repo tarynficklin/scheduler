@@ -49,6 +49,7 @@ class BudgetWidget extends Component {
 								min='0'/>
 					</div>
 				</frosted-glass> : null }
+				{revealed ? <div class="arrow" style={{borderTop: `10px solid rgb(${this.props.color})`}}></div> : null}
 				<button	onClick={() => this.revealWidget()} className="widget-button" style={themeColor()}><i class="fas fa-dollar-sign"></i></button>
 			</div>
 		);

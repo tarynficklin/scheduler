@@ -8,7 +8,7 @@
 }
 
 .new-trip-card {
-	width: 80%;
+	width: 600px;
 	margin: auto;
 	display: flex;
 	border-radius: 5px;
@@ -17,9 +17,49 @@
 	transition: 0.25s;
 }
 
-.glass-content {
+.new-trip-card .glass-content {
 	width: 100%;
 }
+
+.new-trip-wrapper {
+	display: flex;
+	width: 100%;
+	transition: 0.25s;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.new-trip input {
+	color: white;
+	padding: 15px;
+	margin: 0px;
+	width: 600px;
+	height: 60px;
+	border-radius: 0;
+	transition: .25s;
+	background: transparent;
+}
+
+.new-trip input::placeholder {
+	text-transform: uppercase;
+	color: white;
+	opacity: .75;
+}
+
+.new-trip input:focus {
+	outline: none;
+	opacity: 1;
+	background: rgba(255,255,255,.25);
+}
+
+/* .location, .budget {
+	display: flex;
+	justify-content: center;
+}
+
+.calendar {
+	padding-bottom: 25px;
+} */
 
 .new-trip button {
 	color: white;

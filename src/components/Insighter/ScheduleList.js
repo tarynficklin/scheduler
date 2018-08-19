@@ -43,7 +43,7 @@ export default class ScheduleList extends Component {
 		return (
 			selected ?
 			<div>
-				{scheduleItems.length === 0 ? <a className="empty-schedule">Add new items</a> : null}
+				{scheduleItems.length === 0 ? <a className="empty-schedule">Add new item</a> : null}
 				<div className="schedule-list">
 					{scheduleItems.map((e, i) => {
 						return (

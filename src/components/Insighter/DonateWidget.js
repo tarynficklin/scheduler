@@ -22,9 +22,15 @@ class DonateWidget extends Component {
 				{
 					revealed ? 
 				<frosted-glass overlay-color="#ffffff70" blur-amount="1.6rem" class="widget-card">
-					<h3>Donate $5</h3>
-					<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
+					<h3>Donate to the developer?</h3>
+					<p>it's going to a good cause...</p>
+					<p>seriously!</p>
+					<div className="donate-footer" style={themeColor()}>
+						<a><i class="fas fa-donate"></i>  Donate</a>
+						<StripeCheckout	token={onToken}	stripeKey={process.env.REACT_APP_STRIPE_PUBLIC}	amount={500} />
+					</div>
 				</frosted-glass> : null }
+				{revealed ? <div class="arrow" style={{borderTop: `10px solid rgb(${this.props.color})`}}></div> : null}
 				<button onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-heart"></i></button>
 			</div>
 		);

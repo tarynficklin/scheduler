@@ -5,12 +5,20 @@ body {
 	font-family: 'Titillium Web', sans-serif;
 }
 
+input {
+	font-family: 'Titillium Web', sans-serif;
+}
+
 button input {
 	font-family: 'Titillium Web', sans-serif;
 	transition: .25s;
 }
 
 button:focus {outline:0;}
+
+.glass-content {
+	width: 100%;
+}
 
 input {
 	background: rgba(255,255,255,0.5);

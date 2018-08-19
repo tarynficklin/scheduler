@@ -73,6 +73,7 @@ class PackingWidget extends Component {
 					</div>
 				</div>
 				</frosted-glass> : null }
+				{revealed ? <div class="arrow" style={{borderTop: `10px solid rgb(${this.props.color})`}}></div> : null}
 				<button onClick={() => this.revealWidget()} style={themeColor()} className="widget-button"><i class="fas fa-briefcase"></i></button>
 			</div>
 		);

@@ -1,3 +1,51 @@
-.donate-widget {
+.donate-widget .widget-card {
+	width: 300px;
+	text-align: center;
+}
 
+.donate-widget h3 {
+	margin: 20px 0;
+	text-transform: uppercase;
+}
+
+.donate-widget p {
+	font-style: italic;
+	opacity: 0.5;
+	padding: 0;
+	margin: 0;
+}
+
+.donate-widget .widget-card button {
+	padding: 45px 0 !important;
+	background: transparent !important;
+	width: 100% !important;
+	position: relative;
+	bottom: -37.5px;
+	border-radius: 0 !important;
+	cursor: default !important;
+}
+
+.donate-widget .widget-card button:hover {
+	background: rgba(255, 255, 255, .25) !important;
+}
+
+.donate-footer {
+	margin-top: 25px;
+	text-transform: uppercase;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 45px;
+	width: 100%;
+}
+
+.donate-footer a {
+	white-space:pre;
+	position: absolute;
+	height: 45px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
 }
