@@ -43,24 +43,42 @@ class NewTrip extends Component {
 		let days = this.getDaysBetween(trip_start_date, trip_end_date);
 
 		const photo = await axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${trip_location}&client_id=${REACT_APP_UAK}`);
-		const colors = await Vibrant.from(`${photo.data.results[0].urls.raw}&client_id=${process.env.REACT_APP_UAK}`)
-			.getPalette((err, palette) => palette);
-			const swatch = colors.Vibrant._rgb;
-			const trip_bg_color = `${swatch[0]}, ${swatch[1]}, ${swatch[2]}`;
-		await axios
-			.post(`/api/trips/`, {
-				trip_id					: trip_id,
-				user_id					: this.props.user.user_id,
-				trip_location 	: trip_location,
-				trip_start_date	: trip_start_date,
-				trip_end_date		: trip_end_date,
-				trip_budget     : trip_budget,
-				trip_background : `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`,
-				trip_bg_color   : trip_bg_color
-			});
-		await updateBackground(`${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`);
-		await updateColor(trip_bg_color);
-		document.getElementById("app").style.cssText = `background: center fixed url(${photo.data.results[0].urls.raw}); background-size: cover; min-height: 100vh; transition: 1s;`
+		if (photo.data.results.length !== 0) {
+			const colors = await Vibrant.from(`${photo.data.results[0].urls.raw}&client_id=${process.env.REACT_APP_UAK}`)
+				.getPalette((err, palette) => palette);
+				const swatch = colors.Vibrant._rgb;
+				const trip_bg_color = `${swatch[0]}, ${swatch[1]}, ${swatch[2]}`;
+			await axios
+				.post(`/api/trips/`, {
+					trip_id					: trip_id,
+					user_id					: this.props.user.user_id,
+					trip_location 	: trip_location,
+					trip_start_date	: trip_start_date,
+					trip_end_date		: trip_end_date,
+					trip_budget     : trip_budget,
+					trip_background : `${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`,
+					trip_bg_color   : trip_bg_color
+				});
+			await updateBackground(`${photo.data.results[0].urls.raw}&auto=format&fit=crop&w=1400&q=80`);
+			await updateColor(trip_bg_color);
+			document.getElementById("app").style.cssText = `background: center fixed url(${photo.data.results[0].urls.raw}); background-size: cover; min-height: 100vh; transition: 1s;`
+		}
+		else {
+			await axios
+				.post(`/api/trips/`, {
+					trip_id					: trip_id,
+					user_id					: this.props.user.user_id,
+					trip_location 	: trip_location,
+					trip_start_date	: trip_start_date,
+					trip_end_date		: trip_end_date,
+					trip_budget     : trip_budget,
+					trip_background : `https://images.unsplash.com/photo-1518144591331-17a5dd71c477?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=210f0cacd6dd701fe842441652db7be8&auto=format&fit=crop&w=1400&q=80`,
+					trip_bg_color   : '25, 144, 172'
+				});
+			await updateBackground(`https://images.unsplash.com/photo-1518144591331-17a5dd71c477?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=210f0cacd6dd701fe842441652db7be8&auto=format&fit=crop&w=1400&q=80`);
+			await updateColor('25, 144, 172');
+			document.getElementById("app").style.cssText = `background: center fixed url(https://images.unsplash.com/photo-1518144591331-17a5dd71c477?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=210f0cacd6dd701fe842441652db7be8&auto=format&fit=crop&w=1400&q=80); background-size: cover; min-height: 100vh; transition: 1s;`
+		}
 
 		for (let i in days) {
 			await axios.post(`/api/schedule/`, {trip_id: this.state.trip_id, schedule_date: days[i]});
