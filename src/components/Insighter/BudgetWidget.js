@@ -40,7 +40,7 @@ class BudgetWidget extends Component {
 					<frosted-glass overlay-color={"#ffffff70"} blur-amount="1.6rem" class="widget-card">
 						<div>
 							<p>Total spent:</p>
-							<h1 style={{color: this.state.alert}}>${budgetTotal}</h1>
+							<h1 style={{color: this.state.alert}}>{budgetTotal === '' || budgetTotal === null ? `$0` : `$${budgetTotal}`}</h1>
 							<div className="budget-footer" style={themeColor()}>
 								<input
 									onChange={(e) => getBudgetInput(e.target.value)}
