@@ -30,14 +30,15 @@ class SettingsWidget extends Component {
 				revealed ? 
 				<frosted-glass overlay-color="#ffffff70" blur-amount="1.6rem" class="widget-card">
 				<div>
-					<h3>Settings</h3>
-					<input placeholder={location} onChange={(e) => getLocationInput(e.target.value)} onBlur={() => updateLocation(id)}/><br /><br />
-					<button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} style={themeColor()} className="delete-button"><i class="fas fa-trash-alt"></i> Delete Trip</button>
+					<input placeholder={location} onChange={(e) => getLocationInput(e.target.value)} onBlur={() => updateLocation(id)}/>
+					<div className="delete-button-wrapper" style={themeColor()}>
+						{!confirmDelete ? <button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} className="delete-button"><i class="fas fa-trash-alt"></i>  Delete Trip</button> : null}
+					</div>
 					{confirmDelete ? 
-						<div>
+						<div className="delete-wrapper" style={themeColor()}>
+							<button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} className="confirm-button no">No</button>
+							<Link to="/"><button onClick={() => deleteTrip(id)} className="confirm-button yes">Yes</button></Link>
 							<p>Are you sure you want to delete this trip?</p>
-							<Link to="/"><button onClick={() => deleteTrip(id)} style={themeColor()}>Yes<i class="fas fa-check"></i></button></Link>
-							<button onClick={() => this.setState({confirmDelete: !this.state.confirmDelete})} style={themeColor()}>No<i class="fas fa-times"></i></button>
 						</div> : null
 					}
 				</div>

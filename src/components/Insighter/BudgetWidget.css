@@ -1,3 +1,42 @@
-.budget-widget {
-	
+.budget-widget .widget-card {
+	width: 200px;
+	text-align: center;
+}
+
+.budget-widget h3 {
+	margin: 20px 0;
+	text-transform: uppercase;
+}
+
+.budget-widget p {
+	margin: 0;
+	padding: 25px 0 0 0;
+	font-style: italic;
+	opacity: .5;
+}
+
+.budget-footer {
+	margin-top: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 45px;
+	width: 100%;
+}
+
+.budget-footer input {
+	height: 45px;
+	width: 100%;
+	padding: 10px;
+	margin: 0;
+	color: white;
+	background: transparent;
+	font-size: 18px;
+	transition: .25s;
+	text-align: center;
+}
+
+.budget-footer input:focus {
+	background: rgba(255, 255, 255, .15);
+	outline: none;
 }

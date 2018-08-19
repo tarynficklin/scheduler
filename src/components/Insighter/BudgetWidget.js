@@ -15,16 +15,16 @@ class BudgetWidget extends Component {
 	componentWillReceiveProps (props) {this.refreshTotal(props.id, props.budget, this.state.budgetTotal)};
 
 	revealWidget () {
-		this.setState({revealed: !this.state.revealed});
 		this.refreshTotal(this.props.id, this.props.budget, this.state.budgetTotal);
+		this.setState({revealed: !this.state.revealed});
 	}
 	
 	async refreshTotal (id, budget, budgetTotal) {
 		if (id !== 0) {
 			axios.get(`/api/trips/total/${id}`)
 			.then(results => {
-				this.setState({budgetTotal: results.data.sum})
 				budgetTotal > budget ? this.setState({alert: 'red'}) : this.setState({alert: null});
+				this.setState({budgetTotal: results.data.sum})
 			});
 		};
 	};
@@ -39,15 +39,16 @@ class BudgetWidget extends Component {
 					revealed ? 
 					<frosted-glass overlay-color={"#ffffff70"} blur-amount="1.6rem" class="widget-card">
 						<div>
-							<h3>Budget</h3>
-							<p>Budget: {budget}</p>
-							<p style={{color: this.state.alert}}>Total Spent: {budgetTotal}</p>
-							<input
-								onChange={(e) => getBudgetInput(e.target.value)}
-								onBlur={() => updateBudget(id)} value={budget}
-								type='number'
-								min='0'/>
-					</div>
+							<p>Total spent:</p>
+							<h1 style={{color: this.state.alert}}>${budgetTotal}</h1>
+							<div className="budget-footer" style={themeColor()}>
+								<input
+									onChange={(e) => getBudgetInput(e.target.value)}
+									onBlur={() => updateBudget(id)} value={budget}
+									type='number'
+									min='0'/>
+							</div>
+						</div>
 				</frosted-glass> : null }
 				{revealed ? <div class="arrow" style={{borderTop: `10px solid rgb(${this.props.color})`}}></div> : null}
 				<button	onClick={() => this.revealWidget()} className="widget-button" style={themeColor()}><i class="fas fa-dollar-sign"></i></button>

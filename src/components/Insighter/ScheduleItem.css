@@ -89,6 +89,7 @@
 	height: 45px;
 	text-align: right;
 	width: 70px;
+	padding: 0 10px;
 }
 
 .schedule-item .check-box {
