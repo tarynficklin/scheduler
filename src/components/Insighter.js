@@ -18,7 +18,7 @@ class Insighter extends Component {
 		super();
 		this.state = {
 			trip_id           : 0,
-			trip_location     : 'Trip',
+			trip_location     : '',
 			trip_start_date   : '1/1/20XX',
 			trip_end_date     : '1/1/20XX',
 			trip_budget       : 0,
@@ -81,6 +81,7 @@ class Insighter extends Component {
 		return (
 			<div className="insighter">
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="insighter-card">
+					<div className="trip-info">
 					<Header
 						location  = {trip_location}
 						startDate = {trip_start_date}
@@ -91,10 +92,13 @@ class Insighter extends Component {
 						scheduleIndex   = {scheduleIndex}
 						currentSchedule = {current_schedule}
 						color           = {trip_bg_color} />
+					</div>
+					<div className="trip-schedule">
 					<Schedule
 						schedule        = {trip_schedule}
 						currentSchedule = {current_schedule}
 						color           = {trip_bg_color} />
+					</div>
 				</frosted-glass>
 				<div className="widget-wrapper">
 					<BudgetWidget
