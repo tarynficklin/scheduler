@@ -39,7 +39,7 @@
 }
 
 .settings-widget .delete-button:hover {
-	background: red
+	background: rgba(255, 255, 255, 0.25)
 }
 
 .settings-widget .confirm-button {
