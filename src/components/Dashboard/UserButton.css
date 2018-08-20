@@ -40,7 +40,7 @@
 }
 
 .user-button .new-button {width: 200px; background: rgba(0, 0, 0, 0);}
-.user-button .exit-button {width: 50px; background: rgba(0, 0, 0, 0.2);}
+.user-button .exit-button {width: 50px; background: rgba(0, 0, 0, 0.1);}
 .user-button .logout-button {width: 150px; background: rgba(0, 0, 0, 0);}
 
 .profile-pic {
