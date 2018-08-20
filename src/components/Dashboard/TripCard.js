@@ -1,6 +1,7 @@
 import React from 'react';
 import {updateBackground, updateColor} from '../../ducks/reducer';
 import {connect} from 'react-redux'
+import moment from 'moment';
 import './TripCard.css';
 
 async function selectTrip(props) {
@@ -16,8 +17,8 @@ function TripCard (props) {
 	return (
 		<frosted-glass overlay-color="#ffffff50" class="trip-card" onClick={() => selectTrip(props)}>
 			<div className="color-strip" style={{backgroundColor: `rgb(${color})`}}></div>
-			<h3>{location}</h3>
-			<p>{startDate} to {endDate}</p>
+			<h1>{location}</h1>
+			<a>{moment(startDate).format("MMMM DD YYYY")} - {moment(endDate).format("MMMM DD YYYY")}</a>
 		</frosted-glass>
 	);
 };

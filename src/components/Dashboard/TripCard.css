@@ -15,6 +15,16 @@
 .trip-card a {
 	text-decoration: none;
 	color: black;
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+	font-style: italic;
+	opacity: .5;
+}
+
+.trip-card h1 {
+	padding: 0;
+	margin: 0;
 }
 
 .trip-card:hover {

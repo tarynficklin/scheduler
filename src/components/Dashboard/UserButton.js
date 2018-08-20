@@ -31,7 +31,7 @@ class UserButton extends Component {
 			<div className="user-button" style={{background}}>
 			{!loggingOut ?
 				<div className="user-div">
-					<Link to="/new"><button className="new-button">New Trip <i class="fas fa-plus"></i></button></Link>
+					<Link to="/new"><button className="new-button">New Trip  <i class="fas fa-plus"></i></button></Link>
 					<img src={user.auth_profile} at="" className="profile-pic" onClick={() => this.toggleLogOut()} alt=""/>
 				</div>
 			: 
