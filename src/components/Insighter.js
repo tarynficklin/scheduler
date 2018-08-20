@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {updateBackground, updateColor} from '../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import FadeIn from 'react-fade-in';
+
 import axios from 'axios';
 import './Insighter.css';
 
@@ -79,6 +81,7 @@ class Insighter extends Component {
 		} = this;
 		
 		return (
+			<FadeIn>
 			<div className="insighter">
 				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="insighter-card">
 					<div className="trip-info">
@@ -121,6 +124,7 @@ class Insighter extends Component {
 							color             = {trip_bg_color} />
 					</div>
 			</div>
+			</FadeIn>
 		);
 	};
 };

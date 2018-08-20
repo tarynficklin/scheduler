@@ -21,20 +21,55 @@
 	transition: 1s;
 }
 
+.landing h1 {
+	font-size: 25px;
+	letter-spacing: 5px;
+	margin-bottom: 70px;
+}
+
 .landing button {
 	color: white;
 	border: none;
 	padding: 10px 80px;
-	border-radius: 50px;
-	margin-bottom: 20px;
+	width: 100%;
 	font-family: 'Titillium Web', sans-serif;
 	font-size: 16px;
 	text-transform: uppercase;
 	transition: 0.25s;
 	opacity: .75;
-	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
 }
 
 .landing button:hover {
 	opacity: 1;
+}
+
+.login-wrapper {
+	display: flex;
+	border-radius: 50px;
+	overflow: hidden;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+}
+
+.logo {
+	display: flex;
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+}
+
+.logo-wrapper {
+	text-transform: uppercase;
+	color: white;
+	text-shadow: 0px 0px 35px rgba(0, 0, 0, 1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.logo img {
+	width: 200px;
+	height: 200px;
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import FadeIn from 'react-fade-in';
 import axios from 'axios';
 
 import UserButton from './Dashboard/UserButton';
@@ -18,32 +19,34 @@ class Dashboard extends Component {
 	render () {
 		const {tripCards} = this.state;
 		return (
-			<div>
-				<div className="user-wrapper">
-					<UserButton	id = {this.props.user.user_id} />
+			<FadeIn>
+				<div>
+					<div className="user-wrapper">
+						<UserButton	id = {this.props.user.user_id} />
+					</div>
+					<div className="dashboard">
+						{tripCards.map((e, i) => {
+							return (
+								<TripCard
+									key         = {i}
+									id          = {e.trip_id}
+									location    = {e.trip_location}
+									startDate   = {e.trip_start_date}
+									endDate     = {e.trip_end_date}
+									budget      = {e.trip_budget}
+									packingList = {e.trip_packing_list}
+									schedule    = {e.trip_schedule}
+									background  = {e.trip_background}
+									color       = {e.trip_bg_color}
+									deleteTrip  = {this.deleteTrip}
+									router      = {this.props.history}
+								/>
+							)
+						})
+					}
+					</div>
 				</div>
-				<div className="dashboard">
-					{tripCards.map((e, i) => {
-						return (
-							<TripCard
-								key         = {i}
-								id          = {e.trip_id}
-								location    = {e.trip_location}
-								startDate   = {e.trip_start_date}
-								endDate     = {e.trip_end_date}
-								budget      = {e.trip_budget}
-								packingList = {e.trip_packing_list}
-								schedule    = {e.trip_schedule}
-								background  = {e.trip_background}
-								color       = {e.trip_bg_color}
-								deleteTrip  = {this.deleteTrip}
-								router      = {this.props.history}
-							/>
-						)
-					})
-				}
-				</div>
-			</div>
+			</FadeIn>
 		);
 	};
 };

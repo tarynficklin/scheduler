@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import FadeIn from 'react-fade-in';
+import logo from './logo.png'
 import './Landing.css';
 
 class Landing extends Component {
@@ -13,12 +15,23 @@ class Landing extends Component {
   render(){
     let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
     return(
-      <div className="landing">
-        <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="landing-card">
-          <h2>Please Log in</h2>
-          <button onClick={() => this.login()} style={themeColor()}>Login</button>
-        </frosted-glass>
-      </div>
+      <FadeIn>
+        <div className="landing">
+          <div className="logo-wrapper">
+            <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="logo">
+              <img src={logo} alt=""/>
+            </frosted-glass>
+            <h1>Scheduler</h1>
+            <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="login-wrapper">
+              <button onClick={() => this.login()} style={themeColor()}>Login</button>
+            </frosted-glass>
+          </div>
+          {/* <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="landing-card">
+            <h2>Please Log in</h2>
+            <button onClick={() => this.login()} style={themeColor()}>Login</button>
+          </frosted-glass> */}
+        </div>
+      </FadeIn>
     )
   }
 }

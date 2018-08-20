@@ -3,6 +3,7 @@ import {updateBackground, updateColor} from '../ducks/reducer';
 import {withRouter} from 'react-router-dom';
 import * as Vibrant from 'node-vibrant';
 import {connect} from 'react-redux';
+import FadeIn from 'react-fade-in';
 import moment from 'moment';
 import axios from 'axios';
 import './NewTrip.css';
@@ -122,25 +123,27 @@ class NewTrip extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
-			<div className="new-trip">
-				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
-					<Header
-						color={this.props.color}/>
-					<div style={{backgroundColor: `rgba(${this.props.color}, .20)`}} className="new-trip-wrapper">
-						<Location
-							getLocationInput={getLocationInput} />
-						<Budget
-							getBudgetInput={getBudgetInput}
-							color={this.props.color} />
-						<Calendar
-							getStartDateInput={getStartDateInput}
-							getEndDateInput={getEndDateInput}
-							getDayCount={getDayCount}
+			<FadeIn>
+				<div className="new-trip">
+					<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
+						<Header
 							color={this.props.color}/>
-					</div>
-					<button onClick={() => this.createTrip()} className="done-button" style={themeColor()}><i class="fas fa-check"></i></button>
-				</frosted-glass>
-			</div>
+						<div style={{backgroundColor: `rgba(${this.props.color}, .20)`}} className="new-trip-wrapper">
+							<Location
+								getLocationInput={getLocationInput} />
+							<Budget
+								getBudgetInput={getBudgetInput}
+								color={this.props.color} />
+							<Calendar
+								getStartDateInput={getStartDateInput}
+								getEndDateInput={getEndDateInput}
+								getDayCount={getDayCount}
+								color={this.props.color}/>
+						</div>
+						<button onClick={() => this.createTrip()} className="done-button" style={themeColor()}><i class="fas fa-check"></i></button>
+					</frosted-glass>
+				</div>
+			</FadeIn>
 		);
 	};
 };
