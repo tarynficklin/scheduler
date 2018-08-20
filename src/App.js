@@ -12,6 +12,7 @@ import Missing   from './components/Common/Missing';
 import Dashboard from './components/Dashboard';
 import NewTrip   from './components/NewTrip';
 import Insighter from './components/Insighter';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
     return (
       <frosted-glass-container>
         <div id="app" style={{background: `center fixed url(${this.props.background})`, backgroundSize: `cover`, minHeight: `100vh`, transition: `1s`}}>
+        <FadeIn delay="1000" transitionDuration="800">
           {
             user.user_name ? (
               <HashRouter>
@@ -34,6 +36,7 @@ class App extends Component {
               </HashRouter>
             ) : <Landing />
           }
+          </FadeIn>
         </div>
       </frosted-glass-container>
     );
