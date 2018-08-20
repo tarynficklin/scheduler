@@ -123,7 +123,7 @@ class NewTrip extends Component {
 		let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
 
 		return (
-			<FadeIn>
+			<FadeIn delay="500" transitionDuration="800">
 				<div className="new-trip">
 					<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
 						<Header

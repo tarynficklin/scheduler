@@ -15,7 +15,7 @@ class Landing extends Component {
   render(){
     let themeColor = () => {return {backgroundColor: `rgb(${this.props.color})`}};
     return(
-      <FadeIn>
+      <FadeIn transitionDuration="800">
         <div className="landing">
           <div className="logo-wrapper">
             <frosted-glass overlay-color="#FFFFFF50" blur-amount="1.6rem" class="logo">
