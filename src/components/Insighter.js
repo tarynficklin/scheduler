@@ -83,7 +83,7 @@ class Insighter extends Component {
 		return (
 			<FadeIn>
 			<div className="insighter">
-				<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="insighter-card">
+				<frosted-glass overlay-color="rgba(255, 255, 255, 0.5)" blur-amount="1.6rem" class="insighter-card">
 					<div className="trip-info">
 					<Header
 						location  = {trip_location}

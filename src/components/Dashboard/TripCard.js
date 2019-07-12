@@ -17,7 +17,7 @@ function TripCard (props) {
 	const {location, startDate, endDate, color} = props;
 	return (
 		<FadeIn>
-		<frosted-glass overlay-color="#ffffff50" class="trip-card" onClick={() => selectTrip(props)}>
+		<frosted-glass overlay-color="rgba(255, 255, 255, 0.5)" class="trip-card" onClick={() => selectTrip(props)}>
 			<div className="color-strip" style={{backgroundColor: `rgb(${color})`}}></div>
 			<h1>{location}</h1>
 			<a>{moment(startDate).format("MMMM DD YYYY")} - {moment(endDate).format("MMMM DD YYYY")}</a>

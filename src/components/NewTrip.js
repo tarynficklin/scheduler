@@ -125,7 +125,7 @@ class NewTrip extends Component {
 		return (
 			<FadeIn delay="500" transitionDuration="800">
 				<div className="new-trip">
-					<frosted-glass overlay-color="#ffffff50" blur-amount="1.6rem" class="new-trip-card">
+					<frosted-glass overlay-color="rgba(255, 255, 255, 0.5)" blur-amount="1.6rem" class="new-trip-card">
 						<Header
 							color={this.props.color}/>
 						<div style={{backgroundColor: `rgba(${this.props.color}, .20)`}} className="new-trip-wrapper">

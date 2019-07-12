@@ -28,7 +28,7 @@ class SettingsWidget extends Component {
 			<div className="settings-widget widget">
 				{
 				revealed ? 
-				<frosted-glass overlay-color="#ffffff70" blur-amount="1.6rem" class="widget-card">
+				<frosted-glass overlay-color="rgba(255, 255, 255, 0.7)" blur-amount="1.6rem" class="widget-card">
 				<div>
 					<input placeholder={location} onChange={(e) => getLocationInput(e.target.value)} onBlur={() => updateLocation(id)}/>
 					<div className="delete-button-wrapper" style={themeColor()}>

@@ -43,7 +43,7 @@ class PackingWidget extends Component {
 			<div className="packing-widget widget">
 			{
 				revealed ?
-				<frosted-glass overlay-color="#ffffff70" blur-amount="1.6rem" class="widget-card">
+				<frosted-glass overlay-color="rgba(255, 255, 255, 0.7)" blur-amount="1.6rem" class="widget-card">
 				<div>
 					<div className="list-banner" style={themeColor()}>
 						<h3>Packing List</h3>
