@@ -14,6 +14,8 @@ import NewTrip   from './components/NewTrip';
 import Insighter from './components/Insighter';
 import FadeIn from 'react-fade-in/lib/FadeIn';
 
+//testing mc tester beans...
+
 class App extends Component {
 
   componentDidMount () {axios.get('/api/user-data').then(res => this.props.updateUserData(res.data))};

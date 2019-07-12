@@ -14,17 +14,17 @@ CREATE TABLE users (
 	auth_profile TEXT
 );
 
-INSERT INTO users (user_id, user_name, user_email, auth_id, auth_profile)
-VALUES (1, 'Taryn Ficklin', 'tarynficklin@gmail.com', 'google-oauth2|100800992512531079080', 'https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg');
+INSERT INTO users (user_name, user_email, auth_id, auth_profile)
+VALUES ('Taryn Ficklin', 'tarynficklin@gmail.com', 'google-oauth2|100800992512531079080', 'https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg');
 
-INSERT INTO users (user_id, user_name, user_email, auth_id, auth_profile)
-VALUES (2, 'Taryn Ficklin', 'clayf700@gmail.com', 'google-oauth2|115352869833705350314', 'https://lh4.googleusercontent.com/-WtSvKjFYiXM/AAAAAAAAAAI/AAAAAAAAAHc/fXzUoy8H42A/photo.jpg');
+INSERT INTO users (user_name, user_email, auth_id, auth_profile)
+VALUES ('Taryn Ficklin', 'clayf700@gmail.com', 'google-oauth2|115352869833705350314', 'https://lh4.googleusercontent.com/-WtSvKjFYiXM/AAAAAAAAAAI/AAAAAAAAAHc/fXzUoy8H42A/photo.jpg');
 
-INSERT INTO users (user_id, user_name, user_email, auth_id, auth_profile)
-VALUES (3, 'TarynFicklin@gmail.com', 'TarynFicklin@gmail.com', 'github|38847691', 'https://avatars2.githubusercontent.com/u/38847691?v=4');
+INSERT INTO users (user_name, user_email, auth_id, auth_profile)
+VALUES ('TarynFicklin@gmail.com', 'TarynFicklin@gmail.com', 'github|38847691', 'https://avatars2.githubusercontent.com/u/38847691?v=4');
 
-INSERT INTO users (user_id, user_name, user_email, auth_id, auth_profile)
-VALUES (4, 'Taryn Ficklin', 'clayf700@gmail.com', 'facebook|1346171328848139', 'https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1346171328848139&height=50&width=50&ext=1536190305&hash=AeTPNLQ9xlGCTpxU');
+INSERT INTO users (user_name, user_email, auth_id, auth_profile)
+VALUES ('Taryn Ficklin', 'clayf700@gmail.com', 'facebook|1346171328848139', 'https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1346171328848139&height=50&width=50&ext=1536190305&hash=AeTPNLQ9xlGCTpxU');
 
 SELECT * FROM users;
 
