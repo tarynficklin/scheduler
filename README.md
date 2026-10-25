@@ -31,7 +31,9 @@ bun run db:seed      # drops and re-creates everything from backend/db/master_se
 last 7 days (`minimumReleaseAge = 604800`).
 
 Configuration lives in `backend/.env` (Bun loads it automatically; variables already set in your shell win, even empty
-ones). The frontend's `.env` only holds its dev server's `PORT` (default 3108) and `VITE_API_URL`, the API it proxies to (default: `http://localhost:` plus the backend's `PORT`):
+ones). The frontend's `.env` only holds its dev server's `PORT` (default 3108) and `VITE_API_URL`, the API (default: `http://localhost:` plus the backend's `PORT`). The dev server
+proxies to it, and a build calls it directly, e.g. `https://api.<domain>` deployed, with this site in the API's
+`ALLOWED_ORIGINS` (see `frontend/src/lib/apiBase.js`):
 
 | Variable | Used by |
 | --- | --- |
@@ -57,6 +59,9 @@ API's `UNSPLASH_KEY`) and `REACT_APP_USK` (an Unsplash secret key, which a searc
 ```sh
 bun run dev             # API, then Vite once the API's /health answers (Turborepo)
 bun run build           # production build into frontend/dist
+bun run build:frontend  # just the frontend (what Coolify's frontend builds with)
+bun run build:backend   # bundles backend/src into backend/dist to check its imports (it runs from src)
+bun run db:migrate      # create missing tables only (backend/db/schema.sql), no dev user or trips: before each deployed start
 bun run start:backend   # API that also serves frontend/dist, with NODE_ENV=production (no dev back door)
 bun run start:frontend  # preview frontend/dist with Vite on port 3108
 bun run test            # unit tests for both workspaces (bun test)
