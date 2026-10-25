@@ -38,8 +38,21 @@ class App extends Component {
   render() {
     const { user, background } = this.props;
     const { ready, donation } = this.state;
+    // Background longhands only: when the `background` shorthand changed, React re-applied
+    // it alone, which reset background-size to auto and tiled the wallpaper.
     return (
-      <div id="app" style={{ background: `center fixed url(${background})`, backgroundSize: `cover`, minHeight: `100vh`, transition: `1s` }}>
+      <div
+        id="app"
+        style={{
+          backgroundImage: background ? `url(${background})` : 'none',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh',
+          transition: '1s',
+        }}
+      >
         {donation ? (
           <div className="notice" role="status">
             <span>{DONATION_MESSAGES[donation]}</span>
