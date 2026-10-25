@@ -29,12 +29,12 @@ bun run db:seed      # drops and re-creates everything from backend/db/master_se
 last 7 days (`minimumReleaseAge = 604800`).
 
 Configuration lives in `backend/.env` (Bun loads it automatically; variables already set in your shell win, even empty
-ones). The frontend needs no `.env`:
+ones). The frontend's `.env` only holds its dev server's `PORT` (default 3108) and `VITE_API_URL`, the API it proxies to (default: `http://localhost:` plus the backend's `PORT`):
 
 | Variable | Used by |
 | --- | --- |
 | `DATABASE_URL` | API and `db:*` scripts: `postgres://user:password@host:port/scheduler` |
-| `API_PORT` | API port (default **4108**); the Vite proxy and `frontend/scripts/wait-for-api.js` follow it |
+| `PORT` | API port (default **4108**); `frontend/.env`'s `VITE_API_URL` points the Vite proxy and `frontend/scripts/wait-for-api.js` here |
 | `SESSION_SECRET` | API: signs the session cookie (falls back to a fixed dev string) |
 | `NODE_ENV` | `production` disables the dev back door (`bun run start` sets it) |
 | `STRIPE_SECRET_KEY` | API: donations through Stripe Checkout (unset: the API answers 503) |
@@ -60,10 +60,10 @@ bun run test            # unit tests for both workspaces (bun test)
 bun run lint            # Biome (also the pre-commit hook)
 ```
 
-In development open **http://localhost:3108**. Vite proxies `/api` to the API on `API_PORT` (read from
-`backend/.env`). Both ports are fixed so the legacy apps can run side by side. `API_PORT=5108 bun run dev` moves the
-API for a session, and the proxy follows. In `backend/`, `bun run dev` watches the API alone; in `frontend/`,
-`bun --bun vite --port 5208` runs Vite on another port.
+In development open **http://localhost:3108**. Vite proxies `/api` to `VITE_API_URL` (or the backend's `PORT`).
+The default ports are fixed so the legacy apps can run side by side; to move the API, change `backend/.env`'s `PORT`
+and `frontend/.env`'s `VITE_API_URL` together. A `PORT` set in the shell would reach both workspaces, so set ports in the `.env` files. In `backend/`, `bun run dev` watches the API
+alone.
 
 ## Login
 
