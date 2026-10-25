@@ -1,65 +1,65 @@
 .insighter {
-	height: 100vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .insighter-card {
-	width: 100%;
-	height: 500px;
-	margin-bottom: 5%;
-	display: flex;
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-	transition: 0.25s;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 5%;
+  display: flex;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  transition: 0.25s;
 }
 
 .insighter-card .glass-content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .trip-info {
-	height: 220px;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .trip-schedule {
-	height: 280px;
-	display: flex;
+  height: 280px;
+  display: flex;
 }
 
 .widget-wrapper {
-	position: absolute;
-	bottom: 6.5%;
-	display: flex;
+  position: absolute;
+  bottom: 6.5%;
+  display: flex;
 }
 
 .widget {
-	width: 25vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  width: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .widget h3 {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .widget-card {
-	position: absolute;
-	bottom: 70px;
-	border-radius: 3px;
-	overflow: hidden;
-	box-shadow: 0px 5px 25px 0px rgba(0,0,0,0.25);
+  position: absolute;
+  bottom: 70px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Pointer under an open widget card (color set inline per theme). A clipped box instead
@@ -67,57 +67,57 @@
    left a hairline gap under the card at 125% display scaling. It's 11px tall so its top
    1px tucks under the card's bottom edge (70px) and no rounding can open a seam. */
 .arrow {
-	position: absolute;
-	bottom: 60px;
-	width: 20px;
-	height: 11px;
-	clip-path: polygon(0 0, 100% 0, 50% 100%);
-	z-index: 1;
+  position: absolute;
+  bottom: 60px;
+  width: 20px;
+  height: 11px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 1;
 }
 
 .insighter button {
-	color: white;
-	border: none;
-	padding: 10px;
-	border-radius: 50px;
-	font-family: 'Titillium Web', sans-serif;
-	font-size: 16px;
-	text-transform: uppercase;
-	transition: 0.25s;
-	opacity: .75;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: 0.25s;
+  opacity: 0.75;
 }
 
 .insighter .exit-button {
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-	padding: 0;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	color: black;
-	background-color: transparent;
-	font-size: 20px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+  background-color: transparent;
+  font-size: 20px;
 }
 
 .insighter .exit-button:hover {
-	background-color: rgba(0,0,0,.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .insighter button:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .insighter .widget-button {
-	width: 45px;
-	height: 45px;
-	border-radius: 50%;
-	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-	opacity: .9;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  opacity: 0.9;
 }
 
 .insighter .done-button {
-	width: 100%;
+  width: 100%;
 }
 
 /* @media only screen and (max-height: 800px) {

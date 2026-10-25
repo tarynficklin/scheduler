@@ -13,7 +13,9 @@ export const dbDir = path.join(import.meta.dirname, '..', 'db');
 
 // Connection failures can be AggregateErrors (one per address tried) with an empty message.
 export function describeError(err) {
-  const inner = Array.isArray(err?.errors) ? err.errors.map((e) => e.message || e.code).filter(Boolean) : [];
+  const inner = Array.isArray(err?.errors)
+    ? err.errors.map((e) => e.message || e.code).filter(Boolean)
+    : [];
   return err?.message || inner.join('; ') || err?.code || String(err);
 }
 
@@ -51,7 +53,8 @@ export function loadQueries(sql, scriptsDir = dbDir) {
 
   for (const dir of readdirSync(scriptsDir, { withFileTypes: true })) {
     if (!dir.isDirectory()) continue;
-    const namespace = (db[dir.name] = {});
+    const namespace = {};
+    db[dir.name] = namespace;
     for (const file of readdirSync(path.join(scriptsDir, dir.name))) {
       if (!file.endsWith('.sql')) continue;
       const text = readFileSync(path.join(scriptsDir, dir.name, file), 'utf8');

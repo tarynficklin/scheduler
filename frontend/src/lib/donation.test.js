@@ -26,6 +26,11 @@ test('cancel return without a trip keeps the current hash', () => {
 test('no donation parameter: nothing happens', () => {
   const w = fakeWindow('http://localhost:3108/#/trip/3');
   expect(consumeDonationResult(w.location, w.history)).toBeNull();
-  expect(consumeDonationResult(fakeWindow('http://localhost:3108/?donation=<script>').location, w.history)).toBeNull();
+  expect(
+    consumeDonationResult(
+      fakeWindow('http://localhost:3108/?donation=<script>').location,
+      w.history,
+    ),
+  ).toBeNull();
   expect(w.replaced).toEqual([]);
 });

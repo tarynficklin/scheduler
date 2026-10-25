@@ -22,7 +22,12 @@ describe('formatLongDate (was moment(...).format("MMMM DD YYYY"))', () => {
 
 describe('daysBetween (was NewTrip.getDaysBetween)', () => {
   test('inclusive range across a month and year boundary', () => {
-    expect(daysBetween('2026-12-30', '2027-01-02')).toEqual(['December 30 2026', 'December 31 2026', 'January 01 2027', 'January 02 2027']);
+    expect(daysBetween('2026-12-30', '2027-01-02')).toEqual([
+      'December 30 2026',
+      'December 31 2026',
+      'January 01 2027',
+      'January 02 2027',
+    ]);
   });
 
   test('single day', () => {
@@ -30,8 +35,16 @@ describe('daysBetween (was NewTrip.getDaysBetween)', () => {
   });
 
   test('DST changes do not skip or repeat days', () => {
-    expect(daysBetween('2026-03-07', '2026-03-09')).toEqual(['March 07 2026', 'March 08 2026', 'March 09 2026']);
-    expect(daysBetween('2026-10-31', '2026-11-02')).toEqual(['October 31 2026', 'November 01 2026', 'November 02 2026']);
+    expect(daysBetween('2026-03-07', '2026-03-09')).toEqual([
+      'March 07 2026',
+      'March 08 2026',
+      'March 09 2026',
+    ]);
+    expect(daysBetween('2026-10-31', '2026-11-02')).toEqual([
+      'October 31 2026',
+      'November 01 2026',
+      'November 02 2026',
+    ]);
   });
 
   test('empty for a reversed or missing range, capped for huge ones', () => {

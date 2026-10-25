@@ -1,123 +1,121 @@
 .schedule-item {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	font-size: 16px;
-	background: rgba(255,255,255,.15);
-	border-radius: 3px;
-	overflow: hidden;
-	margin: 10px;
-	height: 45px;
-	width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 10px;
+  height: 45px;
+  width: 400px;
 }
 
 .schedule-item .item-title {
-	padding-left: 10px;
-	width: 230px;
-	overflow: hidden;
-	white-space: nowrap;
+  padding-left: 10px;
+  width: 230px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .schedule-item .item-price {
-	padding-right: 10px;
-	text-align: right;
-	width: 80px;
+  padding-right: 10px;
+  text-align: right;
+  width: 80px;
 }
 
 .schedule-item input {
-	margin: 0;
-	padding: 0;
-
+  margin: 0;
+  padding: 0;
 }
 
 .schedule-item .item-edit {
-	color: black;
-	background-color: transparent;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 45px;
-	height: 45px;
-	padding: 5px;
-	border-radius: 3px;
-	opacity: .5;
+  color: black;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+  border-radius: 3px;
+  opacity: 0.5;
 }
 
 .schedule-item .schedule-delete {
-	color: black;
-	background-color: transparent;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 45px;
-	height: 45px;
-	padding: 5px;
-	border-radius: 3px;
-	border-radius: 0;
-	transition: .25s
+  color: black;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+  border-radius: 0;
+  transition: 0.25s;
 }
 
 .schedule-item .schedule-delete:hover {
-	background: red;
-	color: white;
+  background: red;
+  color: white;
 }
 
 .schedule-item input {
-	background: transparent;
-	border-radius: 0;
-	font-family: 'Titillium Web', sans-serif;
-	font-size: 16px;
-	transition: .25s;
+  background: transparent;
+  border-radius: 0;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  transition: 0.25s;
 }
 
 .schedule-item input:focus {
-	background: white;
-	outline: none;
+  background: white;
+  outline: none;
 }
 
 .schedule-selected {
-	background: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .schedule-item .title-input {
-	height: 45px;
-	padding: 10px;
-	width: 240px;
+  height: 45px;
+  padding: 10px;
+  width: 240px;
 }
 
 .schedule-item .price-input {
-	height: 45px;
-	text-align: right;
-	width: 70px;
-	padding: 0 10px;
+  height: 45px;
+  text-align: right;
+  width: 70px;
+  padding: 0 10px;
 }
 
 .schedule-item .check-box {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 5px;
-	height: 45px;
-	width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  height: 45px;
+  width: 45px;
 }
 
 .schedule-item .checked {
-	color: white;
-	opacity: .75;
-	transition: 0.25s;
+  color: white;
+  opacity: 0.75;
+  transition: 0.25s;
 }
 
 .schedule-item .checked:hover {
-	color: white;
-	opacity: 1;
+  color: white;
+  opacity: 1;
 }
 
 .schedule-item .unchecked {
-	color: black;
-	opacity: 0.5;
-	transition: 0.25s;
+  color: black;
+  opacity: 0.5;
+  transition: 0.25s;
 }
 
 .schedule-item .unchecked:hover {
-	opacity: 1;
+  opacity: 1;
 }

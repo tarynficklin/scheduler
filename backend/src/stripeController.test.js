@@ -2,8 +2,8 @@
 // from .env and never talk to Stripe.
 import { describe, expect, test } from 'bun:test';
 import { Hono } from 'hono';
-import { checkoutSessionParams, createStripeController } from './controllers/stripeController.js';
 import { createApp } from './app.js';
+import { checkoutSessionParams, createStripeController } from './controllers/stripeController.js';
 
 // A tiny app with the payment route and a fake logged-in user.
 function appWith(controller) {
@@ -44,8 +44,13 @@ function mockStripe(impl) {
 
 describe('POST /api/payment', () => {
   test('creates a USD Checkout Session for the amount and returns its url', async () => {
-    const { calls, createClient } = mockStripe(() => ({ id: 'cs_test_123', url: 'https://checkout.stripe.com/c/pay/cs_test_123' }));
-    const app = appWith(createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient }));
+    const { calls, createClient } = mockStripe(() => ({
+      id: 'cs_test_123',
+      url: 'https://checkout.stripe.com/c/pay/cs_test_123',
+    }));
+    const app = appWith(
+      createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient }),
+    );
 
     const res = await post(app, { amount: 500, trip_id: 3 });
     expect(res.status).toBe(200);
@@ -56,7 +61,14 @@ describe('POST /api/payment', () => {
     const [params] = calls.params;
     expect(params.mode).toBe('payment');
     expect(params.line_items).toEqual([
-      { quantity: 1, price_data: { currency: 'usd', unit_amount: 500, product_data: { name: 'Donation to the Scheduler developer' } } },
+      {
+        quantity: 1,
+        price_data: {
+          currency: 'usd',
+          unit_amount: 500,
+          product_data: { name: 'Donation to the Scheduler developer' },
+        },
+      },
     ]);
     expect(params.success_url).toBe('http://localhost:3108/?donation=success&trip=3');
     expect(params.cancel_url).toBe('http://localhost:3108/?donation=cancelled&trip=3');
@@ -65,7 +77,9 @@ describe('POST /api/payment', () => {
 
   test('defaults to $5.00 and reuses the client', async () => {
     const { calls, createClient } = mockStripe(() => ({ url: 'https://checkout.stripe.com/x' }));
-    const app = appWith(createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient }));
+    const app = appWith(
+      createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient }),
+    );
     await post(app, {});
     await post(app, {});
     expect(calls.params.map((p) => p.line_items[0].price_data.unit_amount)).toEqual([500, 500]);
@@ -90,7 +104,9 @@ describe('POST /api/payment', () => {
       err.statusCode = 401;
       throw err;
     });
-    const app = appWith(createStripeController({ getSecretKey: () => 'sk_test_invalid', createClient }));
+    const app = appWith(
+      createStripeController({ getSecretKey: () => 'sk_test_invalid', createClient }),
+    );
     const originalError = console.error;
     const logged = [];
     console.error = (...args) => logged.push(args.join(' '));
@@ -108,7 +124,9 @@ describe('POST /api/payment', () => {
 
   test('rejects bad amounts with 400', async () => {
     const { calls, createClient } = mockStripe(() => ({ url: 'x' }));
-    const app = appWith(createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient }));
+    const app = appWith(
+      createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient }),
+    );
     for (const amount of [10, 5.5, -500, 'abc', 10_000_000]) {
       expect((await post(app, { amount })).status).toBe(400);
     }
@@ -116,14 +134,27 @@ describe('POST /api/payment', () => {
   });
 
   test('requires a logged-in user in the real app', async () => {
-    const app = createApp({ db: {}, stripeController: createStripeController({ getSecretKey: () => 'sk_test_mocked', createClient: () => { throw new Error('must not be called'); } }) });
+    const app = createApp({
+      db: {},
+      stripeController: createStripeController({
+        getSecretKey: () => 'sk_test_mocked',
+        createClient: () => {
+          throw new Error('must not be called');
+        },
+      }),
+    });
     const res = await post(app, { amount: 500 });
     expect(res.status).toBe(401);
   });
 });
 
 test('checkoutSessionParams without a trip', () => {
-  const params = checkoutSessionParams({ amount: 1234, origin: 'http://localhost:4108', tripId: null, userId: 1 });
+  const params = checkoutSessionParams({
+    amount: 1234,
+    origin: 'http://localhost:4108',
+    tripId: null,
+    userId: 1,
+  });
   expect(params.success_url).toBe('http://localhost:4108/?donation=success');
   expect(params.line_items[0].price_data.unit_amount).toBe(1234);
 });

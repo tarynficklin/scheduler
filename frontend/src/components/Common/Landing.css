@@ -1,140 +1,140 @@
 .landing {
-	min-height: 100vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .landing h1 {
-	font-size: 25px;
-	letter-spacing: 5px;
-	margin-bottom: 40px;
+  font-size: 25px;
+  letter-spacing: 5px;
+  margin-bottom: 40px;
 }
 
 .logo-wrapper {
-	text-transform: uppercase;
-	color: white;
-	text-shadow: 0px 0px 35px rgba(0, 0, 0, 1);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	padding: 16px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0px 0px 35px rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
 }
 
 .logo {
-	display: flex;
-	border-radius: 50%;
-	width: 200px;
-	height: 200px;
-	overflow: hidden;
-	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+  display: flex;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
 }
 
 .logo img {
-	width: 200px;
-	height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
 /* login / signup card (was a single Auth0 "Login" button) */
 .login-card {
-	width: 320px;
-	max-width: 100%;
-	border-radius: 5px;
-	overflow: hidden;
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-	text-shadow: none;
+  width: 320px;
+  max-width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  text-shadow: none;
 }
 
 .login-card form {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-tabs {
-	display: flex;
+  display: flex;
 }
 
 .landing .login-tabs button {
-	flex: 1;
-	padding: 12px 0;
-	color: black;
-	background: transparent;
-	opacity: .5;
+  flex: 1;
+  padding: 12px 0;
+  color: black;
+  background: transparent;
+  opacity: 0.5;
 }
 
 .landing .login-tabs button.active {
-	opacity: 1;
-	background: rgba(255, 255, 255, .35);
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .login-card input {
-	margin: 0;
-	padding: 15px;
-	height: 50px;
-	border-radius: 0;
-	border-top: 1px solid rgba(0, 0, 0, .08);
-	background: transparent;
-	font-size: 16px;
-	color: black;
+  margin: 0;
+  padding: 15px;
+  height: 50px;
+  border-radius: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+  font-size: 16px;
+  color: black;
 }
 
 .login-card input::placeholder {
-	text-transform: uppercase;
-	color: black;
-	opacity: .45;
+  text-transform: uppercase;
+  color: black;
+  opacity: 0.45;
 }
 
 .login-card input:focus {
-	outline: none;
-	background: rgba(255, 255, 255, .35);
+  outline: none;
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .login-error {
-	margin: 0;
-	padding: 10px 15px;
-	color: rgb(170, 20, 20);
-	font-size: 14px;
-	text-transform: none;
-	background: rgba(255, 255, 255, .5);
+  margin: 0;
+  padding: 10px 15px;
+  color: rgb(170, 20, 20);
+  font-size: 14px;
+  text-transform: none;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .landing button {
-	color: white;
-	border: none;
-	padding: 10px 80px;
-	width: 100%;
-	font-family: 'Titillium Web', sans-serif;
-	font-size: 16px;
-	text-transform: uppercase;
-	transition: 0.25s;
-	opacity: .75;
-	cursor: pointer;
+  color: white;
+  border: none;
+  padding: 10px 80px;
+  width: 100%;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: 0.25s;
+  opacity: 0.75;
+  cursor: pointer;
 }
 
 .landing button:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .landing .login-submit {
-	height: 50px;
+  height: 50px;
 }
 
 .landing .login-submit:disabled {
-	opacity: .5;
-	cursor: default;
+  opacity: 0.5;
+  cursor: default;
 }
 
 .dev-login {
-	margin-top: 20px;
-	color: white;
-	font-size: 13px;
-	letter-spacing: 2px;
-	opacity: .8;
+  margin-top: 20px;
+  color: white;
+  font-size: 13px;
+  letter-spacing: 2px;
+  opacity: 0.8;
 }
 
 .dev-login:hover {
-	opacity: 1;
+  opacity: 1;
 }

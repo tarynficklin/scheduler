@@ -35,21 +35,27 @@ export default {
   // POST /api/trips -> [trip]. user_id always comes from the session.
   create: async (c) => {
     const body = await readJson(c);
-    const tripId = body.trip_id === undefined || body.trip_id === null || body.trip_id === 0 ? null : toId(body.trip_id, 'trip_id');
+    const tripId =
+      body.trip_id === undefined || body.trip_id === null || body.trip_id === 0
+        ? null
+        : toId(body.trip_id, 'trip_id');
     try {
-      const rows = await c.get('db').trips.trip_create([
-        tripId,
-        c.get('userId'),
-        toText(body.trip_location, 'Location', { max: 200 }),
-        toText(body.trip_start_date, 'Start date', DATE),
-        toText(body.trip_end_date, 'End date', DATE),
-        toAmount(body.trip_budget, 'Budget'),
-        toText(body.trip_background, 'Background', { max: 2000 }),
-        toText(body.trip_bg_color, 'Color', { max: 100 }),
-      ]);
+      const rows = await c
+        .get('db')
+        .trips.trip_create([
+          tripId,
+          c.get('userId'),
+          toText(body.trip_location, 'Location', { max: 200 }),
+          toText(body.trip_start_date, 'Start date', DATE),
+          toText(body.trip_end_date, 'End date', DATE),
+          toAmount(body.trip_budget, 'Budget'),
+          toText(body.trip_background, 'Background', { max: 2000 }),
+          toText(body.trip_bg_color, 'Color', { max: 100 }),
+        ]);
       return c.json(rows);
     } catch (err) {
-      if (err.errno === '23505' || err.code === '23505') return c.json({ error: 'That trip id is already taken.' }, 409);
+      if (err.errno === '23505' || err.code === '23505')
+        return c.json({ error: 'That trip id is already taken.' }, 409);
       throw err;
     }
   },
@@ -57,14 +63,16 @@ export default {
   // PUT /api/trips/:id { trip_location, trip_start_date, trip_end_date, trip_budget }
   update: async (c) => {
     const body = await readJson(c);
-    const rows = await c.get('db').trips.trip_update([
-      toText(body.trip_location, 'Location', { max: 200 }),
-      toText(body.trip_start_date, 'Start date', DATE),
-      toText(body.trip_end_date, 'End date', DATE),
-      toAmount(body.trip_budget, 'Budget'),
-      idParam(c),
-      c.get('userId'),
-    ]);
+    const rows = await c
+      .get('db')
+      .trips.trip_update([
+        toText(body.trip_location, 'Location', { max: 200 }),
+        toText(body.trip_start_date, 'Start date', DATE),
+        toText(body.trip_end_date, 'End date', DATE),
+        toAmount(body.trip_budget, 'Budget'),
+        idParam(c),
+        c.get('userId'),
+      ]);
     return rows.length ? c.json(rows) : notFound(c, 'Trip not found.');
   },
 

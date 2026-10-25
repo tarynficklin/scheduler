@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import withRouter from '../lib/withRouter';
 import api from '../lib/api';
+import withRouter from '../lib/withRouter';
 import FadeIn from './Common/FadeIn';
-
-import UserButton from './Dashboard/UserButton';
 import TripCard from './Dashboard/TripCard';
+import UserButton from './Dashboard/UserButton';
 import './Dashboard.css';
 
 class Dashboard extends Component {

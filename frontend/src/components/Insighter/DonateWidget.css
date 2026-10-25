@@ -1,54 +1,54 @@
 .donate-widget .widget-card {
-	width: 300px;
-	text-align: center;
+  width: 300px;
+  text-align: center;
 }
 
 .donate-widget h3 {
-	margin: 20px 0;
-	text-transform: uppercase;
+  margin: 20px 0;
+  text-transform: uppercase;
 }
 
 .donate-widget p {
-	font-style: italic;
-	opacity: 0.5;
-	padding: 0;
-	margin: 0;
+  font-style: italic;
+  opacity: 0.5;
+  padding: 0;
+  margin: 0;
 }
 
 .donate-widget .donate-error {
-	margin: 15px 15px 0 15px;
-	font-style: normal;
-	opacity: 1;
-	color: rgb(170, 20, 20);
+  margin: 15px 15px 0 15px;
+  font-style: normal;
+  opacity: 1;
+  color: rgb(170, 20, 20);
 }
 
 .donate-footer {
-	margin-top: 25px;
-	text-transform: uppercase;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 45px;
-	width: 100%;
+  margin-top: 25px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  width: 100%;
 }
 
 /* The whole footer is the donate button (it used to be react-stripe-checkout's button). */
 .insighter .donate-widget .donate-button {
-	height: 45px;
-	width: 100%;
-	padding: 0;
-	border-radius: 0;
-	white-space: pre;
-	background: transparent;
-	color: white;
-	cursor: pointer;
+  height: 45px;
+  width: 100%;
+  padding: 0;
+  border-radius: 0;
+  white-space: pre;
+  background: transparent;
+  color: white;
+  cursor: pointer;
 }
 
 .insighter .donate-widget .donate-button:hover {
-	background: rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .insighter .donate-widget .donate-button:disabled {
-	cursor: default;
-	opacity: .75;
+  cursor: default;
+  opacity: 0.75;
 }

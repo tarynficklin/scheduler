@@ -4,7 +4,13 @@
 //   transitionDuration  ms per child (default 400)
 import React, { Children } from 'react';
 
-export default function FadeIn({ delay = 50, transitionDuration = 400, className, childClassName, children }) {
+export default function FadeIn({
+  delay = 50,
+  transitionDuration = 400,
+  className,
+  childClassName,
+  children,
+}) {
   const step = Number(delay) || 0;
   const duration = Number(transitionDuration) || 0;
   return (
@@ -17,7 +23,7 @@ export default function FadeIn({ delay = 50, transitionDuration = 400, className
           >
             {child}
           </div>
-        )
+        ),
       )}
     </div>
   );

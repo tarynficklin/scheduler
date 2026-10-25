@@ -1,48 +1,52 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
-* {box-sizing: border-box}
+* {
+  box-sizing: border-box;
+}
 
 body {
-	font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 input {
-	font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 button input {
-	font-family: 'Titillium Web', sans-serif;
-	transition: .25s;
+  font-family: 'Titillium Web', sans-serif;
+  transition: 0.25s;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=date]::-webkit-inner-spin-button, 
-input[type=date]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-button:focus {outline:0;}
+button:focus {
+  outline: 0;
+}
 
 .glass-content {
-	width: 100%;
+  width: 100%;
 }
 
 input {
-	background: rgba(255,255,255,0.5);
-	border: none;
-	padding: 5px;
-	margin: 5px;
-	border-radius: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
 }
 
 #app {
-	background: #000;
-	background-size: cover;
-	min-height: 100vh;
-	transition: 1s;
+  background: #000;
+  background-size: cover;
+  min-height: 100vh;
+  transition: 1s;
 }

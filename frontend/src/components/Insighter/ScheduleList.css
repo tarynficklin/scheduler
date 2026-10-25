@@ -1,49 +1,49 @@
 .schedule-list {
-	height: 280px;
-	max-width: 1260px;
-	display: flex;
-	flex-direction: row;
-	align-items: top;
-	justify-content: flex-start;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	overflow-y: scroll;
+  height: 280px;
+  max-width: 1260px;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-y: scroll;
 }
 
 .schedule-list .new-item {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	text-transform: uppercase;
-	font-size: 16px;
-	background: rgba(255,255,255,.15);
-	border-radius: 3px;
-	overflow: hidden;
-	margin: 10px;
-	height: 45px;
-	width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 10px;
+  height: 45px;
+  width: 400px;
 }
 
 .empty-schedule {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	padding-bottom: 20px;
-	font-size: 20px;
-	font-style: italic;
-	opacity: .5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-style: italic;
+  opacity: 0.5;
 }
 
 @media only screen and (max-width: 1260px) {
-	.schedule-list {
-		width: 840px;
-	}
+  .schedule-list {
+    width: 840px;
+  }
 }
 
 @media only screen and (max-width: 840) {
-	.schedule-list {
-		width: 420px;
-	}
+  .schedule-list {
+    width: 420px;
+  }
 }

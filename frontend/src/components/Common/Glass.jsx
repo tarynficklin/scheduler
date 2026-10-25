@@ -5,7 +5,14 @@
 //   <Glass className="trip-card" overlayColor="rgba(255, 255, 255, 0.5)" blurAmount="1.6rem">
 import React from 'react';
 
-export default function Glass({ className = '', overlayColor, blurAmount, style, children, ...rest }) {
+export default function Glass({
+  className = '',
+  overlayColor,
+  blurAmount,
+  style,
+  children,
+  ...rest
+}) {
   const vars = {};
   if (overlayColor) vars['--glass-overlay'] = overlayColor;
   if (blurAmount) vars['--glass-blur'] = blurAmount;

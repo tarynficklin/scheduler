@@ -28,7 +28,11 @@ function Landing({ color, updateUserData }) {
     setError('');
     try {
       const { data: user } = isSignup
-        ? await api.post('/api/signup', { username: fields.username, email: fields.email, password: fields.password })
+        ? await api.post('/api/signup', {
+            username: fields.username,
+            email: fields.email,
+            password: fields.password,
+          })
         : await api.post('/api/login', { login: fields.login, password: fields.password });
       updateUserData(user);
     } catch (err) {
@@ -53,21 +57,56 @@ function Landing({ color, updateUserData }) {
           <Glass overlayColor="rgba(255, 255, 255, 0.5)" blurAmount="1.6rem" className="login-card">
             <form onSubmit={submit}>
               <div className="login-tabs" role="tablist">
-                <button type="button" role="tab" aria-selected={!isSignup} className={!isSignup ? 'active' : ''} onClick={() => switchMode('login')}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={!isSignup}
+                  className={!isSignup ? 'active' : ''}
+                  onClick={() => switchMode('login')}
+                >
                   Log in
                 </button>
-                <button type="button" role="tab" aria-selected={isSignup} className={isSignup ? 'active' : ''} onClick={() => switchMode('signup')}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={isSignup}
+                  className={isSignup ? 'active' : ''}
+                  onClick={() => switchMode('signup')}
+                >
                   Sign up
                 </button>
               </div>
 
               {isSignup ? (
                 <>
-                  <input value={fields.username} onChange={update('username')} placeholder="username" autoComplete="username" aria-label="Username" autoFocus required />
-                  <input type="email" value={fields.email} onChange={update('email')} placeholder="email (optional)" autoComplete="email" aria-label="Email" />
+                  <input
+                    value={fields.username}
+                    onChange={update('username')}
+                    placeholder="username"
+                    autoComplete="username"
+                    aria-label="Username"
+                    autoFocus
+                    required
+                  />
+                  <input
+                    type="email"
+                    value={fields.email}
+                    onChange={update('email')}
+                    placeholder="email (optional)"
+                    autoComplete="email"
+                    aria-label="Email"
+                  />
                 </>
               ) : (
-                <input value={fields.login} onChange={update('login')} placeholder="username or email" autoComplete="username" aria-label="Username or email" autoFocus required />
+                <input
+                  value={fields.login}
+                  onChange={update('login')}
+                  placeholder="username or email"
+                  autoComplete="username"
+                  aria-label="Username or email"
+                  autoFocus
+                  required
+                />
               )}
               <input
                 type="password"
@@ -79,7 +118,11 @@ function Landing({ color, updateUserData }) {
                 required
               />
 
-              {error ? <p className="login-error" role="alert">{error}</p> : null}
+              {error ? (
+                <p className="login-error" role="alert">
+                  {error}
+                </p>
+              ) : null}
 
               <button type="submit" className="login-submit" style={themeColor} disabled={busy}>
                 {busy ? '...' : isSignup ? 'Create account' : 'Login'}

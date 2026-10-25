@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { deleteUser } from '../../ducks/auth';
 import api from '../../lib/api';
 import './UserButton.css';
@@ -28,7 +28,12 @@ class UserButton extends Component {
     const background = loggingOut ? 'red' : `rgb(${color})`;
     // Auth0 supplied a profile picture; local accounts show their initial instead.
     const avatar = (
-      <button className="profile-pic" onClick={() => this.toggleLogOut()} title={user.user_name} aria-label="Account">
+      <button
+        className="profile-pic"
+        onClick={() => this.toggleLogOut()}
+        title={user.user_name}
+        aria-label="Account"
+      >
         {(user.user_name || '?').charAt(0).toUpperCase()}
       </button>
     );

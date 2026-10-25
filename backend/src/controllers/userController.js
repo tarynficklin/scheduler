@@ -10,8 +10,10 @@ export default {
   // PUT /api/users/:id { user_name?, user_email? } (own account only)
   update: async (c) => {
     const body = await readJson(c);
-    const name = body.user_name === undefined ? null : toText(body.user_name, 'Username', { max: 100 }).trim();
-    const email = body.user_email === undefined ? null : toText(body.user_email, 'Email', { max: 100 }).trim();
+    const name =
+      body.user_name === undefined ? null : toText(body.user_name, 'Username', { max: 100 }).trim();
+    const email =
+      body.user_email === undefined ? null : toText(body.user_email, 'Email', { max: 100 }).trim();
     if (name === '' || (name && name.includes('@'))) {
       return c.json({ error: 'Usernames cannot be empty or contain "@".' }, 400);
     }

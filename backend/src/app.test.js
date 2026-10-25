@@ -9,7 +9,9 @@ beforeAll(async () => {
 });
 
 function fakeDb() {
-  const users = [{ user_id: 1, user_name: 'dev', user_email: 'dev@scheduler.test', password_hash: devHash }];
+  const users = [
+    { user_id: 1, user_name: 'dev', user_email: 'dev@scheduler.test', password_hash: devHash },
+  ];
   const trips = [
     { trip_id: 1, user_id: 1, trip_location: 'New York' },
     { trip_id: 2, user_id: 2, trip_location: 'Elsewhere' },
@@ -17,10 +19,14 @@ function fakeDb() {
   const publicUser = ({ password_hash, ...u }) => u;
   return {
     users: {
-      user_find: async ([login]) => users.filter((u) => [u.user_name, u.user_email].some((v) => v?.toLowerCase() === login.toLowerCase())),
+      user_find: async ([login]) =>
+        users.filter((u) =>
+          [u.user_name, u.user_email].some((v) => v?.toLowerCase() === login.toLowerCase()),
+        ),
       user_read: async ([id]) => users.filter((u) => u.user_id === id).map(publicUser),
       user_create: async ([user_name, user_email, password_hash]) => {
-        if (users.some((u) => u.user_name.toLowerCase() === user_name.toLowerCase())) throw Object.assign(new Error('duplicate'), { errno: '23505' });
+        if (users.some((u) => u.user_name.toLowerCase() === user_name.toLowerCase()))
+          throw Object.assign(new Error('duplicate'), { errno: '23505' });
         const user = { user_id: users.length + 1, user_name, user_email, password_hash };
         users.push(user);
         return [publicUser(user)];
@@ -28,12 +34,17 @@ function fakeDb() {
     },
     trips: {
       trip_read: async ([userId]) => trips.filter((t) => t.user_id === userId),
-      trip_find: async ([id, userId]) => trips.filter((t) => t.trip_id === id && t.user_id === userId),
+      trip_find: async ([id, userId]) =>
+        trips.filter((t) => t.trip_id === id && t.user_id === userId),
     },
   };
 }
 
-const json = (body) => ({ method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+const json = (body) => ({
+  method: 'POST',
+  headers: { 'content-type': 'application/json' },
+  body: JSON.stringify(body),
+});
 const cookieFrom = (res) => res.headers.get('set-cookie')?.split(';')[0];
 
 describe('auth', () => {
@@ -41,7 +52,10 @@ describe('auth', () => {
     const app = createApp({ db: fakeDb(), isProduction: false });
     expect((await app.request('/api/user-data')).status).toBe(401);
 
-    const signup = await app.request('/api/signup', json({ username: 'casey', email: 'casey@example.test', password: 'hunter22' }));
+    const signup = await app.request(
+      '/api/signup',
+      json({ username: 'casey', email: 'casey@example.test', password: 'hunter22' }),
+    );
     expect(signup.status).toBe(201);
     const user = await signup.json();
     expect(user).toEqual({ user_id: 2, user_name: 'casey', user_email: 'casey@example.test' });
@@ -59,9 +73,15 @@ describe('auth', () => {
 
   test('signup validation and duplicates', async () => {
     const app = createApp({ db: fakeDb() });
-    expect((await app.request('/api/signup', json({ username: 'x', password: '123' }))).status).toBe(400);
-    expect((await app.request('/api/signup', json({ username: 'a@b', password: 'long-enough' }))).status).toBe(400);
-    expect((await app.request('/api/signup', json({ username: 'DEV', password: 'long-enough' }))).status).toBe(409);
+    expect(
+      (await app.request('/api/signup', json({ username: 'x', password: '123' }))).status,
+    ).toBe(400);
+    expect(
+      (await app.request('/api/signup', json({ username: 'a@b', password: 'long-enough' }))).status,
+    ).toBe(400);
+    expect(
+      (await app.request('/api/signup', json({ username: 'DEV', password: 'long-enough' }))).status,
+    ).toBe(409);
   });
 
   test('login by username or email; wrong password is a 401', async () => {
@@ -69,10 +89,18 @@ describe('auth', () => {
     for (const login of ['dev', 'DEV@scheduler.test']) {
       const res = await app.request('/api/login', json({ login, password: 'scheduler-dev' }));
       expect(res.status).toBe(200);
-      expect(await res.json()).toEqual({ user_id: 1, user_name: 'dev', user_email: 'dev@scheduler.test' });
+      expect(await res.json()).toEqual({
+        user_id: 1,
+        user_name: 'dev',
+        user_email: 'dev@scheduler.test',
+      });
     }
-    expect((await app.request('/api/login', json({ login: 'dev', password: 'nope-nope' }))).status).toBe(401);
-    expect((await app.request('/api/login', json({ login: 'nobody', password: 'nope-nope' }))).status).toBe(401);
+    expect(
+      (await app.request('/api/login', json({ login: 'dev', password: 'nope-nope' }))).status,
+    ).toBe(401);
+    expect(
+      (await app.request('/api/login', json({ login: 'nobody', password: 'nope-nope' }))).status,
+    ).toBe(401);
   });
 
   test('dev back door exists outside production only', async () => {
@@ -81,14 +109,20 @@ describe('auth', () => {
     expect(dev.headers.get('location')).toBe('/#/');
     expect(cookieFrom(dev)).toStartWith('scheduler_session=');
 
-    const prod = await createApp({ db: fakeDb(), isProduction: true, buildDir: '/nonexistent' }).request('/api/dev/login');
+    const prod = await createApp({
+      db: fakeDb(),
+      isProduction: true,
+      buildDir: '/nonexistent',
+    }).request('/api/dev/login');
     expect(prod.status).toBe(404);
   });
 });
 
 describe('scoping', () => {
   async function devCookie(app) {
-    return cookieFrom(await app.request('/api/login', json({ login: 'dev', password: 'scheduler-dev' })));
+    return cookieFrom(
+      await app.request('/api/login', json({ login: 'dev', password: 'scheduler-dev' })),
+    );
   }
 
   test('data routes need a session', async () => {
@@ -118,12 +152,16 @@ describe('scoping', () => {
     expect((await app.request('/api/trips/trip/1', { headers: { cookie } })).status).toBe(200);
     expect((await app.request('/api/trips/trip/2', { headers: { cookie } })).status).toBe(404);
     expect((await app.request('/api/trips/trip/abc', { headers: { cookie } })).status).toBe(400);
-    expect((await app.request('/api/users/2', { method: 'PUT', headers: { cookie } })).status).toBe(403);
+    expect((await app.request('/api/users/2', { method: 'PUT', headers: { cookie } })).status).toBe(
+      403,
+    );
   });
 
   test('a forged cookie is ignored', async () => {
     const app = createApp({ db: fakeDb() });
-    const res = await app.request('/api/user-data', { headers: { cookie: 'scheduler_session=1.forged' } });
+    const res = await app.request('/api/user-data', {
+      headers: { cookie: 'scheduler_session=1.forged' },
+    });
     expect(res.status).toBe(401);
   });
 

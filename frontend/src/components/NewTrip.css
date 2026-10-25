@@ -1,55 +1,55 @@
 .new-trip {
-	height: 100vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .new-trip-card {
-	width: 600px;
-	margin: auto;
-	display: flex;
-	border-radius: 5px;
-	overflow: hidden;
-	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
-	transition: 0.25s;
+  width: 600px;
+  margin: auto;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  transition: 0.25s;
 }
 
 .new-trip-card .glass-content {
-	width: 100%;
+  width: 100%;
 }
 
 .new-trip-wrapper {
-	display: flex;
-	width: 100%;
-	transition: 0.25s;
-	flex-direction: column;
-	justify-content: space-around;
+  display: flex;
+  width: 100%;
+  transition: 0.25s;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .new-trip input {
-	color: white;
-	padding: 15px;
-	margin: 0px;
-	width: 600px;
-	height: 60px;
-	border-radius: 0;
-	transition: .25s;
-	background: transparent;
+  color: white;
+  padding: 15px;
+  margin: 0px;
+  width: 600px;
+  height: 60px;
+  border-radius: 0;
+  transition: 0.25s;
+  background: transparent;
 }
 
 .new-trip input::placeholder {
-	text-transform: uppercase;
-	color: white;
-	opacity: .75;
+  text-transform: uppercase;
+  color: white;
+  opacity: 0.75;
 }
 
 .new-trip input:focus {
-	outline: none;
-	opacity: 1;
-	background: rgba(255,255,255,.25);
+  outline: none;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.25);
 }
 
 /* .location, .budget {
@@ -62,56 +62,56 @@
 } */
 
 .new-trip button {
-	color: white;
-	border: none;
-	padding: 10px;
-	font-family: 'Titillium Web', sans-serif;
-	font-size: 16px;
-	text-transform: uppercase;
-	transition: 0.25s;
-	opacity: .75;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: 0.25s;
+  opacity: 0.75;
 }
 
 .new-trip button:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .new-trip .exit-button {
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-	padding: 0;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	color: black;
-	background-color: transparent;
-	font-size: 20px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+  background-color: transparent;
+  font-size: 20px;
 }
 
 .new-trip .exit-button:hover {
-	background-color: rgba(0,0,0,.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .new-trip .done-button {
-	width: 100%;
+  width: 100%;
 }
 .new-trip-error {
-	margin: 0;
-	padding: 10px 15px;
-	color: rgb(170, 20, 20);
-	background: rgba(255, 255, 255, .5);
+  margin: 0;
+  padding: 10px 15px;
+  color: rgb(170, 20, 20);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .new-trip .done-button:disabled {
-	opacity: .5;
+  opacity: 0.5;
 }
 
 /* The fixed 600px card and inputs shrink on narrow screens. */
 .new-trip-card {
-	max-width: calc(100vw - 32px);
+  max-width: calc(100vw - 32px);
 }
 
 .new-trip input {
-	max-width: 100%;
+  max-width: 100%;
 }

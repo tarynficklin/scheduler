@@ -1,59 +1,68 @@
 .user-wrapper {
-	position: fixed;
-	width: 100%;
-	height: 100px;
-	display: flex;
-	align-content: center;
-	justify-content: center;
-	z-index: 1;
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  z-index: 1;
 }
 
 .user-button {
-	border-radius: 50px;
-	overflow: hidden;
-	height: 50px;
-	width: 250px;
-	display: flex;
-	box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.25);
-	transition: 0.25s;
-	margin: auto;
-	background-size: 10px;
+  border-radius: 50px;
+  overflow: hidden;
+  height: 50px;
+  width: 250px;
+  display: flex;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
+  transition: 0.25s;
+  margin: auto;
+  background-size: 10px;
 }
 
 .user-div {
-	display: flex;
+  display: flex;
 }
 
 .user-button button {
-	white-space: pre;
-	height: 50px;
-	outline: none;
-	border: none;
-	padding: 10px 20px;
-	color: white;
-	text-transform: uppercase;
-	transition: 0.25s;
+  white-space: pre;
+  height: 50px;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  text-transform: uppercase;
+  transition: 0.25s;
 }
 
 .user-button button:hover {
-	background: rgba(0, 0, 0, .25);
+  background: rgba(0, 0, 0, 0.25);
 }
 
-.user-button .new-button {width: 200px; background: rgba(0, 0, 0, 0);}
-.user-button .exit-button {width: 50px; background: rgba(0, 0, 0, 0.1);}
-.user-button .logout-button {width: 150px; background: rgba(0, 0, 0, 0);}
+.user-button .new-button {
+  width: 200px;
+  background: rgba(0, 0, 0, 0);
+}
+.user-button .exit-button {
+  width: 50px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.user-button .logout-button {
+  width: 150px;
+  background: rgba(0, 0, 0, 0);
+}
 
 .profile-pic {
-	height: 50px;
-	width: 50px;
-	transition: 0.25s;
+  height: 50px;
+  width: 50px;
+  transition: 0.25s;
 }
 /* The Auth0 profile picture is gone: local accounts show their initial. */
 .user-button .profile-pic {
-	width: 50px;
-	padding: 0;
-	font-size: 20px;
-	font-family: 'Titillium Web', sans-serif;
-	background: rgba(0, 0, 0, 0.2);
-	cursor: pointer;
+  width: 50px;
+  padding: 0;
+  font-size: 20px;
+  font-family: 'Titillium Web', sans-serif;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }

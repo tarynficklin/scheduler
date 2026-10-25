@@ -7,7 +7,13 @@ export default function Schedule(props) {
   return (
     <div className="schedule">
       {schedule.map((e) => (
-        <ScheduleList key={e.schedule_id} id={e.schedule_id} date={e.schedule_date} currentSchedule={currentSchedule} color={props.color} />
+        <ScheduleList
+          key={e.schedule_id}
+          id={e.schedule_id}
+          date={e.schedule_date}
+          currentSchedule={currentSchedule}
+          color={props.color}
+        />
       ))}
     </div>
   );

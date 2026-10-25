@@ -10,19 +10,19 @@ import { HTTPException } from 'hono/http-exception';
 
 //CONTROLLERS
 import authController, { requireSelf, requireUser } from './controllers/authController.js';
-import userController from './controllers/userController.js';
-import tripController from './controllers/tripController.js';
 import listController from './controllers/listController.js';
 import scheduleController from './controllers/scheduleController.js';
 import defaultStripeController from './controllers/stripeController.js';
+import tripController from './controllers/tripController.js';
+import userController from './controllers/userController.js';
 import { describeError } from './db.js';
 
 // Postgres errors caused by bad input rather than a server fault.
 const CLIENT_ERRORS = {
-  '22001': 'A value is too long.',
-  '22003': 'A number is out of range.',
+  22001: 'A value is too long.',
+  22003: 'A number is out of range.',
   '22P02': 'Invalid value.',
-  '23503': 'That record does not exist.',
+  23503: 'That record does not exist.',
 };
 
 export function createApp({
@@ -41,7 +41,13 @@ export function createApp({
     c.set('db', db);
     await next();
   });
-  app.use('/api/*', bodyLimit({ maxSize: 1024 * 1024, onError: (c) => c.json({ error: 'Request body too large.' }, 413) }));
+  app.use(
+    '/api/*',
+    bodyLimit({
+      maxSize: 1024 * 1024,
+      onError: (c) => c.json({ error: 'Request body too large.' }, 413),
+    }),
+  );
 
   //AUTH ENDPOINTS (local login; Auth0 and /auth/callback are gone)
   app.post('/api/signup', authController.signup);
@@ -120,7 +126,9 @@ export function createApp({
     if (err instanceof HTTPException) return c.json({ error: err.message }, err.status);
     const code = err?.errno ?? err?.code;
     if (CLIENT_ERRORS[code]) return c.json({ error: CLIENT_ERRORS[code] }, 400);
-    console.error(`${c.req.method} ${c.req.path} failed: ${code ? `[${code}] ` : ''}${describeError(err)}`);
+    console.error(
+      `${c.req.method} ${c.req.path} failed: ${code ? `[${code}] ` : ''}${describeError(err)}`,
+    );
     return c.json({ error: 'Server error.' }, 500);
   });
 

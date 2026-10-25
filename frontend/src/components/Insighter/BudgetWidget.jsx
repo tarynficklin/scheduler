@@ -38,10 +38,16 @@ class BudgetWidget extends Component {
     return (
       <div className="budget-widget widget">
         {revealed ? (
-          <Glass overlayColor="rgba(255, 255, 255, 0.7)" blurAmount="1.6rem" className="widget-card">
+          <Glass
+            overlayColor="rgba(255, 255, 255, 0.7)"
+            blurAmount="1.6rem"
+            className="widget-card"
+          >
             <div>
               <p>Total spent:</p>
-              <h1 style={{ color: overBudget ? 'red' : null }}>{!budgetTotal ? `$0` : `$${budgetTotal}`}</h1>
+              <h1 style={{ color: overBudget ? 'red' : null }}>
+                {!budgetTotal ? `$0` : `$${budgetTotal}`}
+              </h1>
               <div className="budget-footer" style={themeColor}>
                 <input
                   onChange={(e) => getBudgetInput(e.target.value)}
@@ -55,8 +61,15 @@ class BudgetWidget extends Component {
             </div>
           </Glass>
         ) : null}
-        {revealed ? <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div> : null}
-        <button onClick={() => this.revealWidget()} className="widget-button" style={themeColor} aria-label="Budget">
+        {revealed ? (
+          <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div>
+        ) : null}
+        <button
+          onClick={() => this.revealWidget()}
+          className="widget-button"
+          style={themeColor}
+          aria-label="Budget"
+        >
           <i className="fas fa-dollar-sign"></i>
         </button>
       </div>

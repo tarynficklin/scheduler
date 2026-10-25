@@ -19,7 +19,8 @@ class ScheduleItem extends Component {
 
   // The list can switch every item into edit mode; each item can also toggle its own.
   componentDidUpdate(prevProps) {
-    if (prevProps.editMode !== this.props.editMode) this.setState({ editMode: Boolean(this.props.editMode) });
+    if (prevProps.editMode !== this.props.editMode)
+      this.setState({ editMode: Boolean(this.props.editMode) });
   }
 
   getTitleInput(val) {
@@ -60,7 +61,11 @@ class ScheduleItem extends Component {
           <i className="fas fa-edit"></i>
         </button>
         {checked ? (
-          <div onClick={() => this.toggleChecked(id)} className="check-box checked" style={themeColor}>
+          <div
+            onClick={() => this.toggleChecked(id)}
+            className="check-box checked"
+            style={themeColor}
+          >
             <i className="fas fa-check"></i>
           </div>
         ) : (
@@ -71,7 +76,14 @@ class ScheduleItem extends Component {
       </div>
     ) : (
       <div className="schedule-item schedule-selected">
-        <input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} className="title-input" maxLength={100} aria-label="Title" />
+        <input
+          onChange={(e) => this.getTitleInput(e.target.value)}
+          onBlur={() => this.updateTitle(id)}
+          value={title}
+          className="title-input"
+          maxLength={100}
+          aria-label="Title"
+        />
         <input
           onChange={(e) => this.getPriceInput(e.target.value)}
           onBlur={() => this.updatePrice(id)}
@@ -81,10 +93,18 @@ class ScheduleItem extends Component {
           className="price-input"
           aria-label="Price"
         />
-        <button className="item-edit" onClick={() => this.toggleEditMode()} aria-label="Done editing">
+        <button
+          className="item-edit"
+          onClick={() => this.toggleEditMode()}
+          aria-label="Done editing"
+        >
           <i className="fas fa-edit"></i>
         </button>
-        <button onClick={() => this.deleteItem(id)} className="schedule-delete" aria-label="Delete item">
+        <button
+          onClick={() => this.deleteItem(id)}
+          className="schedule-delete"
+          aria-label="Delete item"
+        >
           <i className="fas fa-trash-alt"></i>
         </button>
       </div>

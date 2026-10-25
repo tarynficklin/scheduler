@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PackingItem from './PackingItem';
 import api from '../../lib/api';
 import Glass from '../Common/Glass';
+import PackingItem from './PackingItem';
 import './PackingWidget.css';
 
 class PackingWidget extends Component {
@@ -42,7 +42,10 @@ class PackingWidget extends Component {
 
   async addPackingItem() {
     try {
-      const results = await api.post(`/api/list`, { trip_id: this.props.id, packing_title: 'New Item' });
+      const results = await api.post(`/api/list`, {
+        trip_id: this.props.id,
+        packing_title: 'New Item',
+      });
       this.setState({ packingList: [...this.state.packingList, results.data] });
     } catch (err) {
       console.error(err);
@@ -56,11 +59,19 @@ class PackingWidget extends Component {
     return (
       <div className="packing-widget widget">
         {revealed ? (
-          <Glass overlayColor="rgba(255, 255, 255, 0.7)" blurAmount="1.6rem" className="widget-card">
+          <Glass
+            overlayColor="rgba(255, 255, 255, 0.7)"
+            blurAmount="1.6rem"
+            className="widget-card"
+          >
             <div>
               <div className="list-banner" style={themeColor}>
                 <h3>Packing List</h3>
-                <button onClick={() => this.addPackingItem()} className="list-add" aria-label="Add item">
+                <button
+                  onClick={() => this.addPackingItem()}
+                  className="list-add"
+                  aria-label="Add item"
+                >
                   <i className="fas fa-plus"></i>
                 </button>
               </div>
@@ -90,8 +101,15 @@ class PackingWidget extends Component {
             </div>
           </Glass>
         ) : null}
-        {revealed ? <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div> : null}
-        <button onClick={() => this.revealWidget()} style={themeColor} className="widget-button" aria-label="Packing list">
+        {revealed ? (
+          <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div>
+        ) : null}
+        <button
+          onClick={() => this.revealWidget()}
+          style={themeColor}
+          className="widget-button"
+          aria-label="Packing list"
+        >
           <i className="fas fa-briefcase"></i>
         </button>
       </div>

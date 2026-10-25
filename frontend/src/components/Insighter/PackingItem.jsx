@@ -54,8 +54,18 @@ class PackingItem extends Component {
       </div>
     ) : (
       <div className="packing-item">
-        <input onChange={(e) => this.getTitleInput(e.target.value)} onBlur={() => this.updateTitle(id)} value={title} tabIndex={this.props.tab + 1} maxLength={100} />
-        <button className="list-delete" onClick={() => this.deleteItem(id)} aria-label="Delete item">
+        <input
+          onChange={(e) => this.getTitleInput(e.target.value)}
+          onBlur={() => this.updateTitle(id)}
+          value={title}
+          tabIndex={this.props.tab + 1}
+          maxLength={100}
+        />
+        <button
+          className="list-delete"
+          onClick={() => this.deleteItem(id)}
+          aria-label="Delete item"
+        >
           <i className="fas fa-trash-alt"></i>
         </button>
         {checkBox}

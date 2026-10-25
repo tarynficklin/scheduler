@@ -31,7 +31,8 @@ async function request(method, url, body) {
 }
 
 // The API's error message, or a generic one when the API couldn't be reached.
-export const errorMessage = (err) => err?.response?.data?.error ?? 'Something went wrong. Is the API server running?';
+export const errorMessage = (err) =>
+  err?.response?.data?.error ?? 'Something went wrong. Is the API server running?';
 
 const api = {
   get: (url) => request('GET', url),

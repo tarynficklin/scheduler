@@ -1,75 +1,75 @@
 .packing-item {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-	padding: 20px 0;
-	height: 70px;
-	border-bottom: 1px solid rgba(0,0,0,.15);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 20px 0;
+  height: 70px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 ::-webkit-scrollbar {
-	width: 0px;
+  width: 0px;
 }
 
 .packing-item .check-box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 30px;
-	height: 30px;
-	padding: 5px;
-	border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 3px;
 }
 
 .packing-item a {
-	width: 230px;
-	display: flex;
-	align-items: center;
-	height: 30px;
-	font-size: 16px;
-	padding-left: 10px;
+  width: 230px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  font-size: 16px;
+  padding-left: 10px;
 }
 
 .packing-item input {
-	width: 195px;
-	display: flex;
-	align-items: center;
-	height: 30px;
-	font-family: 'Titillium Web', sans-serif;
-	margin: 0 5px 0 0;
-	padding: 0 10px;
-	font-size: 16px;
+  width: 195px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  font-family: 'Titillium Web', sans-serif;
+  margin: 0 5px 0 0;
+  padding: 0 10px;
+  font-size: 16px;
 }
 
 .packing-item .list-delete {
-	color: black;
-	background-color: transparent;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 30px;
-	height: 30px;
-	padding: 5px 10px 5px 5px;
-	border-radius: 3px;
+  color: black;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 5px 10px 5px 5px;
+  border-radius: 3px;
 }
 
 .packing-item .checked {
-	color: white;
-	opacity: .75;
-	transition: 0.25s;
+  color: white;
+  opacity: 0.75;
+  transition: 0.25s;
 }
 
 .packing-item .checked:hover {
-	color: white;
-	opacity: 1;
+  color: white;
+  opacity: 1;
 }
 
 .packing-item .unchecked {
-	color: black;
-	opacity: 0.5;
-	transition: 0.25s;
+  color: black;
+  opacity: 0.5;
+  transition: 0.25s;
 }
 
 .packing-item .unchecked:hover {
-	opacity: 1;
+  opacity: 1;
 }

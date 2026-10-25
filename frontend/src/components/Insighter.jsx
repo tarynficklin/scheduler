@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateBackground, updateColor } from '../ducks/reducer';
-import withRouter from '../lib/withRouter';
 import api from '../lib/api';
+import withRouter from '../lib/withRouter';
 import FadeIn from './Common/FadeIn';
 import Glass from './Common/Glass';
 import './Insighter.css';
 
+import BudgetWidget from './Insighter/BudgetWidget';
+import DonateWidget from './Insighter/DonateWidget';
 import Header from './Insighter/Header';
+import PackingWidget from './Insighter/PackingWidget';
 import Schedule from './Insighter/Schedule';
 import ScheduleSelector from './Insighter/ScheduleSelector';
-import BudgetWidget from './Insighter/BudgetWidget';
-import PackingWidget from './Insighter/PackingWidget';
-import DonateWidget from './Insighter/DonateWidget';
 import SettingsWidget from './Insighter/SettingsWidget';
 
 const logError = (err) => console.error(err);
@@ -43,7 +43,8 @@ class Insighter extends Component {
     const { id } = this.props.params;
     try {
       const { data: tripData } = await api.get(`/api/trips/trip/${id}`);
-      if (!tripData || tripData.user_id !== this.props.user.user_id) throw new Error('not your trip');
+      if (!tripData || tripData.user_id !== this.props.user.user_id)
+        throw new Error('not your trip');
       this.setState(tripData);
       this.props.updateBackground(tripData.trip_background);
       this.props.updateColor(tripData.trip_bg_color);
@@ -54,7 +55,12 @@ class Insighter extends Component {
     }
     api
       .get(`/api/schedule/${id}`)
-      .then((results) => this.setState({ trip_schedule: results.data, current_schedule: results.data[0]?.schedule_id ?? 0 }))
+      .then((results) =>
+        this.setState({
+          trip_schedule: results.data,
+          current_schedule: results.data[0]?.schedule_id ?? 0,
+        }),
+      )
       .catch(logError);
   }
 
@@ -84,23 +90,63 @@ class Insighter extends Component {
   }
 
   render() {
-    const { trip_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_bg_color, trip_schedule, current_schedule } = this.state;
-    const { getBudgetInput, getLocationInput, scheduleIndex, updateLocation, updateBudget, deleteTrip } = this;
+    const {
+      trip_id,
+      trip_location,
+      trip_start_date,
+      trip_end_date,
+      trip_budget,
+      trip_bg_color,
+      trip_schedule,
+      current_schedule,
+    } = this.state;
+    const {
+      getBudgetInput,
+      getLocationInput,
+      scheduleIndex,
+      updateLocation,
+      updateBudget,
+      deleteTrip,
+    } = this;
 
     return (
       <FadeIn>
         <div className="insighter">
-          <Glass overlayColor="rgba(255, 255, 255, 0.5)" blurAmount="1.6rem" className="insighter-card">
+          <Glass
+            overlayColor="rgba(255, 255, 255, 0.5)"
+            blurAmount="1.6rem"
+            className="insighter-card"
+          >
             <div className="trip-info">
-              <Header location={trip_location} startDate={trip_start_date} endDate={trip_end_date} color={trip_bg_color} />
-              <ScheduleSelector schedule={trip_schedule} scheduleIndex={scheduleIndex} currentSchedule={current_schedule} color={trip_bg_color} />
+              <Header
+                location={trip_location}
+                startDate={trip_start_date}
+                endDate={trip_end_date}
+                color={trip_bg_color}
+              />
+              <ScheduleSelector
+                schedule={trip_schedule}
+                scheduleIndex={scheduleIndex}
+                currentSchedule={current_schedule}
+                color={trip_bg_color}
+              />
             </div>
             <div className="trip-schedule">
-              <Schedule schedule={trip_schedule} currentSchedule={current_schedule} color={trip_bg_color} />
+              <Schedule
+                schedule={trip_schedule}
+                currentSchedule={current_schedule}
+                color={trip_bg_color}
+              />
             </div>
           </Glass>
           <div className="widget-wrapper">
-            <BudgetWidget id={trip_id} budget={trip_budget} getBudgetInput={getBudgetInput} updateBudget={updateBudget} color={trip_bg_color} />
+            <BudgetWidget
+              id={trip_id}
+              budget={trip_budget}
+              getBudgetInput={getBudgetInput}
+              updateBudget={updateBudget}
+              color={trip_bg_color}
+            />
             <PackingWidget id={trip_id} color={trip_bg_color} />
             <DonateWidget tripId={trip_id} color={trip_bg_color} />
             <SettingsWidget

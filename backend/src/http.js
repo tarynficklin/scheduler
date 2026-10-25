@@ -29,7 +29,12 @@ const MAX_ID = 2 ** 31 - 1; // INTEGER columns
 // A positive integer id (route param or body field); anything else is a 400.
 export function toId(value, label = 'id') {
   const text = typeof value === 'number' ? String(value) : value;
-  if (typeof text !== 'string' || !/^\d+$/.test(text) || Number(text) < 1 || Number(text) > MAX_ID) {
+  if (
+    typeof text !== 'string' ||
+    !/^\d+$/.test(text) ||
+    Number(text) < 1 ||
+    Number(text) > MAX_ID
+  ) {
     throw badRequest(`Invalid ${label}.`);
   }
   return Number(text);

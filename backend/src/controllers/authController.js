@@ -58,7 +58,8 @@ export default {
 
     if (!username || !password) throw badRequest('Username and password are required.');
     if (username.includes('@')) throw badRequest('Usernames cannot contain "@".');
-    if (email && !/^[^\s@]+@[^\s@]+$/.test(email)) throw badRequest('That email address does not look right.');
+    if (email && !/^[^\s@]+@[^\s@]+$/.test(email))
+      throw badRequest('That email address does not look right.');
     if (password.length < MIN_PASSWORD_LENGTH) {
       throw badRequest(`Passwords must be at least ${MIN_PASSWORD_LENGTH} characters.`);
     }
@@ -112,7 +113,8 @@ export default {
   // logs in as the seeded dev user without a password and redirects into the app.
   devLogin: async (c) => {
     const [row] = await c.get('db').users.user_find([DEV_USER]);
-    if (!row) return c.json({ error: `Dev user "${DEV_USER}" not found. Run \`bun run db:seed\`.` }, 404);
+    if (!row)
+      return c.json({ error: `Dev user "${DEV_USER}" not found. Run \`bun run db:seed\`.` }, 404);
     await startSession(c, row.user_id);
     return c.redirect('/#/', 302);
   },

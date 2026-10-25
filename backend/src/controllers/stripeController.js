@@ -52,7 +52,9 @@ export function parseAmount(value) {
   if (value === undefined || value === null || value === '') return DEFAULT_CENTS;
   const cents = typeof value === 'string' && /^\d+$/.test(value.trim()) ? Number(value) : value;
   if (!Number.isInteger(cents) || cents < MIN_CENTS || cents > MAX_CENTS) {
-    throw badRequest(`amount must be a whole number of cents between ${MIN_CENTS} and ${MAX_CENTS}.`);
+    throw badRequest(
+      `amount must be a whole number of cents between ${MIN_CENTS} and ${MAX_CENTS}.`,
+    );
   }
   return cents;
 }
@@ -77,8 +79,14 @@ export function createStripeController({
 
       const body = await readJson(c);
       const amount = parseAmount(body.amount);
-      const tripId = body.trip_id === undefined || body.trip_id === null ? null : toId(body.trip_id, 'trip_id');
-      const params = checkoutSessionParams({ amount, origin: appOrigin(c), tripId, userId: c.get('userId') });
+      const tripId =
+        body.trip_id === undefined || body.trip_id === null ? null : toId(body.trip_id, 'trip_id');
+      const params = checkoutSessionParams({
+        amount,
+        origin: appOrigin(c),
+        tripId,
+        userId: c.get('userId'),
+      });
 
       let session;
       try {
@@ -86,7 +94,9 @@ export function createStripeController({
       } catch (err) {
         if (!isStripeError(err)) throw err;
         // Log the error class only; Stripe messages can echo (masked) key fragments.
-        console.error(`Stripe Checkout Session failed: ${err.type}${err.statusCode ? ` (HTTP ${err.statusCode})` : ''}`);
+        console.error(
+          `Stripe Checkout Session failed: ${err.type}${err.statusCode ? ` (HTTP ${err.statusCode})` : ''}`,
+        );
         return c.json({ error: "Couldn't start the Stripe checkout. Try again later." }, 502);
       }
       if (!session?.url) return c.json({ error: 'Stripe did not return a checkout URL.' }, 502);

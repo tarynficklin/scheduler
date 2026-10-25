@@ -14,7 +14,9 @@ try {
   const [{ exists }] = await sql`SELECT to_regclass('public.users') IS NOT NULL AS exists`;
 
   if (ifEmpty && exists) {
-    console.log(`database "${database}" already has the scheduler tables; nothing to do (\`bun run db:seed\` re-creates them).`);
+    console.log(
+      `database "${database}" already has the scheduler tables; nothing to do (\`bun run db:seed\` re-creates them).`,
+    );
   } else {
     await sql.unsafe(readFileSync(path.join(dbDir, 'master_seed.sql'), 'utf8')); // no params: several statements allowed
     const [counts] = await sql`
@@ -25,7 +27,7 @@ try {
              (SELECT count(*) FROM packing_lists)::int AS packing`;
     console.log(
       `seeded database "${database}": ${counts.users} user(s), ${counts.trips} trip(s), ${counts.schedules} schedule(s), ` +
-        `${counts.items} schedule item(s), ${counts.packing} packing list item(s). Dev login: see db/master_seed.sql.`
+        `${counts.items} schedule item(s), ${counts.packing} packing list item(s). Dev login: see db/master_seed.sql.`,
     );
   }
 } catch (err) {

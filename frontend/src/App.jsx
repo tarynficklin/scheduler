@@ -1,19 +1,19 @@
 //dependencies
 import React, { Component } from 'react';
-import { HashRouter, Routes, Route } from 'react-router';
 import { connect } from 'react-redux';
+import { HashRouter, Route, Routes } from 'react-router';
 import { updateUserData } from './ducks/auth';
 import api from './lib/api';
 import { consumeDonationResult } from './lib/donation';
 import './App.css';
 
+import FadeIn from './components/Common/FadeIn';
 //components
 import Landing from './components/Common/Landing';
 import Missing from './components/Common/Missing';
-import FadeIn from './components/Common/FadeIn';
 import Dashboard from './components/Dashboard';
-import NewTrip from './components/NewTrip';
 import Insighter from './components/Insighter';
+import NewTrip from './components/NewTrip';
 
 const DONATION_MESSAGES = {
   success: 'Thank you for the donation!',

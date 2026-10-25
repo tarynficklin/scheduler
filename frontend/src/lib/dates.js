@@ -3,21 +3,35 @@
 //   getDaysBetween(start, end) (moment loop)  -> daysBetween(start, end)
 
 const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 // "YYYY-MM-DD" (what <input type="date"> gives) and "M-D-YYYY" (the 2018 seed data) are
 // read as local dates, like moment did; anything else goes through Date. null if invalid.
 export function parseDate(value) {
-  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : new Date(value.getFullYear(), value.getMonth(), value.getDate());
+  if (value instanceof Date)
+    return Number.isNaN(value.getTime())
+      ? null
+      : new Date(value.getFullYear(), value.getMonth(), value.getDate());
   if (typeof value !== 'string' || !value.trim()) return null;
-  let match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(value.trim());
+  const iso = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(value.trim());
+  const us = iso ? null : /^(\d{1,2})-(\d{1,2})-(\d{4})$/.exec(value.trim());
   let date;
-  if (match) {
-    date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-  } else if ((match = /^(\d{1,2})-(\d{1,2})-(\d{4})$/.exec(value.trim()))) {
-    date = new Date(Number(match[3]), Number(match[1]) - 1, Number(match[2]));
+  if (iso) {
+    date = new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+  } else if (us) {
+    date = new Date(Number(us[3]), Number(us[1]) - 1, Number(us[2]));
   } else {
     date = new Date(value);
     if (Number.isNaN(date.getTime())) return null;
@@ -40,7 +54,11 @@ export function daysBetween(start, end, maxDays = 366) {
   const last = parseDate(end);
   if (!first || !last || last < first) return [];
   const days = [];
-  for (let day = first; day <= last && days.length < maxDays; day = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1)) {
+  for (
+    let day = first;
+    day <= last && days.length < maxDays;
+    day = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1)
+  ) {
     days.push(formatLongDate(day));
   }
   return days;

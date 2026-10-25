@@ -14,11 +14,18 @@ const app = createApp({ db, isProduction });
 
 //RUN THE SERVER
 const server = Bun.serve({ port, fetch: app.fetch, idleTimeout: 60 });
-console.log(`scheduler API listening on http://localhost:${server.port}${isProduction ? ' (production: serving ./build)' : ''}`);
-if (!isProduction) console.log('dev back door enabled: GET /api/dev/login logs in as "dev" (NODE_ENV is not production)');
+console.log(
+  `scheduler API listening on http://localhost:${server.port}${isProduction ? ' (production: serving frontend/dist)' : ''}`,
+);
+if (!isProduction)
+  console.log(
+    'dev back door enabled: GET /api/dev/login logs in as "dev" (NODE_ENV is not production)',
+  );
 
 db.ping()
   .then((database) => console.log(`connected to Postgres database "${database}"`))
   .catch((err) =>
-    console.error(`could not connect to Postgres yet (check DATABASE_URL, run \`bun run db:setup\`): ${describeError(err)}`)
+    console.error(
+      `could not connect to Postgres yet (check DATABASE_URL, run \`bun run db:setup\`): ${describeError(err)}`,
+    ),
   );

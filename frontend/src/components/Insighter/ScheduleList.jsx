@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ScheduleItem from './ScheduleItem';
 import api from '../../lib/api';
+import ScheduleItem from './ScheduleItem';
 import './ScheduleList.css';
 
 export default class ScheduleList extends Component {
@@ -19,7 +19,9 @@ export default class ScheduleList extends Component {
 
   // Reload the items whenever this day becomes the selected one.
   componentDidUpdate(prevProps) {
-    const becameSelected = this.isSelected() && (prevProps.currentSchedule !== this.props.currentSchedule || prevProps.id !== this.props.id);
+    const becameSelected =
+      this.isSelected() &&
+      (prevProps.currentSchedule !== this.props.currentSchedule || prevProps.id !== this.props.id);
     if (becameSelected) this.loadItems();
   }
 
@@ -72,7 +74,12 @@ export default class ScheduleList extends Component {
               color={this.props.color}
             />
           ))}
-          <button onClick={() => this.addScheduleItem()} style={themeColor} className="new-item" aria-label="Add item">
+          <button
+            onClick={() => this.addScheduleItem()}
+            style={themeColor}
+            className="new-item"
+            aria-label="Add item"
+          >
             <i className="fas fa-plus"></i>
           </button>
         </div>

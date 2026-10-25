@@ -39,7 +39,11 @@ class DonateWidget extends Component {
     return (
       <div className="donate-widget widget">
         {revealed ? (
-          <Glass overlayColor="rgba(255, 255, 255, 0.7)" blurAmount="1.6rem" className="widget-card">
+          <Glass
+            overlayColor="rgba(255, 255, 255, 0.7)"
+            blurAmount="1.6rem"
+            className="widget-card"
+          >
             <h3>Donate to the developer?</h3>
             <p>it's going to a good cause...</p>
             <p>seriously!</p>
@@ -50,13 +54,21 @@ class DonateWidget extends Component {
             ) : null}
             <div className="donate-footer" style={themeColor}>
               <button className="donate-button" onClick={() => this.donate()} disabled={busy}>
-                <i className={busy ? 'fas fa-spinner fa-spin' : 'fas fa-donate'}></i> {busy ? 'Opening Stripe...' : 'Donate $5'}
+                <i className={busy ? 'fas fa-spinner fa-spin' : 'fas fa-donate'}></i>{' '}
+                {busy ? 'Opening Stripe...' : 'Donate $5'}
               </button>
             </div>
           </Glass>
         ) : null}
-        {revealed ? <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div> : null}
-        <button onClick={() => this.revealWidget()} style={themeColor} className="widget-button" aria-label="Donate">
+        {revealed ? (
+          <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div>
+        ) : null}
+        <button
+          onClick={() => this.revealWidget()}
+          style={themeColor}
+          className="widget-button"
+          aria-label="Donate"
+        >
           <i className="fas fa-heart"></i>
         </button>
       </div>

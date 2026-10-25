@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateBackground, updateColor, DEFAULT_COLOR } from '../ducks/reducer';
-import withRouter from '../lib/withRouter';
+import { DEFAULT_COLOR, updateBackground, updateColor } from '../ducks/reducer';
 import api, { errorMessage } from '../lib/api';
 import { daysBetween } from '../lib/dates';
 import { getVibrantColor } from '../lib/palette';
+import withRouter from '../lib/withRouter';
 import FadeIn from './Common/FadeIn';
 import Glass from './Common/Glass';
 import './NewTrip.css';
 
-import Header from './NewTrip/Header';
-import Calendar from './NewTrip/Calendar';
-import Location from './NewTrip/Location';
 import Budget from './NewTrip/Budget';
+import Calendar from './NewTrip/Calendar';
+import Header from './NewTrip/Header';
+import Location from './NewTrip/Location';
 
 // Used when Unsplash has no photo for the location (or REACT_APP_UAK isn't set).
 const FALLBACK_BACKGROUND =
@@ -29,7 +29,10 @@ async function findPhoto(location) {
   const photo = (await res.json()).results?.[0];
   if (!photo) return null;
   const raw = photo.urls.raw;
-  return { background: `${raw}&auto=format&fit=crop&w=1400&q=80`, paletteUrl: `${raw}&auto=format&w=400&q=60` };
+  return {
+    background: `${raw}&auto=format&fit=crop&w=1400&q=80`,
+    paletteUrl: `${raw}&auto=format&w=400&q=60`,
+  };
 }
 
 class NewTrip extends Component {
@@ -56,7 +59,8 @@ class NewTrip extends Component {
     const location = trip_location.trim();
     const days = daysBetween(trip_start_date, trip_end_date);
     if (!location) return this.setState({ error: 'Where are you going?' });
-    if (!days.length) return this.setState({ error: 'Pick a start date and an end date on or after it.' });
+    if (!days.length)
+      return this.setState({ error: 'Pick a start date and an end date on or after it.' });
 
     this.setState({ busy: true, error: '' });
     try {
@@ -115,19 +119,36 @@ class NewTrip extends Component {
     return (
       <FadeIn delay="500" transitionDuration="800">
         <div className="new-trip">
-          <Glass overlayColor="rgba(255, 255, 255, 0.5)" blurAmount="1.6rem" className="new-trip-card">
+          <Glass
+            overlayColor="rgba(255, 255, 255, 0.5)"
+            blurAmount="1.6rem"
+            className="new-trip-card"
+          >
             <Header color={this.props.color} />
-            <div style={{ backgroundColor: `rgba(${this.props.color}, .20)` }} className="new-trip-wrapper">
+            <div
+              style={{ backgroundColor: `rgba(${this.props.color}, .20)` }}
+              className="new-trip-wrapper"
+            >
               <Location getLocationInput={getLocationInput} />
               <Budget getBudgetInput={getBudgetInput} color={this.props.color} />
-              <Calendar getStartDateInput={getStartDateInput} getEndDateInput={getEndDateInput} color={this.props.color} />
+              <Calendar
+                getStartDateInput={getStartDateInput}
+                getEndDateInput={getEndDateInput}
+                color={this.props.color}
+              />
             </div>
             {error ? (
               <p className="new-trip-error" role="alert">
                 {error}
               </p>
             ) : null}
-            <button onClick={() => this.createTrip()} className="done-button" style={themeColor} disabled={busy} aria-label="Create trip">
+            <button
+              onClick={() => this.createTrip()}
+              className="done-button"
+              style={themeColor}
+              disabled={busy}
+              aria-label="Create trip"
+            >
               <i className={busy ? 'fas fa-spinner fa-spin' : 'fas fa-check'}></i>
             </button>
           </Glass>
