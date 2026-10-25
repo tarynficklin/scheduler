@@ -5,22 +5,22 @@
 import { createApp } from './app.js';
 import { connect, describeError, loadQueries } from './db.js';
 
-const { PORT, NODE_ENV } = process.env;
+const { PORT, NODE_ENV, SESSION_SECRET } = process.env;
 const port = Number(PORT) || 4108;
 const isProduction = NODE_ENV === 'production';
+if (isProduction && !SESSION_SECRET) {
+  console.error('SESSION_SECRET must be set in production (it signs the session cookies).');
+  process.exit(1);
+}
 
 const db = loadQueries(connect());
-const app = createApp({ db, isProduction });
+const app = createApp({ db });
 
 //RUN THE SERVER
 const server = Bun.serve({ port, fetch: app.fetch, idleTimeout: 60 });
 console.log(
   `planner API listening on http://localhost:${server.port}${isProduction ? ' (production: serving frontend/dist)' : ''}`,
 );
-if (!isProduction)
-  console.log(
-    'dev back door enabled: GET /api/dev/login logs in as "dev" (NODE_ENV is not production)',
-  );
 
 db.ping()
   .then((database) => console.log(`connected to Postgres database "${database}"`))

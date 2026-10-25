@@ -6,7 +6,14 @@ import { deleteCookie, getSignedCookie, setSignedCookie } from 'hono/cookie';
 
 const COOKIE = 'planner_session';
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
-const secret = () => process.env.SESSION_SECRET || 'planner-dev-secret';
+// The fixed fallback is for local development only: production needs SESSION_SECRET.
+const secret = () => {
+  const value = process.env.SESSION_SECRET;
+  if (!value && process.env.NODE_ENV === 'production') {
+    throw new Error('SESSION_SECRET must be set in production');
+  }
+  return value || 'planner-dev-secret';
+};
 
 export async function getSessionUserId(c) {
   const value = await getSignedCookie(c, secret(), COOKIE);

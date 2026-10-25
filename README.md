@@ -39,9 +39,9 @@ proxies to it, and a build calls it directly, e.g. `https://api.<domain>` deploy
 | --- | --- |
 | `DATABASE_URL` | API and `db:*` scripts: `postgres://user:password@host:port/planner` |
 | `PORT` | API port (default **4108**); `frontend/.env`'s `VITE_API_URL` points the Vite proxy and `frontend/scripts/wait-for-api.js` here |
-| `SESSION_SECRET` | API: signs the session cookie (falls back to a fixed dev string) |
+| `SESSION_SECRET` | API: signs the session cookie. Required in production (the API won't start without it); locally it falls back to a fixed dev string |
 | `ALLOWED_ORIGINS` | API: browser origins that may call it from another address (CORS, with cookies), comma-separated, e.g. `http://localhost:3108`. Requests through the Vite proxy, or to the API serving `frontend/dist`, are same-origin and don't need it |
-| `NODE_ENV` | `production` disables the dev back door (`bun run start` sets it) |
+| `NODE_ENV` | `production` makes `SESSION_SECRET` required (`bun run start` sets it) |
 | `STRIPE_SECRET_KEY` | API: donations through Stripe Checkout (unset: the API answers 503) |
 | `UNSPLASH_KEY` | API: Unsplash access key for trip backgrounds, searched through `GET /api/unsplash/search` so the key stays on the server (unset: a default photo is used) |
 
@@ -62,7 +62,7 @@ bun run build           # production build into frontend/dist
 bun run build:frontend  # just the frontend (what Coolify's frontend builds with)
 bun run build:backend   # bundles backend/src into backend/dist to check its imports (it runs from src)
 bun run db:migrate      # create missing tables only (backend/db/schema.sql), no dev user or trips: before each deployed start
-bun run start:backend   # API that also serves frontend/dist, with NODE_ENV=production (no dev back door)
+bun run start:backend   # API that also serves frontend/dist, with NODE_ENV=production (needs SESSION_SECRET)
 bun run start:frontend  # preview frontend/dist with Vite on port 3108
 bun run test            # unit tests for both workspaces (bun test)
 bun run lint            # Biome (also the pre-commit hook)
@@ -82,13 +82,9 @@ cookie; sessions survive API restarts. **This is not secure and is only meant fo
 
 Seeded dev account (from `backend/db/master_seed.sql`): username **`dev`** (or email `dev@planner.test`), password
 **`planner-dev`**. It owns two sample trips (New York and San Francisco) with schedules, priced items and packing
-lists, so every page has content.
-
-### Dev back door (no password)
-
-While `NODE_ENV` is not `production`, **http://localhost:3108/api/dev/login** logs you in as `dev` and redirects to
-the dashboard. The start page shows a "Dev login" link to it in dev builds. The route is not registered at all when
-`NODE_ENV=production`, and the link is compiled out of production builds.
+lists, so every page has content. Log in with it on the start page. It only exists where `bun run db:setup` or
+`bun run db:seed` has run, i.e. locally: deploys run `bun run db:migrate`, which creates missing tables without seeding,
+so production has no `dev` user.
 
 ## API
 
@@ -103,7 +99,6 @@ instead of `[]`.
 | POST | `/api/login` | `{ login, password }` (login = username or email) -> user |
 | GET, POST | `/api/logout` | `{ loggedOut: true }` |
 | GET | `/api/user-data` | the logged-in user `{ user_id, user_name, user_email }`, or 401 |
-| GET | `/api/dev/login` | dev only: log in as `dev`, redirect to `/#/` |
 | GET | `/api/users` | `[me]` |
 | POST | `/api/users` | same as `/api/signup` |
 | PUT, DELETE | `/api/users/:id` | own account only (`{ user_name?, user_email? }`); DELETE removes the account and its trips |
@@ -179,7 +174,7 @@ show their initial instead of a profile picture).
 | Express, body-parser, cors, express-session | Hono on `Bun.serve`, signed cookie session | |
 | massive | `Bun.sql` + `backend/src/db.js` | same `db.<folder>.<file>()` calls over `backend/db/**/*.sql` |
 | dotenv | Bun's built-in `.env` loading | |
-| Auth0 | local signup/login (`Bun.password`) + dev back door | |
+| Auth0 | local signup/login (`Bun.password`) | |
 | `react-stripe-checkout` + Charges API | Stripe Checkout Session (`stripe` 23) | legacy Checkout.js is retired |
 | `node-vibrant` 3 | `@vibrant/*` 4 (`frontend/src/lib/palette.js`) | same palette, the maintained packages |
 | `moment` | `frontend/src/lib/dates.js` (a few lines) | only two date helpers were used |

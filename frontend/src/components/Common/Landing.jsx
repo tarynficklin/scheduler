@@ -129,11 +129,6 @@ function Landing({ color, updateUserData }) {
               </button>
             </form>
           </Glass>
-          {import.meta.env.DEV ? (
-            <a className="dev-login" href="/api/dev/login">
-              Dev login (no password)
-            </a>
-          ) : null}
         </div>
       </div>
     </FadeIn>

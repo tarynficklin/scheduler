@@ -49,7 +49,7 @@ const cookieFrom = (res) => res.headers.get('set-cookie')?.split(';')[0];
 
 describe('auth', () => {
   test('signup, session, logout', async () => {
-    const app = createApp({ db: fakeDb(), isProduction: false });
+    const app = createApp({ db: fakeDb() });
     expect((await app.request('/api/user-data')).status).toBe(401);
 
     const signup = await app.request(
@@ -101,20 +101,6 @@ describe('auth', () => {
     expect(
       (await app.request('/api/login', json({ login: 'nobody', password: 'nope-nope' }))).status,
     ).toBe(401);
-  });
-
-  test('dev back door exists outside production only', async () => {
-    const dev = await createApp({ db: fakeDb(), isProduction: false }).request('/api/dev/login');
-    expect(dev.status).toBe(302);
-    expect(dev.headers.get('location')).toBe('/#/');
-    expect(cookieFrom(dev)).toStartWith('planner_session=');
-
-    const prod = await createApp({
-      db: fakeDb(),
-      isProduction: true,
-      buildDir: '/nonexistent',
-    }).request('/api/dev/login');
-    expect(prod.status).toBe(404);
   });
 });
 

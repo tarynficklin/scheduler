@@ -28,7 +28,6 @@ const CLIENT_ERRORS = {
 
 export function createApp({
   db,
-  isProduction = process.env.NODE_ENV === 'production',
   stripeController = defaultStripeController,
   buildDir = path.join(import.meta.dirname, '..', '..', 'frontend', 'dist'),
 } = {}) {
@@ -57,12 +56,6 @@ export function createApp({
   app.get('/api/logout', authController.logout);
   app.post('/api/logout', authController.logout);
   app.get('/api/user-data', authController.user);
-
-  // DEV-ONLY BACK DOOR: GET /api/dev/login logs in as the seeded "dev" user with no
-  // password and redirects into the app. Never registered when NODE_ENV=production.
-  if (!isProduction) {
-    app.get('/api/dev/login', authController.devLogin);
-  }
 
   //USER ENDPOINTS (own account only)
   const userOrigin = '/api/users';

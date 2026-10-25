@@ -9,7 +9,6 @@
 --   username: dev   (or email: dev@planner.test)
 --   password: planner-dev
 -- password_hash below is Bun.password.hash('planner-dev') (argon2id).
--- The dev-only back door GET /api/dev/login logs in as this user without a password.
 
 DROP TABLE IF EXISTS schedule_items;
 DROP TABLE IF EXISTS schedules;

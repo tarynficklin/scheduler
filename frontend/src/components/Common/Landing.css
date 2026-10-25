@@ -126,15 +126,3 @@
   opacity: 0.5;
   cursor: default;
 }
-
-.dev-login {
-  margin-top: 20px;
-  color: white;
-  font-size: 13px;
-  letter-spacing: 2px;
-  opacity: 0.8;
-}
-
-.dev-login:hover {
-  opacity: 1;
-}
