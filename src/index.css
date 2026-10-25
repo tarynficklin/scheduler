@@ -14,12 +14,16 @@ body {
 }
 
 /* Fade + slide in (replaces react-fade-in): see components/Common/FadeIn.jsx.
-   The final transform keeps each wrapper a containing block, as react-fade-in's
-   inline translateY(0) did, so absolutely/fixed positioned children stay put. */
+   fill-mode is `backwards`, not `both`: an opacity animation that stays in effect
+   after it finishes makes the wrapper a backdrop root, so the .frosted panels inside
+   it would blur only the wrapper (nothing) instead of the page behind them.
+   The static translateY(0) keeps each wrapper a containing block, as react-fade-in's
+   inline transform did, so absolutely/fixed positioned children stay put. */
 .fade-in {
   animation-name: fade-in;
-  animation-fill-mode: both;
+  animation-fill-mode: backwards;
   animation-timing-function: ease;
+  transform: translateY(0);
 }
 
 @keyframes fade-in {
