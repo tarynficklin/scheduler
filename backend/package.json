@@ -1,0 +1,17 @@
+{
+  "name": "@scheduler/backend",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/server.js",
+    "start": "NODE_ENV=production bun src/server.js",
+    "test": "bun test",
+    "db:setup": "bun src/seed.js --if-empty",
+    "db:seed": "bun src/seed.js"
+  },
+  "dependencies": {
+    "hono": "^4.13.13",
+    "stripe": "^23.0.0"
+  }
+}

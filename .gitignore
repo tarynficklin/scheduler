@@ -1,20 +1,20 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
 # dependencies
-/node_modules
+node_modules
 
-# testing
-/coverage
-# a personal seed file (db/master_seed.sql is the tracked schema + dev seed)
-/db/master_seed_taryn.sql
+# builds and caches
+dist
+.turbo
+.vite
+coverage
 
-# production
-/build
-
-# misc
-.DS_Store
+# environment (each workspace has its own .env)
 .env
 .env.*
 
-# logs (npm-debug.log, debug.log, ...)
+# logs
 *.log
+
+# OS files (._* are macOS resource forks)
+.DS_Store
+._*
+

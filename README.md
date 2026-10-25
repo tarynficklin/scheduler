@@ -4,7 +4,12 @@ A trip planner from 2018, modernized. Create a trip (location, dates, budget) an
 Unsplash photo for the background and picks a theme color from it. Each trip gets one schedule per day with
 priced items (and a running total against the budget), a packing list, and a small donate-to-the-developer widget.
 
-React 19 + Vite frontend, [Hono](https://hono.dev) API on Bun, PostgreSQL through Bun's built-in client (`Bun.sql`).
+React 19 + Vite frontend, [Hono](https://hono.dev) API on Bun, PostgreSQL through Bun's built-in client (`Bun.sql`), as a Bun + Turborepo monorepo laid out like snowstack-lab:
+
+| Workspace | Package | Path | Purpose |
+| --- | --- | --- | --- |
+| Frontend | `@scheduler/frontend` | `frontend/` | The trip planner (React 19, Vite 8, Redux) |
+| Backend | `@scheduler/backend` | `backend/` | The API (Hono on Bun), with its SQL in `backend/db/` |
 
 ## Requirements
 
@@ -17,52 +22,50 @@ React 19 + Vite frontend, [Hono](https://hono.dev) API on Bun, PostgreSQL throug
 ```sh
 bun install          # no native/compiled dependencies, no install scripts (trustedDependencies is empty)
 bun run db:setup     # creates the tables + dev user + sample trips, only if the tables don't exist yet
-bun run db:seed      # drops and re-creates everything from db/master_seed.sql. Wipes existing data!
+bun run db:seed      # drops and re-creates everything from backend/db/master_seed.sql. Wipes existing data!
 ```
 
 `bunfig.toml` sets a supply-chain cooldown: `bun install` / `bun add` never pick package versions published in the
 last 7 days (`minimumReleaseAge = 604800`).
 
-Configuration lives in `.env` (Bun loads it automatically; variables already set in your shell win, even empty ones):
+Configuration lives in `backend/.env`, plus `frontend/.env` for the browser's `REACT_APP_*` value (Bun and Vite load
+them automatically; variables already set in your shell win, even empty ones):
 
 | Variable | Used by |
 | --- | --- |
 | `DATABASE_URL` | API and `db:*` scripts: `postgres://user:password@host:port/scheduler` |
-| `API_PORT` | API port (default **4108**); the Vite proxy and `wait-for-api` follow it |
+| `API_PORT` | API port (default **4108**); the Vite proxy and `frontend/scripts/wait-for-api.js` follow it |
 | `SESSION_SECRET` | API: signs the session cookie (falls back to a fixed dev string) |
 | `NODE_ENV` | `production` disables the dev back door (`bun run start` sets it) |
 | `STRIPE_SECRET_KEY` | API: donations through Stripe Checkout (unset: the API answers 503) |
 | `REACT_APP_UAK` | browser: Unsplash access key for trip backgrounds (unset: a default photo is used) |
 
 `REACT_APP_*` names are kept from the Create React App days: Vite exposes them to the browser as
-`import.meta.env.REACT_APP_*` (`envPrefix` in `vite.config.js`), so only put public values there.
+`import.meta.env.REACT_APP_*` (`envPrefix` in `frontend/vite.config.js`), so only put public values there.
 
 No longer used (safe to delete from `.env`): `SERVER_PORT` (it was 3035, which collides with another app's API),
 `CONNECTION_STRING` (replaced by `DATABASE_URL`), the Auth0 variables `REACT_APP_DOMAIN`, `REACT_APP_CLIENT_ID` and
 `CLIENT_SECRET`, and `REACT_APP_STRIPE_PUBLIC` (Stripe Checkout doesn't need the publishable key).
 
 > Bun.sql lets `PGDATABASE` / `PGUSER` / `PGPASSWORD` from the environment override parts of a connection URL, so
-> `server/db.js` parses `DATABASE_URL` and passes host, port, user, password and database explicitly. The API logs
+> `backend/src/db.js` parses `DATABASE_URL` and passes host, port, user, password and database explicitly. The API logs
 > the database it connected to on startup.
 
 ## Running
 
 ```sh
-bun run dev       # API, then Vite once the API answers (concurrently + server/wait-for-api.js)
-bun run server    # API only (bun --watch): http://localhost:4108
-bun run client    # Vite dev server only: http://localhost:3108 (fixed, strict port)
-bun run build     # production build into ./build
-bun run start     # API that also serves ./build, with NODE_ENV=production (no dev back door)
-bun run preview   # preview ./build with Vite on port 3108
-bun run test      # unit tests (bun test)
+bun run dev             # API, then Vite once the API's /health answers (Turborepo)
+bun run build           # production build into frontend/dist
+bun run start:backend   # API that also serves frontend/dist, with NODE_ENV=production (no dev back door)
+bun run start:frontend  # preview frontend/dist with Vite on port 3108
+bun run test            # unit tests for both workspaces (bun test)
+bun run lint            # Biome (also the pre-commit hook)
 ```
 
-In development open **http://localhost:3108**. Vite proxies `/api` to the API on `API_PORT`.
-Both ports are fixed so the legacy apps can run side by side. To use other ports for a session:
-
-```sh
-API_PORT=5108 bun run dev --port 5208    # API on 5108, Vite on 5208 (extra args go to Vite)
-```
+In development open **http://localhost:3108**. Vite proxies `/api` to the API on `API_PORT` (read from
+`backend/.env`). Both ports are fixed so the legacy apps can run side by side. `API_PORT=5108 bun run dev` moves the
+API for a session, and the proxy follows. In `backend/`, `bun run dev` watches the API alone; in `frontend/`,
+`bun --bun vite --port 5208` runs Vite on another port.
 
 ## Login
 
@@ -71,7 +74,7 @@ email + password; passwords are hashed with `Bun.password`, argon2id). The sessi
 (`scheduler_session`, HMAC-signed with `SESSION_SECRET` via `hono/cookie`) holding the user id. Logging out deletes the
 cookie; sessions survive API restarts. **This is not secure and is only meant for local development.**
 
-Seeded dev account (from `db/master_seed.sql`): username **`dev`** (or email `dev@scheduler.test`), password
+Seeded dev account (from `backend/db/master_seed.sql`): username **`dev`** (or email `dev@scheduler.test`), password
 **`scheduler-dev`**. It owns two sample trips (New York and San Francisco) with schedules, priced items and packing
 lists, so every page has content.
 
@@ -142,9 +145,9 @@ only the Stripe error type.
 
 ## Database
 
-`db/master_seed.sql` is the schema plus seed data and is safe to re-run (it drops and recreates every table).
-Query files live in `db/<table group>/*.sql` (one statement each, `$1`-style parameters) and are exposed by
-`server/db.js` as `db.trips.trip_read([userId])` and so on: the same calls massive used to provide, on `Bun.sql`.
+`backend/db/master_seed.sql` is the schema plus seed data and is safe to re-run (it drops and recreates every table).
+Query files live in `backend/db/<table group>/*.sql` (one statement each, `$1`-style parameters) and are exposed by
+`backend/src/db.js` as `db.trips.trip_read([userId])` and so on: the same calls massive used to provide, on `Bun.sql`.
 
 ```
 users          user_id (identity PK), user_name (unique, case-insensitive), user_email (unique, case-insensitive), password_hash
@@ -167,13 +170,13 @@ show their initial instead of a profile picture).
 | `react-router-dom` 4 (`Switch`, `withRouter`) | `react-router` 8 (`HashRouter`, `Routes`, small local `withRouter`) | hash URLs kept (`/#/trip/1`) |
 | redux 4 / react-redux 5 | redux 5 (`legacy_createStore`) / react-redux 9 | |
 | Express, body-parser, cors, express-session | Hono on `Bun.serve`, signed cookie session | |
-| massive | `Bun.sql` + `server/db.js` | same `db.<folder>.<file>()` calls over `db/**/*.sql` |
+| massive | `Bun.sql` + `backend/src/db.js` | same `db.<folder>.<file>()` calls over `backend/db/**/*.sql` |
 | dotenv | Bun's built-in `.env` loading | |
 | Auth0 | local signup/login (`Bun.password`) + dev back door | |
 | `react-stripe-checkout` + Charges API | Stripe Checkout Session (`stripe` 23) | legacy Checkout.js is retired |
-| `node-vibrant` 3 | `@vibrant/*` 4 (`src/lib/palette.js`) | same palette, the maintained packages |
-| `moment` | `src/lib/dates.js` (a few lines) | only two date helpers were used |
-| `axios` | `src/lib/api.js` (fetch) | a 40-line wrapper with the same `{ data }` / `err.response` shape |
+| `node-vibrant` 3 | `@vibrant/*` 4 (`frontend/src/lib/palette.js`) | same palette, the maintained packages |
+| `moment` | `frontend/src/lib/dates.js` (a few lines) | only two date helpers were used |
+| `axios` | `frontend/src/lib/api.js` (fetch) | a 40-line wrapper with the same `{ data }` / `err.response` shape |
 | `lodash` | removed | it was never imported |
 | `frosted-glass` (web component from unpkg) | CSS `backdrop-filter` (`components/Common/Glass.jsx`) | archived on GitHub, loaded unpinned from a CDN |
 | `react-fade-in` | CSS animation (`components/Common/FadeIn.jsx`) | unmaintained; a dozen lines of CSS |
@@ -181,6 +184,16 @@ show their initial instead of a profile picture).
 
 ## Tests
 
-`bun run test` runs `server/*.test.js` and `src/lib/*.test.js`: the auth flow, route guards and per-user scoping
+`bun run test` runs `backend/src/*.test.js` and `frontend/src/lib/*.test.js`: the auth flow, route guards and per-user scoping
 against an in-memory fake of the query files, the Stripe Checkout Session parameters and error paths with a mocked
 Stripe client (the tests never read `STRIPE_SECRET_KEY` or call Stripe), and the date and donation-return helpers.
+
+## Tooling
+
+- **Turborepo** runs the workspaces' `dev`, `build`, `test`, `db:setup` and `db:seed` scripts from the root (`turbo.json`).
+- **Biome** (pinned to `2.4.10`, like snowstack-lab) lints and formats everything. The config is the one shared by the
+  legacy monorepos: snowstack-lab's, with a few old-code rules (hook dependencies, array-index keys, six accessibility
+  rules) as warnings.
+- **Husky** runs `bunx biome check .` before each commit. `.gitattributes` keeps every file LF, which Biome expects.
+- `bun.lock` is committed, unlike snowstack-lab, so installs reproduce exactly and the cooldown applies to the versions
+  it pins.

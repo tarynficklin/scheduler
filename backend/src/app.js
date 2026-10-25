@@ -29,9 +29,12 @@ export function createApp({
   db,
   isProduction = process.env.NODE_ENV === 'production',
   stripeController = defaultStripeController,
-  buildDir = path.join(import.meta.dirname, '..', 'build'),
+  buildDir = path.join(import.meta.dirname, '..', '..', 'frontend', 'dist'),
 } = {}) {
   const app = new Hono();
+
+  // for the healthcheck scripts and the frontend's `bun run dev`
+  app.get('/health', (c) => c.json({ status: 'ok' }));
 
   //MIDDLEWARE
   app.use('*', async (c, next) => {
