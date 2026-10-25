@@ -48,3 +48,12 @@
 	width: 50px;
 	transition: 0.25s;
 }
+/* The Auth0 profile picture is gone: local accounts show their initial. */
+.user-button .profile-pic {
+	width: 50px;
+	padding: 0;
+	font-size: 20px;
+	font-family: 'Titillium Web', sans-serif;
+	background: rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}

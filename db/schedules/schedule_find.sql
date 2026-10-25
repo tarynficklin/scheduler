@@ -1,3 +1,3 @@
-SELECT * FROM schedules
-WHERE schedule_id=$1
-ORDER BY schedule_id;
+SELECT s.* FROM schedules s
+JOIN trips t ON t.trip_id = s.trip_id
+WHERE s.schedule_id = $1 AND t.user_id = $2;

@@ -1,0 +1,27 @@
+// Sessions are a signed cookie (hono/cookie, HMAC-SHA256) that holds the user id,
+// like the other modernized legacy apps. Replaces express-session.
+// Stateless and deliberately simple: logging out deletes the cookie, but a copied
+// cookie stays valid until it expires. Fine for local development, not for production.
+import { deleteCookie, getSignedCookie, setSignedCookie } from 'hono/cookie';
+
+const COOKIE = 'scheduler_session';
+const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
+const secret = () => process.env.SESSION_SECRET || 'scheduler-dev-secret';
+
+export async function getSessionUserId(c) {
+  const value = await getSignedCookie(c, secret(), COOKIE);
+  return typeof value === 'string' && /^\d{1,10}$/.test(value) ? Number(value) : null;
+}
+
+export function startSession(c, userId) {
+  return setSignedCookie(c, COOKIE, String(userId), secret(), {
+    path: '/',
+    httpOnly: true,
+    sameSite: 'Lax',
+    maxAge: MAX_AGE,
+  });
+}
+
+export function endSession(c) {
+  deleteCookie(c, COOKIE, { path: '/' });
+}

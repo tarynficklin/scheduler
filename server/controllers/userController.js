@@ -1,37 +1,35 @@
-module.exports = {
-	read: (req, res) => {
-		const db = req.app.get('db');
+// /api/users: scoped to the logged-in user (the 2018 version listed and edited every user).
+// Account creation is POST /api/signup (POST /api/users is an alias, see server/app.js).
+import { readJson, toText } from '../http.js';
+import { endSession } from '../session.js';
 
-		db.users.user_read()
-			.then(user => res.status(200).send(user))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+export default {
+  // GET /api/users -> [the logged-in user] (same array shape as before)
+  read: (c) => c.json([c.get('user')]),
 
-	create: (req, res) => {
-		const db = req.app.get('db');
-		const {user_name, user_email, auth_id, auth_profile} = req.body;
+  // PUT /api/users/:id { user_name?, user_email? } (own account only)
+  update: async (c) => {
+    const body = await readJson(c);
+    const name = body.user_name === undefined ? null : toText(body.user_name, 'Username', { max: 100 }).trim();
+    const email = body.user_email === undefined ? null : toText(body.user_email, 'Email', { max: 100 }).trim();
+    if (name === '' || (name && name.includes('@'))) {
+      return c.json({ error: 'Usernames cannot be empty or contain "@".' }, 400);
+    }
+    try {
+      const rows = await c.get('db').users.user_update([name, email || null, c.get('userId')]);
+      return c.json(rows);
+    } catch (err) {
+      if (err.errno === '23505' || err.code === '23505') {
+        return c.json({ error: 'That username or email is already taken.' }, 409);
+      }
+      throw err;
+    }
+  },
 
-		db.users.user_create([user_name, user_email, auth_id, auth_profile])
-			.then(user => res.status(200).send(req.body))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
-	update: (req, res) => {
-		const db = req.app.get('db');
-		const {user_name, user_email} = req.body;
-		const {id} = req.params;
-
-		db.users.user_update([user_name, user_email, id])
-			.then(user => res.status(200).send(user))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
-	delete: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-
-		db.users.user_delete([id])
-			.then(user => res.status(200).send(user))
-			.catch(err => console.log(`Error Message: ${err}`))
-	}
-}
+  // DELETE /api/users/:id (own account only): deletes the account and all its trips, logs out.
+  delete: async (c) => {
+    const rows = await c.get('db').users.user_delete([c.get('userId')]);
+    endSession(c);
+    return c.json(rows);
+  },
+};

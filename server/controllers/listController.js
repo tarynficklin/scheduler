@@ -1,57 +1,42 @@
-module.exports = {
-	read: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
+// /api/list (packing lists): scoped to trips owned by the logged-in user.
+import { idParam, notFound, readJson, toBoolean, toId, toText } from '../http.js';
 
-		db.packing_lists.list_read([id])
-			.then(list => res.status(200).send(list))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+const TITLE = { max: 100 };
 
-	create: (req, res) => {
-		const db = req.app.get('db');
-		const {trip_id, packing_title} = req.body;
+const rowsOr404 = (c, rows) => (rows.length ? c.json(rows) : notFound(c, 'Packing list item not found.'));
 
-		db.packing_lists.list_create([trip_id, packing_title])
-			.then(trip => res.status(200).send(trip[0]))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+export default {
+  // GET /api/list/:id (trip id) -> items ([] when the trip isn't the user's)
+  read: async (c) => c.json(await c.get('db').packing_lists.list_read([idParam(c), c.get('userId')])),
 
-	check: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-		const {checked} = req.body
+  // POST /api/list { trip_id, packing_title } -> the new item
+  create: async (c) => {
+    const body = await readJson(c);
+    const [item] = await c.get('db').packing_lists.list_create([
+      toId(body.trip_id, 'trip_id'),
+      toText(body.packing_title, 'Title', TITLE),
+      c.get('userId'),
+    ]);
+    return item ? c.json(item) : notFound(c, 'Trip not found.');
+  },
 
-		db.packing_lists.list_check([checked, id])
-			.then(item => res.status(200).send(item))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+  // PUT /api/list/check/:id { checked }
+  check: async (c) => {
+    const { checked } = await readJson(c);
+    const rows = await c.get('db').packing_lists.list_check([toBoolean(checked, 'checked'), idParam(c), c.get('userId')]);
+    return rowsOr404(c, rows);
+  },
 
-	update: (req, res) => {
-		const db = req.app.get('db');
-		const {packing_title} = req.body;
-		const {id} = req.params;
+  // PUT /api/list/:id { packing_title }
+  update: async (c) => {
+    const { packing_title } = await readJson(c);
+    const rows = await c.get('db').packing_lists.list_update([toText(packing_title, 'Title', TITLE), idParam(c), c.get('userId')]);
+    return rowsOr404(c, rows);
+  },
 
-		db.packing_lists.list_update([packing_title, id])
-			.then(list => res.status(200).send(list))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+  // DELETE /api/list/:id
+  delete: async (c) => rowsOr404(c, await c.get('db').packing_lists.list_delete([idParam(c), c.get('userId')])),
 
-	delete: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-
-		db.packing_lists.list_delete([id])
-			.then(list => res.status(200).send(list))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
-	purge: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-
-		db.packing_lists.list_purge([id])
-			.then(list => res.status(200).send(list))
-			.catch(err => console.log(`Error Message: ${err}`))
-	}
-}
+  // DELETE /api/list/purge/:id (trip id): removes the whole list
+  purge: async (c) => c.json(await c.get('db').packing_lists.list_purge([idParam(c), c.get('userId')])),
+};

@@ -1,85 +1,60 @@
-module.exports = {
-	read: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
+// /api/schedule (trip days and their priced items): scoped to the logged-in user's trips.
+import { idParam, notFound, readJson, toAmount, toBoolean, toId, toText } from '../http.js';
 
-		db.schedules.schedule_read([id])
-			.then(schedule => res.status(200).send(schedule))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+const rowsOr404 = (c, rows) => (rows.length ? c.json(rows) : notFound(c, 'Schedule item not found.'));
 
-	create: (req, res) => {
-		const db = req.app.get('db');
-		const {trip_id, schedule_date} = req.body;
+export default {
+  // GET /api/schedule/:id (trip id) -> the trip's schedules (days)
+  read: async (c) => c.json(await c.get('db').schedules.schedule_read([idParam(c), c.get('userId')])),
 
-		db.schedules.schedule_create([trip_id, schedule_date])
-			.then(schedule => res.status(200).send(schedule[0]))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+  // POST /api/schedule { trip_id, schedule_date } -> the new schedule
+  create: async (c) => {
+    const body = await readJson(c);
+    const [schedule] = await c.get('db').schedules.schedule_create([
+      toId(body.trip_id, 'trip_id'),
+      toText(body.schedule_date, 'Date', { max: 50 }),
+      c.get('userId'),
+    ]);
+    return schedule ? c.json(schedule) : notFound(c, 'Trip not found.');
+  },
 
-	find: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
+  // GET /api/schedule/schedule/:id -> [schedule]
+  find: async (c) => c.json(await c.get('db').schedules.schedule_find([idParam(c), c.get('userId')])),
 
-		db.schedules.schedule_find([id])
-			.then(schedule => res.status(200).send(schedule))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+  // GET /api/schedule/item/:id (schedule id) -> the schedule's items
+  readItem: async (c) => c.json(await c.get('db').schedules.item_read([idParam(c), c.get('userId')])),
 
-	readItem: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
+  // POST /api/schedule/item { schedule_id, item_title, item_price, item_time } -> the new item
+  createItem: async (c) => {
+    const body = await readJson(c);
+    const [item] = await c.get('db').schedules.item_create([
+      toId(body.schedule_id, 'schedule_id'),
+      toText(body.item_title, 'Title', { max: 100 }),
+      toAmount(body.item_price, 'Price'),
+      toText(body.item_time, 'Time', { max: 10, fallback: 'morning' }) || 'morning',
+      c.get('userId'),
+    ]);
+    return item ? c.json(item) : notFound(c, 'Schedule not found.');
+  },
 
-		db.schedules.item_read([id])
-			.then(item => res.status(200).send(item))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+  // PUT /api/schedule/item/title/:id { title }
+  titleItem: async (c) => {
+    const { title } = await readJson(c);
+    return rowsOr404(c, await c.get('db').schedules.item_title([toText(title, 'Title', { max: 100 }), idParam(c), c.get('userId')]));
+  },
 
-	createItem: (req, res) => {
-		const db = req.app.get('db');
-		const {schedule_id, item_title, item_price, item_time} = req.body;
+  // PUT /api/schedule/item/price/:id { price }
+  priceItem: async (c) => {
+    const { price } = await readJson(c);
+    return rowsOr404(c, await c.get('db').schedules.item_price([toAmount(price, 'Price'), idParam(c), c.get('userId')]));
+  },
 
-		db.schedules.item_create([schedule_id, item_title, item_price, item_time])
-			.then(trip => res.status(200).send(trip[0]))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
+  // PUT /api/schedule/item/check/:id { checked }
+  checkItem: async (c) => {
+    const { checked } = await readJson(c);
+    return rowsOr404(c, await c.get('db').schedules.item_check([toBoolean(checked, 'checked'), idParam(c), c.get('userId')]));
+  },
 
-	titleItem: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-		const {title} = req.body
-
-		db.schedules.item_title([title, id])
-			.then(item => res.status(200).send(item))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
-	priceItem: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-		const {price} = req.body
-
-		db.schedules.item_price([price, id])
-			.then(item => res.status(200).send(item))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
-	checkItem: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-		const {checked} = req.body
-
-		db.schedules.item_check([checked, id])
-			.then(item => res.status(200).send(item))
-			.catch(err => console.log(`Error Message: ${err}`))
-	},
-
-	deleteItem: (req, res) => {
-		const db = req.app.get('db');
-		const {id} = req.params;
-
-		db.schedules.item_delete([id])
-			.then(item => res.status(200).send(item))
-			.catch(err => console.log(`Error Message: ${err}`))
-	}
-}
+  // DELETE /api/schedule/item/:id
+  deleteItem: async (c) => rowsOr404(c, await c.get('db').schedules.item_delete([idParam(c), c.get('userId')])),
+};

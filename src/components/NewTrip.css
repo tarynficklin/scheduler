@@ -96,3 +96,22 @@
 .new-trip .done-button {
 	width: 100%;
 }
+.new-trip-error {
+	margin: 0;
+	padding: 10px 15px;
+	color: rgb(170, 20, 20);
+	background: rgba(255, 255, 255, .5);
+}
+
+.new-trip .done-button:disabled {
+	opacity: .5;
+}
+
+/* The fixed 600px card and inputs shrink on narrow screens. */
+.new-trip-card {
+	max-width: calc(100vw - 32px);
+}
+
+.new-trip input {
+	max-width: 100%;
+}
