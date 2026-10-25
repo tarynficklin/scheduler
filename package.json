@@ -1,5 +1,5 @@
 {
-  "name": "scheduler",
+  "name": "planner",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -15,8 +15,8 @@
     "format": "bunx biome format . --write",
     "db:setup": "turbo run db:setup",
     "db:seed": "turbo run db:seed",
-    "start:frontend": "turbo run preview --filter=@scheduler/frontend",
-    "start:backend": "turbo run start --filter=@scheduler/backend",
+    "start:frontend": "turbo run preview --filter=@planner/frontend",
+    "start:backend": "turbo run start --filter=@planner/backend",
     "health:backend": "bun --cwd backend scripts/healthcheck.js",
     "health:frontend": "bun --cwd frontend scripts/healthcheck.js",
     "prepare": "husky"

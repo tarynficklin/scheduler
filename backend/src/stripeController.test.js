@@ -66,13 +66,13 @@ describe('POST /api/payment', () => {
         price_data: {
           currency: 'usd',
           unit_amount: 500,
-          product_data: { name: 'Donation to the Scheduler developer' },
+          product_data: { name: 'Donation to the Planner developer' },
         },
       },
     ]);
     expect(params.success_url).toBe('http://localhost:3108/?donation=success&trip=3');
     expect(params.cancel_url).toBe('http://localhost:3108/?donation=cancelled&trip=3');
-    expect(params.metadata).toEqual({ app: 'scheduler', user_id: '7' });
+    expect(params.metadata).toEqual({ app: 'planner', user_id: '7' });
   });
 
   test('defaults to $5.00 and reuses the client', async () => {

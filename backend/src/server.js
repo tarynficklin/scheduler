@@ -1,4 +1,4 @@
-// Scheduler API: Hono on Bun, Postgres via Bun.sql. Run with `bun run dev` at the repo
+// Planner API: Hono on Bun, Postgres via Bun.sql. Run with `bun run dev` at the repo
 // root (Turborepo starts this and the frontend), or `bun run start` in backend/. Bun loads
 // backend/.env; variables already set in the shell win. The port is PORT (default 4108), not
 // the 2018 SERVER_PORT's 3035, which collides with venix-desktop's API.
@@ -15,7 +15,7 @@ const app = createApp({ db, isProduction });
 //RUN THE SERVER
 const server = Bun.serve({ port, fetch: app.fetch, idleTimeout: 60 });
 console.log(
-  `scheduler API listening on http://localhost:${server.port}${isProduction ? ' (production: serving frontend/dist)' : ''}`,
+  `planner API listening on http://localhost:${server.port}${isProduction ? ' (production: serving frontend/dist)' : ''}`,
 );
 if (!isProduction)
   console.log(

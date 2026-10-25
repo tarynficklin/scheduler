@@ -1,4 +1,4 @@
-// The Scheduler API as a Hono app (replaces Express + express-session + body-parser + cors).
+// The Planner API as a Hono app (replaces Express + express-session + body-parser + cors).
 // server/server.js connects to Postgres and serves it with Bun.serve; tests build it
 // with a fake db. Every path, method and response shape the frontend uses is unchanged.
 import { existsSync } from 'node:fs';

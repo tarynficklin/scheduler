@@ -1,14 +1,14 @@
--- Scheduler schema + seed data. Safe to re-run: it drops and recreates every table
+-- Planner schema + seed data. Safe to re-run: it drops and recreates every table
 -- (all existing users, trips, schedules and packing lists are wiped).
 --
 --   bun run db:seed      always re-creates everything from this file
 --   bun run db:setup     runs this file only when the tables don't exist yet
---   psql -h localhost -U admin -d scheduler -f db/master_seed.sql
+--   psql -h localhost -U admin -d planner -f db/master_seed.sql
 --
 -- Dev login (local development only, NOT secure):
---   username: dev   (or email: dev@scheduler.test)
---   password: scheduler-dev
--- password_hash below is Bun.password.hash('scheduler-dev') (argon2id).
+--   username: dev   (or email: dev@planner.test)
+--   password: planner-dev
+-- password_hash below is Bun.password.hash('planner-dev') (argon2id).
 -- The dev-only back door GET /api/dev/login logs in as this user without a password.
 
 DROP TABLE IF EXISTS schedule_items;
@@ -78,7 +78,7 @@ CREATE INDEX schedule_items_schedule_id_idx ON schedule_items (schedule_id);
 
 --seed: the dev user with two sample trips
 INSERT INTO users (user_name, user_email, password_hash)
-VALUES ('dev', 'dev@scheduler.test', '$argon2id$v=19$m=65536,t=2,p=1$TFFK9W9Yvy6AqKXZrdgGZ7G8ddf8r4L0QPOpZ4WoDwQ$l/lcSSiLbZ5K3fmrd5z/0TNggCeq8q1DLllVXPX1ycE');
+VALUES ('dev', 'dev@planner.test', '$argon2id$v=19$m=65536,t=2,p=1$fRPx+Df9018cpNn/JdjX37c9RZdBqpNvW6gpwpWQEwE$2UvKI8Ma7eNthzx5Z5IrX6aoSSfzEwe4Az/E/NufCwM');
 
 INSERT INTO trips (user_id, trip_location, trip_start_date, trip_end_date, trip_budget, trip_background, trip_bg_color)
 SELECT user_id, 'New York', '2026-12-04', '2026-12-06', 650,

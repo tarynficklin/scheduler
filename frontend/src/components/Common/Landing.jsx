@@ -53,7 +53,7 @@ function Landing({ color, updateUserData }) {
           <Glass overlayColor="rgba(255, 255, 255, 0.5)" blurAmount="1.6rem" className="logo">
             <img src={logo} alt="" />
           </Glass>
-          <h1>Scheduler</h1>
+          <h1>Planner</h1>
           <Glass overlayColor="rgba(255, 255, 255, 0.5)" blurAmount="1.6rem" className="login-card">
             <form onSubmit={submit}>
               <div className="login-tabs" role="tablist">

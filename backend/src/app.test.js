@@ -5,12 +5,12 @@ import { createApp } from './app.js';
 
 let devHash;
 beforeAll(async () => {
-  devHash = await Bun.password.hash('scheduler-dev');
+  devHash = await Bun.password.hash('planner-dev');
 });
 
 function fakeDb() {
   const users = [
-    { user_id: 1, user_name: 'dev', user_email: 'dev@scheduler.test', password_hash: devHash },
+    { user_id: 1, user_name: 'dev', user_email: 'dev@planner.test', password_hash: devHash },
   ];
   const trips = [
     { trip_id: 1, user_id: 1, trip_location: 'New York' },
@@ -62,7 +62,7 @@ describe('auth', () => {
     expect(JSON.stringify(user)).not.toContain('password');
 
     const cookie = cookieFrom(signup);
-    expect(cookie).toStartWith('scheduler_session=');
+    expect(cookie).toStartWith('planner_session=');
     const me = await app.request('/api/user-data', { headers: { cookie } });
     expect(await me.json()).toEqual(user);
 
@@ -86,13 +86,13 @@ describe('auth', () => {
 
   test('login by username or email; wrong password is a 401', async () => {
     const app = createApp({ db: fakeDb() });
-    for (const login of ['dev', 'DEV@scheduler.test']) {
-      const res = await app.request('/api/login', json({ login, password: 'scheduler-dev' }));
+    for (const login of ['dev', 'DEV@planner.test']) {
+      const res = await app.request('/api/login', json({ login, password: 'planner-dev' }));
       expect(res.status).toBe(200);
       expect(await res.json()).toEqual({
         user_id: 1,
         user_name: 'dev',
-        user_email: 'dev@scheduler.test',
+        user_email: 'dev@planner.test',
       });
     }
     expect(
@@ -107,7 +107,7 @@ describe('auth', () => {
     const dev = await createApp({ db: fakeDb(), isProduction: false }).request('/api/dev/login');
     expect(dev.status).toBe(302);
     expect(dev.headers.get('location')).toBe('/#/');
-    expect(cookieFrom(dev)).toStartWith('scheduler_session=');
+    expect(cookieFrom(dev)).toStartWith('planner_session=');
 
     const prod = await createApp({
       db: fakeDb(),
@@ -120,7 +120,7 @@ describe('auth', () => {
 
 async function devCookie(app) {
   return cookieFrom(
-    await app.request('/api/login', json({ login: 'dev', password: 'scheduler-dev' })),
+    await app.request('/api/login', json({ login: 'dev', password: 'planner-dev' })),
   );
 }
 
@@ -160,7 +160,7 @@ describe('scoping', () => {
   test('a forged cookie is ignored', async () => {
     const app = createApp({ db: fakeDb() });
     const res = await app.request('/api/user-data', {
-      headers: { cookie: 'scheduler_session=1.forged' },
+      headers: { cookie: 'planner_session=1.forged' },
     });
     expect(res.status).toBe(401);
   });

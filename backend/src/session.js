@@ -4,9 +4,9 @@
 // cookie stays valid until it expires. Fine for local development, not for production.
 import { deleteCookie, getSignedCookie, setSignedCookie } from 'hono/cookie';
 
-const COOKIE = 'scheduler_session';
+const COOKIE = 'planner_session';
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
-const secret = () => process.env.SESSION_SECRET || 'scheduler-dev-secret';
+const secret = () => process.env.SESSION_SECRET || 'planner-dev-secret';
 
 export async function getSessionUserId(c) {
   const value = await getSignedCookie(c, secret(), COOKIE);

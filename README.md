@@ -1,6 +1,8 @@
-# Scheduler
+# Planner
 
-A trip planner from 2018, modernized. Create a trip (location, dates, budget) and Scheduler finds an
+Formerly **Scheduler** (the `scheduler` repo); renamed to Planner in October 2026.
+
+A trip planner from 2018, modernized. Create a trip (location, dates, budget) and Planner finds an
 Unsplash photo for the background and picks a theme color from it. Each trip gets one schedule per day with
 priced items (and a running total against the budget), a packing list, and a small donate-to-the-developer widget.
 
@@ -8,14 +10,14 @@ React 19 + Vite frontend, [Hono](https://hono.dev) API on Bun, PostgreSQL throug
 
 | Workspace | Package | Path | Purpose |
 | --- | --- | --- | --- |
-| Frontend | `@scheduler/frontend` | `frontend/` | The trip planner (React 19, Vite 8, Redux) |
-| Backend | `@scheduler/backend` | `backend/` | The API (Hono on Bun), with its SQL in `backend/db/` |
+| Frontend | `@planner/frontend` | `frontend/` | The trip planner (React 19, Vite 8, Redux) |
+| Backend | `@planner/backend` | `backend/` | The API (Hono on Bun), with its SQL in `backend/db/` |
 
 ## Requirements
 
 - [Bun](https://bun.sh) 1.4.4+: package manager, script runner, and the runtime for the API (`Bun.serve`) and Vite
 - Node 26.12.1 (pinned in `.node-version`; Bun does the work, Node is only for tooling that wants it)
-- PostgreSQL (developed against 18.6) with a `scheduler` database
+- PostgreSQL (developed against 18.6) with a `planner` database
 
 ## Setup
 
@@ -33,7 +35,7 @@ ones). The frontend's `.env` only holds its dev server's `PORT` (default 3108) a
 
 | Variable | Used by |
 | --- | --- |
-| `DATABASE_URL` | API and `db:*` scripts: `postgres://user:password@host:port/scheduler` |
+| `DATABASE_URL` | API and `db:*` scripts: `postgres://user:password@host:port/planner` |
 | `PORT` | API port (default **4108**); `frontend/.env`'s `VITE_API_URL` points the Vite proxy and `frontend/scripts/wait-for-api.js` here |
 | `SESSION_SECRET` | API: signs the session cookie (falls back to a fixed dev string) |
 | `NODE_ENV` | `production` disables the dev back door (`bun run start` sets it) |
@@ -67,13 +69,13 @@ alone.
 
 ## Login
 
-Auth0 is gone. Scheduler has a simple local login: the start page has **Log in** / **Sign up** tabs (username or
+Auth0 is gone. Planner has a simple local login: the start page has **Log in** / **Sign up** tabs (username or
 email + password; passwords are hashed with `Bun.password`, argon2id). The session is a signed cookie
-(`scheduler_session`, HMAC-signed with `SESSION_SECRET` via `hono/cookie`) holding the user id. Logging out deletes the
+(`planner_session`, HMAC-signed with `SESSION_SECRET` via `hono/cookie`) holding the user id. Logging out deletes the
 cookie; sessions survive API restarts. **This is not secure and is only meant for local development.**
 
-Seeded dev account (from `backend/db/master_seed.sql`): username **`dev`** (or email `dev@scheduler.test`), password
-**`scheduler-dev`**. It owns two sample trips (New York and San Francisco) with schedules, priced items and packing
+Seeded dev account (from `backend/db/master_seed.sql`): username **`dev`** (or email `dev@planner.test`), password
+**`planner-dev`**. It owns two sample trips (New York and San Francisco) with schedules, priced items and packing
 lists, so every page has content.
 
 ### Dev back door (no password)

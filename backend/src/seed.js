@@ -15,7 +15,7 @@ try {
 
   if (ifEmpty && exists) {
     console.log(
-      `database "${database}" already has the scheduler tables; nothing to do (\`bun run db:seed\` re-creates them).`,
+      `database "${database}" already has the planner tables; nothing to do (\`bun run db:seed\` re-creates them).`,
     );
   } else {
     await sql.unsafe(readFileSync(path.join(dbDir, 'master_seed.sql'), 'utf8')); // no params: several statements allowed

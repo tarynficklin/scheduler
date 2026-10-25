@@ -1,6 +1,6 @@
 {
-  "short_name": "Scheduler",
-  "name": "Scheduler trip planner",
+  "short_name": "Planner",
+  "name": "Planner: trips, schedules and budgets",
   "icons": [
     {
       "src": "favicon.ico",

@@ -38,13 +38,13 @@ export function checkoutSessionParams({ amount, origin, tripId, userId }) {
         price_data: {
           currency: 'usd',
           unit_amount: amount,
-          product_data: { name: 'Donation to the Scheduler developer' },
+          product_data: { name: 'Donation to the Planner developer' },
         },
       },
     ],
     success_url: `${origin}/?donation=success${back}`,
     cancel_url: `${origin}/?donation=cancelled${back}`,
-    metadata: { app: 'scheduler', user_id: String(userId) },
+    metadata: { app: 'planner', user_id: String(userId) },
   };
 }
 
