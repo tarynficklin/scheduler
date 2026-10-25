@@ -14,6 +14,7 @@ import listController from './controllers/listController.js';
 import scheduleController from './controllers/scheduleController.js';
 import defaultStripeController from './controllers/stripeController.js';
 import tripController from './controllers/tripController.js';
+import unsplashController from './controllers/unsplashController.js';
 import userController from './controllers/userController.js';
 import { describeError } from './db.js';
 
@@ -112,6 +113,9 @@ export function createApp({
 
   //STRIPE ENDPOINT (Checkout Session; see controllers/stripeController.js)
   app.post('/api/payment', requireUser, stripeController.stripe);
+
+  //UNSPLASH (a new trip's background photo; see controllers/unsplashController.js)
+  app.get('/api/unsplash/search', requireUser, unsplashController.search);
 
   app.all('/api/*', (c) => c.json({ error: 'Not found.' }, 404));
 

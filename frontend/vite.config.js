@@ -10,8 +10,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
-    // Keep the CRA-era REACT_APP_* names working via import.meta.env.REACT_APP_*.
-    envPrefix: ['VITE_', 'REACT_APP_'],
     // Fixed per-app dev port so all the legacy apps can run side by side.
     server: { port: 3108, strictPort: true, proxy },
     preview: { port: 3108, strictPort: true, proxy },

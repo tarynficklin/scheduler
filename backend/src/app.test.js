@@ -118,13 +118,13 @@ describe('auth', () => {
   });
 });
 
-describe('scoping', () => {
-  async function devCookie(app) {
-    return cookieFrom(
-      await app.request('/api/login', json({ login: 'dev', password: 'scheduler-dev' })),
-    );
-  }
+async function devCookie(app) {
+  return cookieFrom(
+    await app.request('/api/login', json({ login: 'dev', password: 'scheduler-dev' })),
+  );
+}
 
+describe('scoping', () => {
   test('data routes need a session', async () => {
     const app = createApp({ db: fakeDb() });
     for (const [method, path] of [
@@ -169,5 +169,65 @@ describe('scoping', () => {
     const res = await createApp({ db: fakeDb() }).request('/api/nope');
     expect(res.status).toBe(404);
     expect(await res.json()).toEqual({ error: 'Not found.' });
+  });
+});
+
+describe('unsplash search', () => {
+  // never the real key or the real API: the key is swapped out and fetch is stubbed
+  const withKey = async (key, run) => {
+    const saved = process.env.UNSPLASH_KEY;
+    if (key === undefined) delete process.env.UNSPLASH_KEY;
+    else process.env.UNSPLASH_KEY = key;
+    try {
+      await run();
+    } finally {
+      if (saved === undefined) delete process.env.UNSPLASH_KEY;
+      else process.env.UNSPLASH_KEY = saved;
+    }
+  };
+
+  test('needs a session and a query', async () => {
+    const app = createApp({ db: fakeDb() });
+    expect((await app.request('/api/unsplash/search?query=Paris')).status).toBe(401);
+    const cookie = await devCookie(app);
+    await withKey('test-key', async () => {
+      expect((await app.request('/api/unsplash/search', { headers: { cookie } })).status).toBe(400);
+    });
+  });
+
+  test('is 503 without UNSPLASH_KEY', async () => {
+    const app = createApp({ db: fakeDb() });
+    const cookie = await devCookie(app);
+    await withKey(undefined, async () => {
+      const res = await app.request('/api/unsplash/search?query=Paris', { headers: { cookie } });
+      expect(res.status).toBe(503);
+    });
+  });
+
+  test('searches with the key in a header and answers the results', async () => {
+    const app = createApp({ db: fakeDb() });
+    const cookie = await devCookie(app);
+    const realFetch = globalThis.fetch;
+    let called;
+    globalThis.fetch = async (url, init) => {
+      called = { url: String(url), auth: init?.headers?.Authorization };
+      return Response.json({ results: [{ id: 'p1', urls: { raw: 'https://images.example/p1' } }] });
+    };
+    try {
+      await withKey('test-key', async () => {
+        const res = await app.request('/api/unsplash/search?query=New York', {
+          headers: { cookie },
+        });
+        expect(res.status).toBe(200);
+        expect(await res.json()).toEqual([
+          { id: 'p1', urls: { raw: 'https://images.example/p1' } },
+        ]);
+      });
+    } finally {
+      globalThis.fetch = realFetch;
+    }
+    expect(called.auth).toBe('Client-ID test-key');
+    expect(called.url).toContain('query=New+York');
+    expect(called.url).not.toContain('test-key');
   });
 });

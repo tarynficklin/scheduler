@@ -14,19 +14,17 @@ import Calendar from './NewTrip/Calendar';
 import Header from './NewTrip/Header';
 import Location from './NewTrip/Location';
 
-// Used when Unsplash has no photo for the location (or REACT_APP_UAK isn't set).
+// Used when Unsplash has no photo for the location (or the API has no UNSPLASH_KEY).
 const FALLBACK_BACKGROUND =
   'https://images.unsplash.com/photo-1518144591331-17a5dd71c477?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=210f0cacd6dd701fe842441652db7be8&auto=format&fit=crop&w=1400&q=80';
 
-// Unsplash photo search with the CRA-era REACT_APP_UAK access key (exposed by Vite's envPrefix).
-// Resolves to { background, paletteUrl } for the first result, or null.
+// Unsplash photo search, through the API (it keeps the key, UNSPLASH_KEY in backend/.env).
+// Resolves to { background, paletteUrl } for the first result, or null. Throws when the
+// search fails (including no UNSPLASH_KEY), and the caller falls back to FALLBACK_BACKGROUND.
 async function findPhoto(location) {
-  const key = import.meta.env.REACT_APP_UAK;
-  if (!key) return null;
-  const query = new URLSearchParams({ page: '1', per_page: '10', query: location, client_id: key });
-  const res = await fetch(`https://api.unsplash.com/search/photos/?${query}`);
-  if (!res.ok) throw new Error(`Unsplash search failed (HTTP ${res.status})`);
-  const photo = (await res.json()).results?.[0];
+  const query = new URLSearchParams({ query: location });
+  const { data: photos } = await api.get(`/api/unsplash/search?${query}`);
+  const photo = photos?.[0];
   if (!photo) return null;
   const raw = photo.urls.raw;
   return {

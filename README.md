@@ -28,8 +28,8 @@ bun run db:seed      # drops and re-creates everything from backend/db/master_se
 `bunfig.toml` sets a supply-chain cooldown: `bun install` / `bun add` never pick package versions published in the
 last 7 days (`minimumReleaseAge = 604800`).
 
-Configuration lives in `backend/.env`, plus `frontend/.env` for the browser's `REACT_APP_*` value (Bun and Vite load
-them automatically; variables already set in your shell win, even empty ones):
+Configuration lives in `backend/.env` (Bun loads it automatically; variables already set in your shell win, even empty
+ones). The frontend needs no `.env`:
 
 | Variable | Used by |
 | --- | --- |
@@ -38,14 +38,12 @@ them automatically; variables already set in your shell win, even empty ones):
 | `SESSION_SECRET` | API: signs the session cookie (falls back to a fixed dev string) |
 | `NODE_ENV` | `production` disables the dev back door (`bun run start` sets it) |
 | `STRIPE_SECRET_KEY` | API: donations through Stripe Checkout (unset: the API answers 503) |
-| `REACT_APP_UAK` | browser: Unsplash access key for trip backgrounds (unset: a default photo is used) |
-
-`REACT_APP_*` names are kept from the Create React App days: Vite exposes them to the browser as
-`import.meta.env.REACT_APP_*` (`envPrefix` in `frontend/vite.config.js`), so only put public values there.
+| `UNSPLASH_KEY` | API: Unsplash access key for trip backgrounds, searched through `GET /api/unsplash/search` so the key stays on the server (unset: a default photo is used) |
 
 No longer used (safe to delete from `.env`): `SERVER_PORT` (it was 3035, which collides with another app's API),
 `CONNECTION_STRING` (replaced by `DATABASE_URL`), the Auth0 variables `REACT_APP_DOMAIN`, `REACT_APP_CLIENT_ID` and
-`CLIENT_SECRET`, and `REACT_APP_STRIPE_PUBLIC` (Stripe Checkout doesn't need the publishable key).
+`CLIENT_SECRET`, `REACT_APP_STRIPE_PUBLIC` (Stripe Checkout doesn't need the publishable key), `REACT_APP_UAK` (now the
+API's `UNSPLASH_KEY`) and `REACT_APP_USK` (an Unsplash secret key, which a search never needed).
 
 > Bun.sql lets `PGDATABASE` / `PGUSER` / `PGPASSWORD` from the environment override parts of a connection URL, so
 > `backend/src/db.js` parses `DATABASE_URL` and passes host, port, user, password and database explicitly. The API logs
@@ -121,6 +119,7 @@ instead of `[]`.
 | PUT | `/api/schedule/item/title/:id`, `/price/:id`, `/check/:id` | `{ title }`, `{ price }`, `{ checked }` |
 | DELETE | `/api/schedule/item/:id` | |
 | POST | `/api/payment` | `{ amount (cents, default 500), trip_id? }` -> `{ url }` of a Stripe Checkout Session |
+| GET | `/api/unsplash/search?query=` | up to 10 Unsplash photos for a new trip's background (`UNSPLASH_KEY`; 503 when unset) |
 
 Bad input (non-numeric ids, negative prices, text over the column limits, ...) is a 400 with `{ error }`.
 
@@ -136,7 +135,7 @@ returned token with the Charges API. Now:
 3. The browser goes to Stripe's hosted page; afterwards Stripe sends it back to the app, which shows a
    "Thank you" (or "cancelled") banner and returns to the trip.
 
-Setup: put a **test-mode** secret key from the Stripe dashboard (Developers -> API keys, `sk_test_...`) in `.env` as
+Setup: put a **test-mode** secret key from the Stripe dashboard (Developers -> API keys, `sk_test_...`) in `backend/.env` as
 `STRIPE_SECRET_KEY`. In test mode no real money moves; Stripe's test card `4242 4242 4242 4242` with any future date
 and CVC completes a payment. A live key (`sk_live_...`) would take real payments.
 The browser no longer needs a publishable key. Without `STRIPE_SECRET_KEY` the API answers
