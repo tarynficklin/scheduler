@@ -7,7 +7,6 @@ import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
 import { serveStatic } from 'hono/bun';
 import { HTTPException } from 'hono/http-exception';
-
 //CONTROLLERS
 import authController, { requireSelf, requireUser } from './controllers/authController.js';
 import listController from './controllers/listController.js';
@@ -16,6 +15,7 @@ import defaultStripeController from './controllers/stripeController.js';
 import tripController from './controllers/tripController.js';
 import unsplashController from './controllers/unsplashController.js';
 import userController from './controllers/userController.js';
+import cors from './cors.js';
 import { describeError } from './db.js';
 
 // Postgres errors caused by bad input rather than a server fault.
@@ -33,6 +33,7 @@ export function createApp({
   buildDir = path.join(import.meta.dirname, '..', '..', 'frontend', 'dist'),
 } = {}) {
   const app = new Hono();
+  app.use('*', cors()); // browser origins on other domains (ALLOWED_ORIGINS)
 
   // for the healthcheck scripts and the frontend's `bun run dev`
   app.get('/health', (c) => c.json({ status: 'ok' }));

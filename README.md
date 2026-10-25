@@ -38,6 +38,7 @@ ones). The frontend's `.env` only holds its dev server's `PORT` (default 3108) a
 | `DATABASE_URL` | API and `db:*` scripts: `postgres://user:password@host:port/planner` |
 | `PORT` | API port (default **4108**); `frontend/.env`'s `VITE_API_URL` points the Vite proxy and `frontend/scripts/wait-for-api.js` here |
 | `SESSION_SECRET` | API: signs the session cookie (falls back to a fixed dev string) |
+| `ALLOWED_ORIGINS` | API: browser origins that may call it from another address (CORS, with cookies), comma-separated, e.g. `http://localhost:3108`. Requests through the Vite proxy, or to the API serving `frontend/dist`, are same-origin and don't need it |
 | `NODE_ENV` | `production` disables the dev back door (`bun run start` sets it) |
 | `STRIPE_SECRET_KEY` | API: donations through Stripe Checkout (unset: the API answers 503) |
 | `UNSPLASH_KEY` | API: Unsplash access key for trip backgrounds, searched through `GET /api/unsplash/search` so the key stays on the server (unset: a default photo is used) |
