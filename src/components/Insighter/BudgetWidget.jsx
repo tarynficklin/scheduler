@@ -55,7 +55,7 @@ class BudgetWidget extends Component {
             </div>
           </Glass>
         ) : null}
-        {revealed ? <div className="arrow" style={{ borderTop: `10px solid rgb(${this.props.color})` }}></div> : null}
+        {revealed ? <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div> : null}
         <button onClick={() => this.revealWidget()} className="widget-button" style={themeColor} aria-label="Budget">
           <i className="fas fa-dollar-sign"></i>
         </button>

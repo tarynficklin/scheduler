@@ -55,7 +55,7 @@ class DonateWidget extends Component {
             </div>
           </Glass>
         ) : null}
-        {revealed ? <div className="arrow" style={{ borderTop: `10px solid rgb(${this.props.color})` }}></div> : null}
+        {revealed ? <div className="arrow" style={{ backgroundColor: `rgb(${this.props.color})` }}></div> : null}
         <button onClick={() => this.revealWidget()} style={themeColor} className="widget-button" aria-label="Donate">
           <i className="fas fa-heart"></i>
         </button>

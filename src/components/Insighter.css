@@ -62,13 +62,16 @@
 	box-shadow: 0px 5px 25px 0px rgba(0,0,0,0.25);
 }
 
+/* Pointer under an open widget card (color set inline per theme). A clipped box instead
+   of the old CSS border triangle: borders get rounded down to whole device pixels, which
+   left a hairline gap under the card at 125% display scaling. It's 11px tall so its top
+   1px tucks under the card's bottom edge (70px) and no rounding can open a seam. */
 .arrow {
 	position: absolute;
 	bottom: 60px;
-  width: 0; 
-  height: 0; 
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+	width: 20px;
+	height: 11px;
+	clip-path: polygon(0 0, 100% 0, 50% 100%);
 	z-index: 1;
 }
 
